@@ -1,0 +1,13 @@
+{
+  "name": "@uxweb2/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@nx/js": "20.4.6",
+    "@nx/workspace": "20.4.6",
+    "nx": "20.4.6"
+  }
+}

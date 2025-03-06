@@ -3,9 +3,10 @@ import { RouterModule } from '@angular/router';
 import { BarService } from './services/bar/bar.service';
 import { map, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { FooComponent } from './components/foo/foo.component';
 
 @Component({
-  imports: [AsyncPipe, RouterModule],
+  imports: [AsyncPipe, RouterModule, FooComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

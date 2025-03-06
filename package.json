@@ -2,7 +2,11 @@
   "name": "@uxweb2/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "npx nx build backend",
+    "start": "npx nx serve backend",
+    "start:prod": "node dist/apps/backend/main"
+  },
   "private": true,
   "devDependencies": {
     "@angular-devkit/build-angular": "~19.1.0",

@@ -39,7 +39,8 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "baseHref": "/uxweb2/"
         },
         "development": {
           "optimization": false,

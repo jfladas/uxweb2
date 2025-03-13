@@ -5,9 +5,11 @@ import { GithubStrategyService } from './github.strategy.service';
 import { JwtStrategyService } from './jwt.strategy.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UsersModule } from '../user/user.module';
 
 @Module({
   imports: [
+    UsersModule,
     JwtModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({
         signOptions: { expiresIn: '8h' },

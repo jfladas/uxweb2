@@ -1,26 +1,27 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+import { TypeOrmModule } from "@nestjs/typeorm"; 
 
 @Module({
   imports: [
     AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    PassportModule,
-    JwtModule.registerAsync({
-      useFactory: async (configService: ConfigService) => ({
-        signOptions: { expiresIn: '8h' },
-        secret: configService.get<string>('JWT_SECRET'),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        url:configService.get('DATABASE_URL'),
+        autoLoadEntities: true,
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),
+
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService],
+  providers: [AppService],
 })
 export class AppModule {}

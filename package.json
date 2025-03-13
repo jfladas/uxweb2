@@ -71,14 +71,17 @@
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/swagger": "^8.1.1",
+    "@nestjs/typeorm": "^11.0.0",
     "axios": "^1.6.0",
     "cookie-parser": "^1.4.7",
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
     "passport-jwt": "^4.0.1",
     "passport-oauth2": "^1.8.0",
+    "pg": "^8.14.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.8.0",
+    "typeorm": "^0.3.21",
     "zone.js": "~0.15.0"
   }
 }

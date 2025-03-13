@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { env } from 'apps/frontend/src/env/env';
 
 @Injectable({
   providedIn: 'root'
@@ -10,5 +11,5 @@ export class BarService {
   api = () =>
     this.httpClient.get<{
       message: string;
-    }>('http://localhost:3000/api');
+    }>(`${env.api}`);
 }

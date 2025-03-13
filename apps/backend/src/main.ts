@@ -15,7 +15,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   app.use(cookieParser());
   app.enableCors({
-    origin: 'http://localhost:4200',
+    origin: ['http://localhost:4200', 'https://jfladas.github.io/uxweb2'],
     credentials: true,
   });
 

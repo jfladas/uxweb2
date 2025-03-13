@@ -3,6 +3,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
+import { env } from 'apps/frontend/src/env/env';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,7 @@ export class DashboardComponent {
   logout = () => this.authService.logout();
 
   helloWorld$ = this.httpClient
-    .get<{ authenticated: boolean }>('http://localhost:3000/api/', {
+    .get<{ authenticated: boolean }>(`${env.api}`, {
       withCredentials: true,
     })
     .pipe(map((response) => response.authenticated));

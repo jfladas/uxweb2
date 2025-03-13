@@ -22,7 +22,7 @@ export class AuthController {
     @UseGuards(AuthGuard('github'))
     async callback(@Req() req: Request, @Res() res: Response) {
         const jwt = await this.authService.login(req.user);
-        res.cookie('jwt', jwt, { httpOnly: true });
+        res.cookie('jwt', jwt, { httpOnly: true, sameSite: 'none', secure: true });
         res.redirect(this.configService.get<string>('FRONTEND_REDIRECT'));
     }
 

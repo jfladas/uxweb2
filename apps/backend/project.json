@@ -30,7 +30,15 @@
           "buildTarget": "backend:build:development"
         },
         "production": {
-          "buildTarget": "backend:build:production"
+          "budgets": [],
+          "outputHashing": "all",
+          "baseHref": "/studio-web/",
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/src/env/env.ts",
+              "with": "apps/frontend/src/env/env.prod.ts"
+            }
+          ]
         }
       }
     },

@@ -40,7 +40,13 @@
             }
           ],
           "outputHashing": "all",
-          "baseHref": "/uxweb2/"
+          "baseHref": "/uxweb2/",
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/src/env/env.ts",
+              "with": "apps/frontend/src/env/env.prod.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,

@@ -21,4 +21,12 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display fake events', () => {
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelectorAll('li').length).toBe(2);
+    expect(compiled.querySelector('li').textContent).toContain('Event 1');
+  });
 });

@@ -1,13 +1,16 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column({ unique: true })
+  @Column({ unique: true }) 
+  githubId: string; // GitHub-ID als eindeutige Spalte
+
+  @Column({ nullable: true }) 
   username: string;
 
-  @Column()
+  @Column({ nullable: false }) 
   name: string;
 }

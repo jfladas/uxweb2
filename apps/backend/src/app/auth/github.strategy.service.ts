@@ -19,7 +19,6 @@ export class GithubStrategyService extends PassportStrategy(Strategy, 'github') 
   }
 
   async validate(_accessToken: string, _refreshToken: string, profile: Profile) {
-    console.log("GitHub Profile Object:", JSON.stringify(profile, null, 2)); // Debugging
     return await this.userService.findOrCreate(profile); // Leitet an UserService weiter
   }
 }

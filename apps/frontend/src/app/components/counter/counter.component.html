@@ -1,8 +1,16 @@
 <div class="container">
+  <h1>Signals</h1>
   <p>Counter: {{ counter() }}</p>
   <p>Doubled: {{ doubled() }}</p>
 
   <button (click)="increment()">Increment</button>
   <button (click)="decrement()">Decrement</button>
   <button (click)="reset()">Reset</button>
+
+  <h1>NGRX</h1>
+  <p>Counter: {{ counter$ | async }}</p>
+
+  <button (click)="incrementNGRX()">Increment</button>
+  <button (click)="decrementNGRX()">Decrement</button>
+  <button (click)="resetNGRX()">Reset</button>
 </div>

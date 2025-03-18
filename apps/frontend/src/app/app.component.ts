@@ -2,10 +2,13 @@ import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BarService } from './services/bar/bar.service';
 import { map, Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
+<<<<<<< Updated upstream
  imports: [RouterModule],
+=======
+  imports: [RouterModule],
+>>>>>>> Stashed changes
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

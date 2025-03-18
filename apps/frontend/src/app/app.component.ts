@@ -4,11 +4,7 @@ import { BarService } from './services/bar/bar.service';
 import { map, Observable } from 'rxjs';
 
 @Component({
-<<<<<<< Updated upstream
- imports: [RouterModule],
-=======
   imports: [RouterModule],
->>>>>>> Stashed changes
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

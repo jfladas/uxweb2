@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth/auth.service';
+import { AuthService } from 'apps/frontend/src/app/services/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { map } from 'rxjs';
 import { env } from 'apps/frontend/src/env/env';
-import { EventItemComponent } from '../event-item/event-item.component';
+import { EventItemComponent } from 'apps/frontend/src/app/components/event-item/event-item.component';
 
 @Component({
   selector: 'app-dashboard',

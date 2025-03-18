@@ -18,6 +18,7 @@
 
 // Color variables
 $primary-color: #007bff;
+$primary-color-dark: #0056b3;
 $background-color: #f4f4f4;
 $text-color: #333;
 
@@ -57,13 +58,16 @@ a {
 button {
   margin-bottom: 20px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: $primary-color;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  :hover {
+      background-color: $primary-color-dark;
+  }
 }
 
-button:hover {
-  background-color: #0056b3;
+.container {
+  margin: 2rem;
 }

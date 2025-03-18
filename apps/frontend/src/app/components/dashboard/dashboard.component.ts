@@ -1,29 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { AuthService } from 'apps/frontend/src/app/services/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
-import { map } from 'rxjs';
-import { env } from 'apps/frontend/src/env/env';
-import { EventItemComponent } from 'apps/frontend/src/app/components/event-item/event-item.component';
+import { EventItemComponent } from '../event-item/event-item.component';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
   imports: [AsyncPipe, CommonModule, EventItemComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
+  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
   private authService = inject(AuthService);
   private httpClient = inject(HttpClient);
 
   logout = () => this.authService.logout();
-
-  helloWorld$ = this.httpClient
-    .get<{ authenticated: boolean }>(`${env.api}`, {
-      withCredentials: true,
-    })
-    .pipe(map((response) => response.authenticated));
 
   events$ = of([
     { name: 'Event 1', date: '2023-10-01' },

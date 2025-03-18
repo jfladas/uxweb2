@@ -1,7 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BarService } from './services/bar/bar.service';
-import { map, Observable } from 'rxjs';
 
 @Component({
   imports: [RouterModule],
@@ -10,11 +8,5 @@ import { map, Observable } from 'rxjs';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  private barService = inject(BarService);
-
   title = 'frontend';
-
-  api$: Observable<string> = this.barService
-    .api()
-    .pipe(map((response) => response.message));
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { env } from 'apps/frontend/src/env/env';
+import { env } from '../../../env/env';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +18,7 @@ export class AuthService {
       })
       .subscribe(() => this.router.navigate(['/login']));
   isAuthenticated = () =>
-    this.httpClient.get<{ authenticated: boolean }>(
-      `${env.api}/auth/status`,
-      { withCredentials: true }
-    );
+    this.httpClient.get<{ authenticated: boolean }>(`${env.api}/auth/status`, {
+      withCredentials: true,
+    });
 }

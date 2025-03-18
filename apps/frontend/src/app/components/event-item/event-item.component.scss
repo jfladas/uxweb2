@@ -1,0 +1,17 @@
+@import '../../../styles.scss';
+
+.event-item {
+  background-color: $background-color;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+  h3 {
+    margin: 0.5rem 0;
+    color: $primary-color;
+  }
+  p {
+    margin: 0;
+    color: $secondary-text-color;
+  }
+}

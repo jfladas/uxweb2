@@ -7,13 +7,13 @@
 // <uniquifier>: Use a unique and descriptive class name
 
 .roboto-flex {
-  font-family: "Roboto Flex", sans-serif;
+  font-family: 'Roboto Flex', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400; // <weight>
   font-style: normal;
-  font-variation-settings:
-    "slnt" 0, // <slant>
-    "wdth" 100; // <width>
+  font-variation-settings: 'slnt' 0,
+    // <slant>
+    'wdth' 100; // <width>
 }
 
 // Color variables
@@ -21,6 +21,7 @@ $primary-color: #007bff;
 $primary-color-dark: #0056b3;
 $background-color: #f4f4f4;
 $text-color: #333;
+$secondary-text-color: #666;
 
 // Global styles
 * {
@@ -35,19 +36,28 @@ body {
   background-color: $background-color;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   font-weight: 800;
-  font-variation-settings:
-      "wdth" 150
+  font-variation-settings: 'wdth' 150;
 }
 
 h1 {
   font-size: 2rem;
+  margin-top: 2rem;
 }
 
 h2 {
   font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
 }
 
 a {
@@ -56,15 +66,16 @@ a {
 }
 
 button {
-  margin-bottom: 20px;
-  padding: 10px 20px;
+  margin: 1rem 0.5rem;
+  padding: 0.5rem 1rem;
   background-color: $primary-color;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   cursor: pointer;
+
   :hover {
-      background-color: $primary-color-dark;
+    background-color: $primary-color-dark;
   }
 }
 

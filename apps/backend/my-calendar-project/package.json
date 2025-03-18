@@ -1,0 +1,19 @@
+{
+  "name": "my-calendar-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module", 
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2",
+    "googleapis": "^146.0.0",
+    "ical-generator": "^8.1.1",
+    "node-ical": "^0.20.1"
+  }
+}

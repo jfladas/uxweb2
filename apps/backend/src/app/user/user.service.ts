@@ -11,7 +11,7 @@ export class UserService {
     let user = await this.userRepository.findOne({ where: { id: profile.id } });
     if (!user) {
       user = this.userRepository.create(
-{id: profile.id, username: profile.username, name: profile.displayName}
+{id: profile.id, username: profile.username, name: profile.displayName || profile.username}
 );
       await this.userRepository.save(user);
     }

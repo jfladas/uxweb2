@@ -6,6 +6,8 @@ import { provideState, provideStore } from '@ngrx/store';
 import { counterReducer } from './components/counter/+state/counter.reducer';
 import { provideHttpClient } from '@angular/common/http';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideEffects } from '@ngrx/effects';
+import { CounterEffects } from './components/counter/+state/counter.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(),
     provideState('counter', counterReducer),
+    provideEffects([CounterEffects]),
     provideStoreDevtools(),
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],

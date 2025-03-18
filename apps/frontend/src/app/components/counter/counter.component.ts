@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { selectCounter } from './+state/counter.selector';
+import { selectCounter, selectThreshold } from './+state/counter.selector';
 import { CounterActions } from './+state/counter.actions';
 
 @Component({
@@ -20,6 +20,7 @@ export class CounterComponent {
 
   store$ = inject(Store);
   counter$ = this.store$.select(selectCounter);
+  threshold$ = this.store$.select(selectThreshold);
   incrementNGRX = () => this.store$.dispatch(CounterActions.increment());
   decrementNGRX = () => this.store$.dispatch(CounterActions.decrement());
   resetNGRX = () => this.store$.dispatch(CounterActions.reset());

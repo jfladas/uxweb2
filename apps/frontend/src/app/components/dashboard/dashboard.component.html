@@ -1,9 +1,5 @@
 <div class="container">
   <button (click)="logout()">Logout</button>
-  <div *ngIf="helloWorld$ | async as authenticated">
-    <p *ngIf="authenticated">Hello, authenticated user!</p>
-    <p *ngIf="!authenticated">Hello, guest!</p>
-  </div>
   <div *ngIf="events$ | async as events">
     <h2>Upcoming Events</h2>
     <ul>

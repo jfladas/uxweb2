@@ -2,12 +2,22 @@ import { Component, inject } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
-import { EventItemComponent } from '../event-item/event-item.component';
 import { AuthService } from '../../services/auth/auth.service';
+import { EventItemComponent } from '../event-item/event-item.component';
+import { SearchComponent } from '../search/search.component';
+import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
+import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, CommonModule, EventItemComponent],
+  imports: [
+    AsyncPipe,
+    CommonModule,
+    EventItemComponent,
+    SearchComponent,
+    FilterChipsComponent,
+    SubscribeButtonComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

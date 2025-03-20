@@ -1,0 +1,19 @@
+<header class="header">
+  <div class="left-section">
+    <ng-container *ngIf="showBackArrow">
+      <button (click)="onBackArrowClick()">
+        <span class="back-arrow icon">arrow_back</span>
+      </button>
+    </ng-container>
+    <img
+      src="https://www.hslu.ch/-/media/campus/common/images/teasers/i/studium/bachelor/digital-ideation/screenshot-video-di-michi-782x336px.jpg?sc_lang=en&usecustomfunctions=1&h=336&centercrop=0&w=782"
+      alt="Logo"
+      class="logo"
+    />
+  </div>
+  <div class="right-section">
+    <button (click)="onMenuClick()">
+      <span class="menu icon">account_circle</span>
+    </button>
+  </div>
+</header>

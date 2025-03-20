@@ -1,14 +1,13 @@
 @use '../../../styles.scss' as *;
 
 .event-item {
-  background-color: $background-color;
+  background-color: $background-color-light;
   margin: 1rem 0;
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
-  h3 {
-    margin: 0.5rem 0;
-    color: $primary-color;
+  h2 {
+    margin: 0 0 0.5rem 0;
   }
   p {
     margin: 0;

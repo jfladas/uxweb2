@@ -11,14 +11,15 @@
 $primary-color: #c74ef3;
 $primary-color-light: #ef8ef9;
 $secondary-color: #bffde4;
-$background-color: #f8f8f8;
+$background-color: #eee;
 $background-color-light: #fff;
 $text-color: #000;
 $secondary-text-color: #444;
+$border-color: #aaa;
 
 // Global styles
 * {
-  font-family: 'Roboto Flex', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 1rem;
   color: $text-color;

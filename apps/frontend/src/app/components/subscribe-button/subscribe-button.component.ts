@@ -7,4 +7,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./subscribe-button.component.scss'],
   imports: [CommonModule],
 })
-export class SubscribeButtonComponent {}
+export class SubscribeButtonComponent {
+  onSubscribe() {
+    // Handle subscribe click
+  }
+}

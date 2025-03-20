@@ -1,8 +1,10 @@
 <div class="container">
   <h1>Events</h1>
   <app-search></app-search>
-  <app-filter-chips></app-filter-chips>
-  <app-subscribe-button></app-subscribe-button>
+  <div class="filter-section">
+    <app-filter-chips></app-filter-chips>
+    <app-subscribe-button></app-subscribe-button>
+  </div>
   <div *ngIf="events$ | async as events">
     <h2>Upcoming Events</h2>
     <ul>

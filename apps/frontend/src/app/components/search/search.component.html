@@ -1,1 +1,10 @@
-
+<div class="search-container">
+  <span class="icon">search</span>
+  <input
+    class="search-input"
+    type="text"
+    placeholder="Search..."
+    [(ngModel)]="searchQuery"
+    (input)="onSearch()"
+  />
+</div>

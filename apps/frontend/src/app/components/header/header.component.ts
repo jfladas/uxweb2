@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
 })
 export class HeaderComponent {
-  @Input() showBackArrow = true;
+  @Input() showBackArrow = false;
 
   onBackArrowClick() {
     // Handle back arrow click

@@ -1,6 +1,10 @@
 @use '../../../styles.scss' as *;
 
 .header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,13 +25,15 @@
 
     .logo {
       height: 3rem;
+      margin: 0 0 0 1rem;
     }
   }
 
-  .right-section {
-    .profile-icon {
-      height: 40px;
-      cursor: pointer;
-    }
+  .menu {
+    color: $secondary-text-color;
   }
+}
+
+.header-spacer {
+  height: 4rem;
 }

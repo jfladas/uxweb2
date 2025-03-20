@@ -79,7 +79,7 @@ button {
   cursor: pointer;
   background-color: transparent;
 
-  .primary {
+  &.primary {
     margin: 1rem 0.5rem;
     background-color: $primary-color;
     color: white;

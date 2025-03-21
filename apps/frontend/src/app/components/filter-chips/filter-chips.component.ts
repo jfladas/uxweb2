@@ -15,8 +15,8 @@ interface Chip {
 export class FilterChipsComponent {
   chips: Chip[] = [
     { name: 'Digital Ideation', selected: false },
-    { name: 'Stair', selected: false },
-    { name: 'Frame', selected: false },
+    { name: 'STAIR', selected: false },
+    { name: 'FRAME', selected: false },
   ];
 
   onChipClick(chip: Chip): void {

@@ -6,14 +6,16 @@ import { Event } from './event.entity';
 
 @Injectable()
 export class StairImportService {
+  private readonly STAIR_ICAL_URL = 'https://stair.ch/?post_type=tribe_events&ical=1&eventDisplay=list';
+
   constructor(
     @InjectRepository(Event)
     private readonly eventRepository: Repository<Event>,
   ) {}
 
-  async importEventsFromIcal(url: string): Promise<string> {
+  async importEvents(): Promise<string> {
     try {
-      const icalEvents = await ical.fromURL(url);
+      const icalEvents = await ical.fromURL(this.STAIR_ICAL_URL);
       for (const key in icalEvents) {
         if (icalEvents[key].type === 'VEVENT') {
           const event = new Event();

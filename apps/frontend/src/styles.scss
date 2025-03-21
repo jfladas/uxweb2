@@ -1,29 +1,25 @@
 // Google Fonts
-// <weight>: Use a value from 100 to 1000
-// <slant>: Use a value from -10 to 0
-// <width>: Use a value from 25 to 151
+// <weight>: Use a value from 100 to 900
 // <uniquifier>: Use a unique and descriptive class name
 
-.roboto-flex {
-  font-family: 'Roboto Flex', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400; // <weight>
-  font-style: normal;
-  font-variation-settings: 'slnt' 0,
-    // <slant>
-    'wdth' 100; // <width>
+.icon {
+  font-family: 'Material Symbols Rounded';
+  font-size: 2rem;
 }
 
 // Color variables
-$primary-color: #007bff;
-$primary-color-dark: #0056b3;
-$background-color: #f4f4f4;
-$text-color: #333;
-$secondary-text-color: #666;
+$primary-color: #c74ef3;
+$primary-color-light: #ef8ef9;
+$secondary-color: #bffde4;
+$background-color: #eee;
+$background-color-light: #fff;
+$text-color: #000;
+$secondary-text-color: #444;
+$border-color: #aaa;
 
 // Global styles
 * {
-  font-family: 'Roboto Flex', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 1rem;
   color: $text-color;
@@ -46,16 +42,24 @@ h6 {
 }
 
 h1 {
-  font-size: 2rem;
-  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-top: 1.5rem;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 400;
 }
 
 h3 {
-  font-size: 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+p {
+  font-size: 0.9rem;
+  font-weight: 400;
 }
 
 a {
@@ -63,17 +67,25 @@ a {
   text-decoration: underline;
 }
 
+.caption {
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+
 button {
-  margin: 1rem 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: $primary-color;
-  color: white;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
+  background-color: transparent;
 
-  :hover {
-    background-color: $primary-color-dark;
+  &.primary {
+    margin: 1rem 0.5rem;
+    background-color: $primary-color;
+    color: white;
+    &:hover {
+      background-color: $primary-color-light;
+    }
   }
 }
 

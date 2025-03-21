@@ -1,4 +1,38 @@
-<div class="event-item">
-  <h3>{{ event.name }}</h3>
-  <p>{{ event.date }}</p>
+<div class="event-card">
+  <div class="event-left">
+    <div class="event-logo">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBowLRULUlTkoIlCMW6ObP65jh8J94qx4m4A&s"
+        alt="Stair"
+        class="event-banner"
+      />
+    </div>
+  </div>
+  <div class="event-right">
+    <h2>{{ event.name }}</h2>
+    <div class="event-details">
+      <span class="icon">location_on</span>
+      <p>{{ event.location }}</p>
+    </div>
+    <div class="event-details">
+      <span class="icon">calendar_month</span>
+      <p>{{ event.date }}</p>
+    </div>
+    <div class="event-details">
+      <span class="icon">schedule</span>
+      <p>{{ event.time }}</p>
+    </div>
+  </div>
+
+  <div class="event-actions">
+    <button class="event-button" (click)="OnSaveEvent()">
+      <span class="icon">star</span>
+    </button>
+    <button class="event-button" (click)="OnShareEvent()">
+      <span class="icon">send</span>
+    </button>
+    <button class="event-button" (click)="OnAddToCalender()">
+      <span class="icon">calendar_add_on</span>
+    </button>
+  </div>
 </div>

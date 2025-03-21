@@ -1,0 +1,12 @@
+<div class="chips-container">
+  <div
+    class="chip"
+    *ngFor="let chip of chips"
+    [ngClass]="{ selected: chip.selected }"
+    (click)="onChipClick(chip)"
+    (keydown)="onChipClick(chip)"
+    tabindex="0"
+  >
+    {{ chip.name }}
+  </div>
+</div>

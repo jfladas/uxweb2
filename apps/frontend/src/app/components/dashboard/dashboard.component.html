@@ -1,7 +1,11 @@
 <div class="container">
-  <button (click)="logout()">Logout</button>
+  <h1>Events</h1>
+  <app-search></app-search>
+  <div class="filter-section">
+    <app-filter-chips></app-filter-chips>
+    <app-subscribe-button></app-subscribe-button>
+  </div>
   <div *ngIf="events$ | async as events">
-    <h2>Upcoming Events</h2>
     <ul>
       <li *ngFor="let event of events">
         <app-event-item [event]="event"></app-event-item>

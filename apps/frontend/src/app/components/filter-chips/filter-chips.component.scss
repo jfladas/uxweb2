@@ -1,0 +1,22 @@
+@use '../../../styles.scss' as *;
+
+.chips-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chip {
+  color: $secondary-text-color;
+  padding: 0.3rem 0.5rem;
+  border: 0.1rem solid $border-color;
+  border-radius: 2rem;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  &.selected {
+    background-color: $primary-color;
+    color: white;
+    border-color: $primary-color;
+    box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+}

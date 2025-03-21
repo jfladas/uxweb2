@@ -4,7 +4,7 @@
   display: flex;
   background-color: white;
   border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.1);
   overflow: hidden;
   width: 100%;
   height: 8rem;
@@ -12,16 +12,10 @@
   font-family: $secondary-color;
 }
 
-/* Left Section */
 .event-left {
   position: relative;
   width: 25%;
-}
-
-.event-banner {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background-color: green;
 }
 
 .event-logo {
@@ -38,9 +32,10 @@
   height: 2.2rem;
 }
 
-
 .event-right {
-  padding: 0.8rem;
+  padding: 0.3rem;
+  display: flex 3.5;
+  padding-left: 1.2rem;
 }
 
 .event-actions {

@@ -8,7 +8,13 @@ import { Component, Input } from '@angular/core';
 export class EventItemComponent {
   @Input() event!: { name: string; date: string; location: string; time: string };
 
-  OnSave() {
+  OnSaveEvent() {
     // Save the event
+  }
+  OnAddToCalender() {
+    // Add the event to the calender
+  }
+  OnShareEvent() {
+    // Share the event
   }
 }

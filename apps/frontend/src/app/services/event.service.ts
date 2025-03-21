@@ -3,20 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Event {
-  id: number;
+  id?: number;
   summary: string;
   start: string;
   end: string;
-  location: string;
-  description: string;
-  category: string;
+  location?: string;
+  description?: string;
+  category?: string;
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = 'http://localhost:3000/events'; // Backend-URL
+  private apiUrl = 'http://localhost:3000/api/events'; // ✅ Korrekte API-URL!
 
   constructor(private http: HttpClient) {}
 

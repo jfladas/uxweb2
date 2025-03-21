@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BarService } from './services/bar/bar.service';
-import { map, Observable } from 'rxjs';
 import { EventListComponent } from './components/event-list/event-list.component'; // ✅ Import der EventListComponent
 
 @Component({

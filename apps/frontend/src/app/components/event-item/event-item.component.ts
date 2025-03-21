@@ -6,5 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./event-item.component.scss'],
 })
 export class EventItemComponent {
-  @Input() event!: { name: string; date: string };
+  @Input() event!: { name: string; date: string; location: string; time: string };
+
+  OnSave() {
+    // Save the event
+  }
 }

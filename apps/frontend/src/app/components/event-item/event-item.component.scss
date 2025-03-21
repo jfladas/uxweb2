@@ -1,16 +1,72 @@
 @use '../../../styles.scss' as *;
 
-.event-item {
-  background-color: $background-color-light;
-  margin: 1rem 0;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
-  h2 {
-    margin: 0 0 0.5rem 0;
+.event-card {
+  display: flex;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  width: 100%;
+  height: 8rem;
+  margin: 1rem 0 0.5rem 0;
+  font-family: $secondary-color;
+}
+
+/* Left Section */
+.event-left {
+  position: relative;
+  width: 25%;
+}
+
+.event-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-logo {
+  position: absolute;
+  top: 0.625rem;
+  left: 0.625rem;
+  background-color: white;
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+
+.event-logo img {
+  width: 2.5rem;
+  height: 2.2rem;
+}
+
+
+.event-right {
+  padding: 0.8rem;
+}
+
+.event-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.event-icon{
+  padding: 0.1rem 0.4rem 0.2rem 0;
+
+  span{
+    font-size: 1.5rem;
   }
-  p {
-    margin: 0;
-    color: $secondary-text-color;
+}
+
+.event-details {
+  display: flex;
+  align-items: center;
+  width: 11rem;
+  height: 2rem;
+
+  span{
+    font-size: 1.2rem;
+  }
+
+  p{
+    margin: 0.2rem 0 0.2rem 0.2rem;
   }
 }

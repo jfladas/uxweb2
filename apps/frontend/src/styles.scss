@@ -8,7 +8,7 @@ $text-color: #000;
 $secondary-text-color: #444;
 $border-color: #aaa;
 $digital-ideation: #c74ef3;
-$stair: #0C6A5C;
+$stair: #0c6a5c;
 $frame: #000;
 
 .icon {
@@ -57,7 +57,7 @@ h3 {
   font-weight: 700;
 }
 
-h4{
+h4 {
   font-size: 1rem;
   font-weight: 400;
   padding-bottom: 0.5rem;
@@ -72,7 +72,6 @@ a {
   color: $primary-color;
   text-decoration: underline;
 }
-
 
 button {
   padding: 0.5rem 1rem;
@@ -93,5 +92,5 @@ button {
 }
 
 .container {
-  margin: 2rem;
+  margin: 2rem 1rem;
 }

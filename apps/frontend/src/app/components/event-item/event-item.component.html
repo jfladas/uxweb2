@@ -1,13 +1,10 @@
 <div class="event-card">
-  <div class="event-left">
+  <div class="event-left {{ event.by }}">
     <div class="event-logo">
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBowLRULUlTkoIlCMW6ObP65jh8J94qx4m4A&s"
-        alt="Stair"
-        class="event-banner"
-      />
+      <img src="assets/{{ event.by }}.jpg" alt="{{ event.by }}" />
     </div>
   </div>
+  <img src="{{ event.poster }}" alt="Poster" class="event-poster" />
   <div class="event-right">
     <h3>{{ event.name }}</h3>
     <h4>Digital Ideation</h4>

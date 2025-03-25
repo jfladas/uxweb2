@@ -21,10 +21,37 @@ import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.c
 })
 export class DashboardComponent {
   events$ = of([
-    { name: 'Event 1', date: '2023-10-01', location: 'Rotkreuz 9 Stock', time: '10:00 Uhr' },
-    { name: 'Event 2', date: '2023-10-01', location: 'Rotkreuz 9 Stock', time: '10:00 Uhr' },
-    { name: 'Event 3', date: '2023-10-01', location: 'Rotkreuz 9 Stock', time: '10:00 Uhr' },
-   
-   
+    {
+      name: 'DI-Party',
+      date: '3. April 2025',
+      location: 'Rotkreuz 9. Stock',
+      time: '10:00 Uhr',
+      by: 'di',
+      poster: 'assets/poster1.jpg',
+    },
+    {
+      name: 'STAIR Event',
+      date: '24. April 2025',
+      location: 'Luzern',
+      time: '13:30 Uhr',
+      by: 'stair',
+      poster: 'assets/poster2.jpg',
+    },
+    {
+      name: 'FRAME Meetup',
+      date: '5. Mai 2025',
+      location: 'Emmenbrücke',
+      time: '16:00 Uhr',
+      by: 'frame',
+      poster: 'assets/poster3.jpg',
+    },
+    {
+      name: 'Digital Oddities',
+      date: '14. Mai 2025',
+      location: 'Rotkreuz 9. Stock',
+      time: '17:00 Uhr',
+      by: 'di',
+      poster: 'assets/poster4.jpg',
+    },
   ]);
 }

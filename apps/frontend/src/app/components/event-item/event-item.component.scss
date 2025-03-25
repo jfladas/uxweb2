@@ -7,42 +7,64 @@
   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 100%;
+  height: 9rem;
   margin: 1rem 0 0.5rem 0;
 }
 
 .event-left {
   position: relative;
-  width: 25%;
-  background-color: green;
+  width: 1rem;
+  &.di {
+    background-color: $digital-ideation;
+  }
+  &.stair {
+    background-color: $stair;
+  }
+  &.frame {
+    background-color: $frame;
+  }
 }
 
 .event-logo {
   position: absolute;
-  top: 0.625rem;
-  left: 0.625rem;
+  top: 0.5rem;
+  left: 0.5rem;
   background-color: white;
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   padding: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  z-index: 2;
   img {
-    width: 2.5rem;
-    height: 2.2rem;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    clip-path: circle(50%);
   }
 }
 
+.event-poster {
+  height: 100%;
+  width: 25%;
+  max-width: 10rem;
+  object-fit: cover;
+  filter: brightness(0.8) grayscale(0.5);
+  z-index: 1;
+}
+
 .event-right {
-  padding: 0.8rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
   flex: 1;
-  padding-left: 1.2rem;
 }
 
 .event-actions {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  width: 3rem;
   .event-button {
-    padding: 0.1rem 1rem 0.2rem 0;
-    flex: 1;
+    padding: 0 0.8rem 0 0.8rem;
     .icon {
       color: $text-color;
       font-size: 1.5rem;

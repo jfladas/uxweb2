@@ -1,12 +1,3 @@
-// Google Fonts
-// <weight>: Use a value from 100 to 900
-// <uniquifier>: Use a unique and descriptive class name
-
-.icon {
-  font-family: 'Material Symbols Rounded';
-  font-size: 2rem;
-}
-
 // Color variables
 $primary-color: #c74ef3;
 $primary-color-light: #ef8ef9;
@@ -16,6 +7,12 @@ $background-color-light: #fff;
 $text-color: #000;
 $secondary-text-color: #444;
 $border-color: #aaa;
+
+.icon {
+  font-family: 'Material Symbols Rounded';
+  font-size: 2rem;
+  color: $text-color;
+}
 
 // Global styles
 * {
@@ -42,23 +39,29 @@ h6 {
 }
 
 h1 {
-  font-size: 1.5rem;
-  font-weight: 300;
+  font-size: 2.125rem;
+  font-weight: 700;
   margin-top: 1.5rem;
 }
 
 h2 {
-  font-size: 1.3rem;
-  font-weight: 400;
-}
-
-h3 {
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
+h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+h4{
+  font-size: 1rem;
+  font-weight: 400;
+  padding-bottom: 0.5rem;
+}
+
 p {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 400;
 }
 
@@ -67,10 +70,6 @@ a {
   text-decoration: underline;
 }
 
-.caption {
-  font-size: 0.6rem;
-  font-weight: 400;
-}
 
 button {
   padding: 0.5rem 1rem;
@@ -81,6 +80,7 @@ button {
 
   &.primary {
     margin: 1rem 0.5rem;
+    font-size: 0.875rem;
     background-color: $primary-color;
     color: white;
     &:hover {

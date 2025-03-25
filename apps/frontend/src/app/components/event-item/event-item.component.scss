@@ -8,9 +8,6 @@
   overflow: hidden;
   width: 100%;
   margin: 1rem 0 0.5rem 0;
-  h2 {
-    margin: 0 0 0.2rem 0;
-  }
 }
 
 .event-left {
@@ -34,7 +31,7 @@
 }
 
 .event-right {
-  padding: 0.3rem;
+  padding: 0.8rem;
   flex: 1;
   padding-left: 1.2rem;
 }
@@ -47,7 +44,7 @@
     padding: 0.1rem 0.4rem 0.2rem 0;
     flex: 1;
     .icon {
-      color: $secondary-text-color;
+      color: $text-color;
       font-size: 1.5rem;
     }
   }
@@ -57,10 +54,9 @@
   display: flex;
   align-items: center;
   width: 11rem;
-  height: 2rem;
-  color: $secondary-text-color !important;
+  height: 1.5rem;
   span {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   p {
     margin: 0.2rem 0 0.2rem 0.2rem;

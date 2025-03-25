@@ -9,6 +9,7 @@
       "
     ></app-subscribe-button>
   </div>
+  
   <h2>Nächste</h2>
   <div *ngIf="events$ | async as events">
     <div *ngFor="let month of events | keyvalue" class="month-section">

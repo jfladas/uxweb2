@@ -16,8 +16,8 @@ import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   imports: [
-    AsyncPipe,
     CommonModule,
     DatePipe,
     EventItemComponent,

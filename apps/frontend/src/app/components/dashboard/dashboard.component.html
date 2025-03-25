@@ -5,11 +5,7 @@
     <app-filter-chips></app-filter-chips>
     <app-subscribe-button></app-subscribe-button>
   </div>
-  <div *ngIf="events$ | async as events">
-    <ul>
-      <li *ngFor="let event of events">
-        <app-event-item [event]="event"></app-event-item>
-      </li>
-    </ul>
-  </div>
+
+  <!-- ✅ Diese Komponente holt und zeigt alle Events -->
+  <app-event-list></app-event-list>
 </div>

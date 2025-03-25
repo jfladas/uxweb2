@@ -18,5 +18,21 @@
     color: white;
     border-color: $primary-color;
     box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+
+    &:nth-child(1) {
+      background-color: $digital-ideation;
+      border-color: $digital-ideation;
+    }
+  
+    &:nth-child(2) {
+      background-color: $stair;
+      border-color: $stair;
+    }
+  
+    &:nth-child(3) {
+      background-color: $frame; 
+      border-color: $frame;
+    }
   }
+ 
 }

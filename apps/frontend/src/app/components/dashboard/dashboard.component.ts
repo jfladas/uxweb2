@@ -1,8 +1,3 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
-import localeDeCh from '@angular/common/locales/de-CH';
-import { EventService } from '../../services/event.service'; // Import EventService
-
 registerLocaleData(localeDeCh);
 import { CommonModule, DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
@@ -13,6 +8,14 @@ import { SearchComponent } from '../search/search.component';
 import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
 import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
 import { PopoverComponent } from '../popover/popover.component';
+import { inject } from '@angular/core';
+import { EventListComponent } from '../event-list/event-list.component'; // 👈 EventList importieren
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { EventService } from '../../services/event.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDeCh from '@angular/common/locales/de-CH';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +31,8 @@ import { PopoverComponent } from '../popover/popover.component';
     FilterChipsComponent,
     SubscribeButtonComponent,
     PopoverComponent,
+    EventListComponent, // ✅ jetzt wirklich eingebunden!
+    ReactiveFormsModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de-CH' }],
   templateUrl: './dashboard.component.html',
@@ -159,4 +164,25 @@ export class DashboardComponent implements OnInit {
       targetEvent.favorite = event.isFavorite;
     }
   }
+
+  eventservice = inject(EventService);
+    eventForm = new FormGroup({
+      titel: new FormControl(''),
+      ort: new FormControl(''),
+      datum: new FormControl(''),
+      start: new FormControl(''),
+      end: new FormControl(''),
+    });
+  
+    submit = () =>
+      this.eventservice
+        .createEvent({
+          summary: this.eventForm.value.titel || '',
+          location:this.eventForm.value.titel || '',
+          start: this.timestamp(this.eventForm.value.start || '00:00'),
+          end: this.timestamp(this.eventForm.value.end || '00:00'),
+        })
+        .subscribe();
+  
+        timestamp = (time?: string) =>`${this.eventForm.value.datum}T${time}`;
 }

@@ -22,23 +22,23 @@
 <html>
 <body>
 
-<h2>Füge ein Event hinzu</h2>
-
-<form action="/action_page.php" target="_blank" method="post">
-  <label for="ltitel">Titel:</label><br>
-  <input type="text" id="ltitel" name="ltitel" value=""><br>
+  <h2>Füge ein Event hinzu</h2>
+  <form [formGroup]="eventForm" (ngSubmit)="submit()"> 
+    <label for="titel">Titel:</label><br>
+    <input type="text" id="titel" formControlName="titel"><br>
+    
+    <label for="Ort">Ort:</label><br>
+    <input type="text" id="ort" formControlName="ort"><br>
   
-  <label for="lname">Ort:</label><br>
-  <input type="text" id="lname" name="lname" value=""><br>
-   
-  <label for="ldatum">Datum:</label><br>
-  <input type="date" id="ldatum" name="ldatum"><br>
-   
-  <label for="lzeit">Start Zeit:</label><br>
-  <input type="time" id="lzeit" name="lzeit"><br><br>
+    <label for="datum">Datum:</label><br>
+    <input type="date" id="datum" formControlName="datum"><br>
   
-  <input type="submit" value="Submit">
-</form>
+    <label for="start">Start zeit:</label><br>
+    <input type="time" id="start" formControlName="start"><br><br>
 
-</body>
-</html>
+    <label for="end">End Zeit:</label><br>
+    <input type="time" id="end" formControlName="end"><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+  

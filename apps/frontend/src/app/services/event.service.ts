@@ -15,12 +15,16 @@ export interface Event {
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {
-  private apiUrl = 'http://localhost:3000/api/events'; // ✅ Korrekte API-URL!
+export class EventService { // ✅ Ensure this class is correctly defined
+  private apiUrl = 'http://localhost:3000/api/events'; // ✅ Correct API URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {} // ✅ Fix constructor issue
 
-  getEvents(): Observable<Event[]> {
+  getEvents(): Observable<Event[]> { // ✅ Ensure correct function definition
     return this.http.get<Event[]>(this.apiUrl);
+  }
+
+  createEvent(event: Event): Observable<Event> { // ✅ Fix function definition
+    return this.http.post<Event>(this.apiUrl, event);
   }
 }

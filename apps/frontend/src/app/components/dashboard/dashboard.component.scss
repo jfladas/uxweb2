@@ -12,7 +12,15 @@ ul {
   margin: 0 0 1rem 0;
 }
 
+.month-section {
+  margin-top: 1.5rem;
+  h2 {
+    font-weight: 700;
+    margin-left: 0.5rem;
+  }
+}
+
 .month-year {
-  font-size: 1.5rem;
-  color: $secondary-text-color;
+  font: inherit;
+  font-weight: 400;
 }

@@ -2,12 +2,13 @@
 
 .chips-container {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.7rem;
 }
 
 .chip {
+  font-size: 1rem;
   color: $secondary-text-color;
-  padding: 0.3rem 0.5rem;
+  padding: 0.2rem 0.7rem;
   border: 0.1rem solid $border-color;
   border-radius: 2rem;
   cursor: pointer;
@@ -23,16 +24,15 @@
       background-color: $digital-ideation;
       border-color: $digital-ideation;
     }
-  
+
     &:nth-child(2) {
       background-color: $stair;
       border-color: $stair;
     }
-  
+
     &:nth-child(3) {
-      background-color: $frame; 
+      background-color: $frame;
       border-color: $frame;
     }
   }
- 
 }

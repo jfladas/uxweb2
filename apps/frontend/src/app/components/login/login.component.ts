@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth/auth.service';
+import { authGuard } from '../../guards/auth/auth.guard';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,6 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  private authService = inject(AuthService);
-  login = () => this.authService.login();
+  private OauthService = inject(OAuthService);
+  login = () => this.OauthService.initLoginFlow();
 }

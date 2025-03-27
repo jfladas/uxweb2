@@ -1,29 +1,21 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { AuthService } from '../../services/auth/auth.service';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+export const authGuard: CanActivateFn = (_route, state) => {
+  const oauthService = inject(OAuthService);
+  const router = inject(Router);
 
-  canActivate(): Observable<boolean> {
-    return this.authService.isAuthenticated().pipe(
-      map((response) => {
-        if (response.authenticated) {
-          return true;
-        } else {
-          this.router.navigate(['/login']);
-          return false;
-        }
-      }),
-      catchError(() => {
-        this.router.navigate(['/login']);
-        return of(false);
-      })
-    );
+  if (oauthService.hasValidAccessToken()) {
+    return true;
   }
-}
+
+  return oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+    if (oauthService.hasValidAccessToken()) {
+      return true;
+    }
+    //oauthService.initLoginFlow(state.url);
+    router.navigate(['/login']);
+    return false;
+  });
+};

@@ -23,14 +23,26 @@
   </div>
 
   <div class="event-actions">
-    <button class="event-button" (click)="OnSaveEvent()">
-      <span class="icon">star</span>
-    </button>
-    <button class="event-button" (click)="OnShareEvent()">
-      <span class="icon">share</span>
-    </button>
-    <button class="event-button" (click)="OnAddToCalender()">
-      <span class="icon">calendar_add_on</span>
+    <button class="event-button" (click)="togglePopup()">
+      <span class="icon">more_vert</span>
     </button>
   </div>
+</div>
+
+<div class="popup"*ngIf="isPopupVisible">
+  <button class="popup-button" (click)="OnSaveEvent()">
+    <span class="icon">star</span> Save
+  </button>
+  <button class="popup-button" (click)="OnShareEvent()">
+    <span class="icon">share</span> Share
+  </button>
+  <button class="popup-button" (click)="OnAddToCalender()">
+    <span class="icon">calendar_add_on</span> Add to Calendar
+  </button>
+  <button class="popup-button" (click)="OnAddToCalender()">
+    <span class="icon">Edit</span>Edit
+  </button>
+  <button class="popup-button" (click)="OnAddToCalender()">
+    <span class="icon">Delete</span>Delete
+  </button>
 </div>

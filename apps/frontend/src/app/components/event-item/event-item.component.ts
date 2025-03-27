@@ -1,11 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostListener, ElementRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-event-item',
+  standalone: true,
+  imports: [CommonModule, DatePipe],
   templateUrl: './event-item.component.html',
   styleUrls: ['./event-item.component.scss'],
-  imports: [DatePipe],
 })
 export class EventItemComponent {
   @Input() event!: {
@@ -17,13 +19,35 @@ export class EventItemComponent {
     poster: string;
   };
 
+  isPopupVisible = false;
+
+  constructor(private elementRef: ElementRef) {}
+
+  togglePopup(): void {
+    this.isPopupVisible = !this.isPopupVisible;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const targetElement = event.target as HTMLElement;
+
+    if (
+      this.isPopupVisible &&
+      !this.elementRef.nativeElement.contains(targetElement)
+    ) {
+      this.isPopupVisible = false;
+    }
+  }
+
   OnSaveEvent() {
-    // Save the event
+    console.log('Event Saved!');
   }
+
   OnAddToCalender() {
-    // Add the event to the calender
+    console.log('Event Added to Calendar!');
   }
+
   OnShareEvent() {
-    // Share the event
+    console.log('Event Shared!');
   }
 }

@@ -38,6 +38,7 @@ import localeDeCh from '@angular/common/locales/de-CH';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
+/*
 export class DashboardComponent implements OnInit {
   currentYear = new Date().getFullYear();
   events$!: Observable<Record<string, any[]>>;
@@ -68,15 +69,34 @@ export class DashboardComponent implements OnInit {
             acc[key] = groupedEvents[key];
             return acc;
           }, {});
-      })
-    );
-  }
+          */
+export class DashboardComponent {
+  eventservice = inject(EventService);
+  eventForm = new FormGroup({
+    titel: new FormControl(''),
+    ort: new FormControl(''),
+    datum: new FormControl(''),
+    start: new FormControl(''),
+    end: new FormControl(''),
+    description: new FormControl(''),
+  });
+
+  submit = () =>
+    this.eventservice
+      .createEvent({
+        summary: this.eventForm.value.titel || '',
+        location:this.eventForm.value.titel || '',
+        start: this.timestamp(this.eventForm.value.start || '00:00'),
+        end: this.timestamp(this.eventForm.value.end || '00:00'),
+        description: this.eventForm.value.description || '',
+      });
 
   isCurrentYear(year: string | null): boolean {
     if (year === null) {
       return false;
     }
-    return parseInt(year, 10) === this.currentYear;
+    //return parseInt(year, 10) === this.currentYear;
+    return true;
   }
 
   @ViewChild(PopoverComponent) popoverComponent?: PopoverComponent;

@@ -18,7 +18,7 @@ export class Event {
   location: string;
 
   @Column({ nullable: true })
-  description?: string;
+  description: string;
 
   @Column({ nullable: true })
   category?: string;

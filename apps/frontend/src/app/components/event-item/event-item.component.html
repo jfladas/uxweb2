@@ -22,14 +22,17 @@
     </div>
   </div>
 
-  <div class="event-actions">
+  <div
+    class="event-actions"
+    [ngStyle]="{ 'z-index': isPopupVisible ? '6' : 'auto' }"
+  >
     <button class="event-button" (click)="togglePopup()">
       <span class="icon">more_vert</span>
     </button>
   </div>
 </div>
 
-<div class="popup" *ngIf="isPopupVisible">
+<div class="popup">
   <button class="popup-button" (click)="OnSaveEvent()">
     <span class="icon">star</span> Zu Favoriten hinzufügen
   </button>

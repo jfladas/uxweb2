@@ -25,6 +25,15 @@ export class EventItemComponent {
 
   togglePopup(): void {
     this.isPopupVisible = !this.isPopupVisible;
+
+    const popupElement = this.elementRef.nativeElement.querySelector('.popup');
+    if (popupElement) {
+      if (this.isPopupVisible) {
+        popupElement.classList.add('visible');
+      } else {
+        popupElement.classList.remove('visible');
+      }
+    }
   }
 
   @HostListener('document:click', ['$event'])
@@ -41,21 +50,26 @@ export class EventItemComponent {
 
   OnSaveEvent() {
     console.log('Event Saved!');
+    this.togglePopup();
   }
 
   OnAddToCalender() {
     console.log('Event Added to Calendar!');
+    this.togglePopup();
   }
 
   OnShareEvent() {
     console.log('Event Shared!');
+    this.togglePopup();
   }
 
   OnDeleteEvent() {
     console.log('Event Deleted!');
+    this.togglePopup();
   }
 
   OnEditEvent() {
     console.log('Event Edited!');
+    this.togglePopup();
   }
 }

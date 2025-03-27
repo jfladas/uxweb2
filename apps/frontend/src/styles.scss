@@ -37,8 +37,6 @@ h4,
 h5,
 h6 {
   margin: 0;
-  font-weight: 800;
-  font-variation-settings: 'wdth' 150;
 }
 
 h1 {
@@ -50,6 +48,7 @@ h1 {
 h2 {
   font-size: 1.5rem;
   font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 h3 {

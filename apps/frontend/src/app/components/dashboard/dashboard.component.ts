@@ -30,6 +30,7 @@ export class DashboardComponent {
     datum: new FormControl(''),
     start: new FormControl(''),
     end: new FormControl(''),
+    description: new FormControl(''),
   });
 
   submit = () =>
@@ -39,6 +40,7 @@ export class DashboardComponent {
         location:this.eventForm.value.titel || '',
         start: this.timestamp(this.eventForm.value.start || '00:00'),
         end: this.timestamp(this.eventForm.value.end || '00:00'),
+        description: this.eventForm.value.description || '',
       })
       .subscribe();
 

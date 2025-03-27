@@ -31,7 +31,7 @@ export class EventListComponent implements OnInit {
         this.events = data.map((event) => ({
           name: event.summary,
           location: event.location || '',
-          description: event.location || '',
+          description: event.description  || '',
           date: event.start.split('T')[0], // "2025-04-15"
           time: event.start.split('T')[1].slice(0, 5), // "14:00"
         }));

@@ -14,7 +14,7 @@
     </div>
     <div class="event-details">
       <span class="icon">calendar_month</span>
-      <p>{{ event.date }}</p>
+      <p>{{ event.date | date : 'd. MMMM yyyy' }}</p>
     </div>
     <div class="event-details">
       <span class="icon">schedule</span>

@@ -1,3 +1,5 @@
+@use '../../../styles.scss' as *;
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -8,4 +10,9 @@ ul {
   justify-content: space-between;
   align-items: center;
   margin: 0 0 1rem 0;
+}
+
+.month-year {
+  font-size: 1.5rem;
+  color: $secondary-text-color;
 }

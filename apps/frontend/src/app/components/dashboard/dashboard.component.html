@@ -5,12 +5,21 @@
     <app-filter-chips></app-filter-chips>
     <app-subscribe-button></app-subscribe-button>
   </div>
-  <h2>Nächste</h2>
   <div *ngIf="events$ | async as events">
-    <ul>
-      <li *ngFor="let event of events">
-        <app-event-item [event]="event"></app-event-item>
-      </li>
-    </ul>
+    <div *ngFor="let month of events | keyvalue" class="month-section">
+      <h2>
+        {{ month.key | date : 'MMMM' }}
+        <span
+          *ngIf="!isCurrentYear(month.key | date : 'yyyy')"
+          class="month-year"
+          >{{ month.key | date : 'yyyy' }}
+        </span>
+      </h2>
+      <ul>
+        <li *ngFor="let event of month.value">
+          <app-event-item [event]="event"></app-event-item>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

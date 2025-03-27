@@ -9,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  background-color: $background-color-light;
+  background-color: $white;
   box-shadow: $shadow;
 
   .left-section {
@@ -29,7 +29,7 @@
   }
 
   .menu {
-    color: $text-color;
+    color: $darkest;
   }
 }
 

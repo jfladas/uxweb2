@@ -1,21 +1,20 @@
 // Color variables
-$primary-color: #c74ef3;
-$primary-color-light: #ef8ef9;
-$secondary-color: #bffde4;
-$background-color: #eee;
-$background-color-light: #fff;
-$text-color: #000;
-$secondary-text-color: #444;
-$border-color: #aaa;
+$primary-color: #6858b8;
+$primary-color-light: #8a7fc9;
+$lightest: #eee;
+$white: #fff;
+$medium: #aaa;
+$dark: #333;
+$darkest: #000;
 $digital-ideation: #c74ef3;
 $stair: #0c6a5c;
 $frame: #000;
-$shadow:0 4px 4px 0 rgba(0, 0, 0, 0.25); 
+$shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 
 .icon {
   font-family: 'Material Symbols Rounded';
   font-size: 2rem;
-  color: $text-color;
+  color: $darkest;
 }
 
 // Global styles
@@ -23,12 +22,12 @@ $shadow:0 4px 4px 0 rgba(0, 0, 0, 0.25);
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 1rem;
-  color: $text-color;
+  color: $darkest;
 }
 
 body {
   margin: 0;
-  background-color: $background-color;
+  background-color: $lightest;
 }
 
 h1,

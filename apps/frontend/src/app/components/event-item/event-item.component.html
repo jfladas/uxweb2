@@ -29,20 +29,24 @@
   </div>
 </div>
 
-<div class="popup"*ngIf="isPopupVisible">
+<div class="popup" *ngIf="isPopupVisible">
   <button class="popup-button" (click)="OnSaveEvent()">
-    <span class="icon">star</span> Save
+    <span class="icon">star</span> Zu Favoriten hinzufügen
   </button>
+  <hr />
   <button class="popup-button" (click)="OnShareEvent()">
-    <span class="icon">share</span> Share
+    <span class="icon">share</span> Teilen
   </button>
+  <hr />
   <button class="popup-button" (click)="OnAddToCalender()">
-    <span class="icon">calendar_add_on</span> Add to Calendar
+    <span class="icon">calendar_add_on</span> Zum Kalender hinzufügen
   </button>
-  <button class="popup-button" (click)="OnAddToCalender()">
-    <span class="icon">Edit</span>Edit
+  <hr />
+  <button class="popup-button" (click)="OnEditEvent()">
+    <span class="icon">edit</span> Bearbeiten
   </button>
-  <button class="popup-button" (click)="OnAddToCalender()">
-    <span class="icon">Delete</span>Delete
+  <hr />
+  <button class="popup-button" (click)="OnDeleteEvent()">
+    <span class="icon">delete</span> Löschen
   </button>
 </div>

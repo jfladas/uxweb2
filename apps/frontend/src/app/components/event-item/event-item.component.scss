@@ -98,15 +98,12 @@
 
 .popup{
   position: absolute;
-  right: 9%;
-  top:45%;
+  transform: translate(0, -2.5rem);
+  right: 2.3rem;
   background-color: $background-color;
-  width: 50%;
-  height: auto;
   border-radius: 0.5rem;
-  padding: 0.5rem;
   box-shadow:$shadow;
-  z-index: 2;
+  z-index: 5;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -118,6 +115,7 @@
     text-align: left;
     width: 100%; 
     font-size: 0.75rem;
+    padding: 0.5rem;
 
     .icon {
       font-size: 1rem;
@@ -126,5 +124,10 @@
   }
 }
 
+.popup hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 0.1rem 0; 
+}
 
 

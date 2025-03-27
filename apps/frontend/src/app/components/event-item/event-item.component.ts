@@ -50,4 +50,12 @@ export class EventItemComponent {
   OnShareEvent() {
     console.log('Event Shared!');
   }
+
+  OnDeleteEvent() {
+    console.log('Event Deleted!');
+  }
+
+  OnEditEvent() {
+    console.log('Event Edited!');
+  }
 }

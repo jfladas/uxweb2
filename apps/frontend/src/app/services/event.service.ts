@@ -2,6 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 /*
+export interface Event {
+  id?: number;
+  summary: string;
+  start: string;
+  end: string;
+  location: string;
+  description?: string;
+  category?: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })

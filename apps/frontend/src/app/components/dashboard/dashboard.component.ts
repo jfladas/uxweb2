@@ -16,11 +16,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
+    GoogleMapsModule,
     CommonModule,
     SearchComponent,
     FilterChipsComponent,
@@ -31,12 +34,12 @@ import localeDeCh from '@angular/common/locales/de-CH';
     FilterChipsComponent,
     SubscribeButtonComponent,
     PopoverComponent,
-    EventListComponent, // ✅ jetzt wirklich eingebunden!
+    EventListComponent, // ✅ now included
     ReactiveFormsModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de-CH' }],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  styleUrls: ['./dashboard.component.scss'],
 })
 /*
 export class DashboardComponent implements OnInit {
@@ -71,25 +74,11 @@ export class DashboardComponent implements OnInit {
           }, {});
           */
 export class DashboardComponent {
-  eventservice = inject(EventService);
-  eventForm = new FormGroup({
-    titel: new FormControl(''),
-    ort: new FormControl(''),
-    datum: new FormControl(''),
-    start: new FormControl(''),
-    end: new FormControl(''),
-    description: new FormControl(''),
-  });
 
-  submit = () =>
-    this.eventservice
-      .createEvent({
-        summary: this.eventForm.value.titel || '',
-        location:this.eventForm.value.titel || '',
-        start: this.timestamp(this.eventForm.value.start || '00:00'),
-        end: this.timestamp(this.eventForm.value.end || '00:00'),
-        description: this.eventForm.value.description || '',
-      });
+  markers: any[] = []; 
+  center: google.maps.LatLngLiteral = { lat: 24, lng: 12 };
+
+  iframeSrc:SafeResourceUrl = ''; // Property to hold the dynamic iframe source URL
 
   isCurrentYear(year: string | null): boolean {
     if (year === null) {
@@ -185,14 +174,16 @@ export class DashboardComponent {
     }
   }
 
+  private sanitzer = inject(DomSanitizer);
   eventservice = inject(EventService);
-    eventForm = new FormGroup({
-      titel: new FormControl(''),
-      ort: new FormControl(''),
-      datum: new FormControl(''),
-      start: new FormControl(''),
-      end: new FormControl(''),
-    });
+  eventForm = new FormGroup({
+    titel: new FormControl(''),
+    ort: new FormControl(''),
+    datum: new FormControl(''),
+    start: new FormControl(''),
+    end: new FormControl(''),
+    description: new FormControl(''),
+  });
   
     submit = () =>
       this.eventservice
@@ -202,7 +193,34 @@ export class DashboardComponent {
           start: this.timestamp(this.eventForm.value.start || '00:00'),
           end: this.timestamp(this.eventForm.value.end || '00:00'),
         })
-        .subscribe();
-  
-        timestamp = (time?: string) =>`${this.eventForm.value.datum}T${time}`;
+      .subscribe(() => {
+        // After submitting the form, update the iframe location with the entered location
+        this.updateIframeLocation(this.eventForm.value.ort || '');
+      });
+
+  timestamp = (time?: string) => `${this.eventForm.value.datum}T${time}`;
+
+  // Update iframe source based on the location
+  updateIframeLocation(location: string): void {
+    const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBOL61GjI2pEwNlEkFcliwWI0PRHNif-ec&q=${encodeURIComponent(location)}`;
+    console.log('Google Maps URL:', googleMapsUrl);
+    this.iframeSrc = this.sanitzer.bypassSecurityTrustResourceUrl(googleMapsUrl);
+  }
+
+  // Load events from the backend and update the iframe with the first event's location
+  loadEvents(): void {
+    this.eventservice.getEvents().subscribe({
+      next: (data) => {
+        console.log('📦 Events data from backend:', data);
+
+        // Dynamically update the iframe with the location of the first event
+        if (data.length > 0) {
+          this.updateIframeLocation(data[0].location); // Set location for the first event
+        }
+      },
+      error: (error) => {
+        console.error('❌ Error while loading events:', error);
+      },
+    });
+  }
 }

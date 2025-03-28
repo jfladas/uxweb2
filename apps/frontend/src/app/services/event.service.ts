@@ -7,7 +7,7 @@ export interface Event {
   summary: string;
   start: string;
   end: string;
-  location?: string;
+  location: string;
   description?: string;
   category?: string;
 }

@@ -1,7 +1,5 @@
 import { AuthConfig } from 'angular-oauth2-oidc';
-import { env } from 'apps/frontend/src/env/env';
-
-
+import { env } from '@env/env';
 
 export const authConfig: AuthConfig = {
     oidc: true,

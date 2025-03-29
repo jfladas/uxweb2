@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { authGuard } from '../../guards/auth/auth.guard';
 import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({

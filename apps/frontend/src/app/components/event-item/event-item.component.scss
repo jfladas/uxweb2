@@ -24,6 +24,10 @@
   &.frame {
     background-color: $frame;
   }
+  &.no-poster {
+    width: calc(25% + 1rem);
+    max-width: 11rem;
+  }
 }
 
 .event-logo {

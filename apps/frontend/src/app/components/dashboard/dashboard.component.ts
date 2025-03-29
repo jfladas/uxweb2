@@ -45,7 +45,6 @@ export class DashboardComponent {
       location: 'Luzern',
       time: '13:30 Uhr',
       by: 'stair',
-      poster: 'assets/poster2.jpg',
     },
     {
       name: 'FRAME Meetup',
@@ -85,7 +84,6 @@ export class DashboardComponent {
       location: 'Emmenbrücke',
       time: '16:00 Uhr',
       by: 'frame',
-      poster: 'assets/poster3.jpg',
     },
     {
       name: 'Digital Oddities',

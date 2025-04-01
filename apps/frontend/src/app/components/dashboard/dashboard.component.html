@@ -87,6 +87,7 @@
 @if(center) {
   <google-map mapId="Studio-Web" [center]="center" [zoom]="zoom">
   @for(marker of marker$ | async; track marker) {
+    {{marker}}
   <map-advanced-marker [title]="marker.title" [position]="marker.position"></map-advanced-marker>
   }
 </google-map>

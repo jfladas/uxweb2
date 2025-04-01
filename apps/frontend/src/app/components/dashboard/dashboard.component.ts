@@ -202,7 +202,7 @@ export class DashboardComponent {
 
   // Update iframe source based on the location
   updateIframeLocation(location: string): void {
-    const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBOL61GjI2pEwNlEkFcliwWI0PRHNif-ec&q=${encodeURIComponent(location)}`;
+    const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyA1fdeOC8LbOz5Mbbe52Lz_w7rGISBqLEw&q=${encodeURIComponent(location)}`;
     console.log('Google Maps URL:', googleMapsUrl);
     this.iframeSrc = this.sanitzer.bypassSecurityTrustResourceUrl(googleMapsUrl);
   }

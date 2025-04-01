@@ -18,6 +18,7 @@ import { DatePipe } from '@angular/common';
 })
 export class EventItemComponent {
   @Input() event!: {
+    id: string;
     name: string;
     date: string;
     location: string;
@@ -33,7 +34,13 @@ export class EventItemComponent {
     buttons: { label: string; action: string }[];
   }>();
 
+  @Output() favoriteChange = new EventEmitter<{
+    id: string;
+    isFavorite: boolean;
+  }>();
+
   isPopupVisible = false;
+  isFavorite = false;
 
   constructor(private elementRef: ElementRef) {}
 
@@ -67,7 +74,11 @@ export class EventItemComponent {
   }
 
   OnSaveEvent(): void {
-    console.log('Event Saved!');
+    this.isFavorite = !this.isFavorite;
+    this.favoriteChange.emit({
+      id: this.event.id,
+      isFavorite: this.isFavorite,
+    });
   }
 
   OnAddToCalender(): void {

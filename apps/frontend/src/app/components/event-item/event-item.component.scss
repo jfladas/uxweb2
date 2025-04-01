@@ -131,6 +131,13 @@
       font-size: 1rem;
       margin-right: 0.5rem;
     }
+    &.favorite {
+      color: $primary-color;
+      .icon {
+        color: $primary-color;
+        font-variation-settings: 'FILL' 1;
+      }
+    }
   }
 
   hr {

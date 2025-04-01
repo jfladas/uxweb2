@@ -38,7 +38,6 @@ export class PopoverComponent implements OnInit, OnDestroy {
   }
 
   onClose(): void {
-    console.log('Popover closed');
     this.isFadingOut = true;
     setTimeout(() => {
       this.isFadingOut = false;

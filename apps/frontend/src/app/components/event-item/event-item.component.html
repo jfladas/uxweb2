@@ -41,8 +41,15 @@
 </div>
 
 <div class="menu-popup">
-  <button class="menu-popup-button" (click)="OnSaveEvent()">
-    <span class="icon">star</span> Zu Favoriten hinzufügen
+  <button
+    class="menu-popup-button"
+    [ngClass]="{ favorite: isFavorite }"
+    (click)="OnSaveEvent()"
+  >
+    <span class="icon">
+      {{ isFavorite ? 'star' : 'star_border' }}
+    </span>
+    {{ isFavorite ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen' }}
   </button>
   <hr />
   <button class="menu-popup-button" (click)="OnShareEvent()">

@@ -1,23 +1,21 @@
 registerLocaleData(localeDeCh);
 import { CommonModule, DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
-import { Observable, of } from 'rxjs'; // Import Observable
-import { map } from 'rxjs/operators';
 import { EventItemComponent } from '../event-item/event-item.component';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
 import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
 import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
 import { PopoverComponent } from '../popover/popover.component';
-import { inject } from '@angular/core';
 import { EventListComponent } from '../event-list/event-list.component'; // 👈 EventList importieren
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EventService } from '../../services/event.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { Component, ViewChild, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
+import { filter, map, mergeAll, mergeMap, Observable, toArray } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -184,39 +182,74 @@ export class DashboardComponent {
     end: new FormControl(''),
     description: new FormControl(''),
   });
-  
-    submit = () =>
-      this.eventservice
-        .createEvent({
-          summary: this.eventForm.value.titel || '',
-          location:this.eventForm.value.titel || '',
-          start: this.timestamp(this.eventForm.value.start || '00:00'),
-          end: this.timestamp(this.eventForm.value.end || '00:00'),
-        })
-      .subscribe(() => {
-        // After submitting the form, update the iframe location with the entered location
-        this.updateIframeLocation(this.eventForm.value.ort || '');
-      });
+
+  center?: google.maps.LatLng;
+zoom=8;
+  constructor(private geoCoder: MapGeocoder) {} 
+  ngOnInit(): void {
+  this.getCurrentLocation();
+  }
+
+  getCurrentLocation(): void {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position: GeolocationPosition) => {
+          this.center = new google.maps.LatLng({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        () => {
+          this.center = new google.maps.LatLng(47.414, 8.0445);
+        }
+      );
+    } else {
+      this.center = new google.maps.LatLng(47.414, 8.0445);
+    }
+  }
+
+  geoCode = (address: string) =>
+    this.geoCoder.geocode({ address }).pipe(
+      filter(response=>response.results.length>0),
+      map(
+        (response: MapGeocoderResponse) =>
+          ({
+            position: {
+              lat: response.results[0].geometry.location.lat(),
+              lng: response.results[0].geometry.location.lng(),
+            },
+          } as MapAdvancedMarker)
+      )
+    );
+
+    marker$: Observable<MapAdvancedMarker[]> = this.eventservice.getEvents().pipe(
+      mergeAll(),
+      mergeMap((event) => this.geoCode(event.location)),
+      toArray()
+    );
+
+  // Submit the event form
+  submit = () => 
+    this.eventservice
+      .createEvent({
+        summary: this.eventForm.value.titel || '',
+        location: this.eventForm.value.ort || '',
+        start: this.timestamp(this.eventForm.value.start || '00:00'),
+        end: this.timestamp(this.eventForm.value.end || '00:00'),
+        description: this.eventForm.value.description || '',
+      })
+      .subscribe();
 
   timestamp = (time?: string) => `${this.eventForm.value.datum}T${time}`;
 
-  // Update iframe source based on the location
-  updateIframeLocation(location: string): void {
-    const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyA1fdeOC8LbOz5Mbbe52Lz_w7rGISBqLEw&q=${encodeURIComponent(location)}`;
-    console.log('Google Maps URL:', googleMapsUrl);
-    this.iframeSrc = this.sanitzer.bypassSecurityTrustResourceUrl(googleMapsUrl);
-  }
+
 
   // Load events from the backend and update the iframe with the first event's location
   loadEvents(): void {
     this.eventservice.getEvents().subscribe({
       next: (data) => {
         console.log('📦 Events data from backend:', data);
-
-        // Dynamically update the iframe with the location of the first event
-        if (data.length > 0) {
-          this.updateIframeLocation(data[0].location); // Set location for the first event
-        }
+     
       },
       error: (error) => {
         console.error('❌ Error while loading events:', error);

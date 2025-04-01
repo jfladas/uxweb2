@@ -57,7 +57,6 @@
   <app-event-list></app-event-list>
 </div>
 
-<!-- Event Form -->
 <h2>Füge ein Event hinzu</h2>
 <form [formGroup]="eventForm" (ngSubmit)="submit()">
   <label for="titel">Titel:</label><br />
@@ -85,6 +84,15 @@
   <button type="submit">Submit</button>
 </form>
 
+@if(center) {
+  <google-map mapId="Studio-Web" [center]="center" [zoom]="zoom">
+  @for(marker of marker$ | async; track marker) {
+  <map-advanced-marker [title]="marker.title" [position]="marker.position"></map-advanced-marker>
+  }
+</google-map>
+}
+
+<!--
 <google-map height="200px" width="100%" [center]="center"
   ><map-marker
     *ngFor="let marker of markers"
@@ -95,3 +103,4 @@
   >
   </map-marker
 ></google-map>
+-->

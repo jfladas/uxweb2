@@ -129,6 +129,8 @@ export class DashboardComponent {
   }
 
   @ViewChild(PopoverComponent) popoverComponent?: PopoverComponent;
+  @ViewChild(SubscribeButtonComponent)
+  subscribeButton?: SubscribeButtonComponent;
 
   popoverText = '';
   popoverIcon?: string;
@@ -174,6 +176,7 @@ export class DashboardComponent {
           false,
           []
         );
+        this.subscribeButton?.markAsSubscribed();
         break;
       case 'confirm-delete':
         this.showPopover(

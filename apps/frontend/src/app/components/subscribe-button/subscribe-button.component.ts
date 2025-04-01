@@ -15,6 +15,8 @@ export class SubscribeButtonComponent {
     buttons: { label: string; action: string }[];
   }>();
 
+  isSubscribed = false;
+
   onSubscribe(): void {
     this.showPopover.emit({
       text: 'Deine angewählten Events werden zu deinem Kalender hinzugefügt',
@@ -25,5 +27,9 @@ export class SubscribeButtonComponent {
         { label: 'BESTÄTIGEN', action: 'confirm-subscribe' },
       ],
     });
+  }
+
+  markAsSubscribed(): void {
+    this.isSubscribed = true;
   }
 }

@@ -87,7 +87,15 @@ export class EventItemComponent {
   }
 
   OnDeleteEvent(): void {
-    console.log('Event Deleted!');
+    this.showPopover.emit({
+      text: 'Willst du diesen Event wirklich Löschen?',
+      icon: '',
+      closeable: true,
+      buttons: [
+        { label: 'ABBRECHEN', action: 'cancel' },
+        { label: 'BESTÄTIGEN', action: 'confirm-delete' },
+      ],
+    });
   }
 
   OnEditEvent(): void {

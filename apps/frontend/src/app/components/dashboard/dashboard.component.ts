@@ -175,6 +175,14 @@ export class DashboardComponent {
           []
         );
         break;
+      case 'confirm-delete':
+        this.showPopover(
+          'Der Event wurde erfolgreich gelöscht!',
+          'check_circle',
+          false,
+          []
+        );
+        break;
       default:
         console.log('Unknown action:', action);
         break;

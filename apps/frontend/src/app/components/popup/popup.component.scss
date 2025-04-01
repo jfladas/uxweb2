@@ -1,0 +1,90 @@
+@use '../../../styles.scss' as *;
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $lightest;
+  border: 1px solid $medium;
+  border-radius: 0.5rem;
+  box-shadow: $shadow;
+  padding: 1rem;
+  z-index: 10;
+  opacity: 0;
+  animation: fade-in 0.3s forwards;
+
+  &.fade-out {
+    animation: fade-out 0.3s forwards;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+  }
+}
+
+.popup-content {
+  text-align: center;
+  min-width: 18rem;
+  width: 60vw;
+  max-width: 25rem;
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.1rem 0.2rem;
+  .icon {
+    color: $primary-color;
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.popup-icon {
+  margin-bottom: 0.5rem;
+  user-select: none;
+  .icon {
+    font-size: 3.5rem;
+    color: $primary-color;
+  }
+}
+
+.popup-text {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  button {
+    margin: 0;
+  }
+}

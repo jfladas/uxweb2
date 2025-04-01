@@ -1,0 +1,20 @@
+<div class="popup" [ngClass]="{ 'fade-out': isFadingOut }">
+  <button *ngIf="closeable" class="popup-close" (click)="onClose()">
+    <span class="icon">close</span>
+  </button>
+  <div class="popup-content">
+    <div *ngIf="icon" class="popup-icon">
+      <span class="icon">{{ icon }}</span>
+    </div>
+    <p class="popup-text">{{ text }}</p>
+    <div class="popup-buttons" *ngIf="buttons.length > 0">
+      <button
+        *ngFor="let button of buttons"
+        (click)="onButtonClick(button.action)"
+        class="primary"
+      >
+        {{ button.label }}
+      </button>
+    </div>
+  </div>
+</div>

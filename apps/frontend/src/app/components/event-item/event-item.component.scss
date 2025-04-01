@@ -97,7 +97,7 @@
   }
 }
 
-.popup {
+.menu-popup {
   position: absolute;
   transform: translate(0, -2rem) scale(0.95);
   right: 2.5rem;
@@ -118,7 +118,7 @@
     pointer-events: auto;
   }
 
-  .popup-button {
+  .menu-popup-button {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -126,7 +126,7 @@
     width: 100%;
     font-size: 0.75rem;
     padding: 0.5rem;
-
+    -webkit-tap-highlight-color: rgba($color: $primary-color, $alpha: 0.5);
     .icon {
       font-size: 1rem;
       margin-right: 0.5rem;

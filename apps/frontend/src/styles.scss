@@ -1,8 +1,8 @@
 // Color variables
 $primary-color: #6858b8;
 $primary-color-light: #8a7fc9;
-$lightest: #eee;
 $white: #fff;
+$lightest: #eee;
 $medium: #aaa;
 $dark: #333;
 $darkest: #000;
@@ -23,6 +23,11 @@ $shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   font-weight: 400;
   font-size: 1rem;
   color: $darkest;
+  -webkit-tap-highlight-color: transparent;
+}
+::selection {
+  background-color: $primary-color;
+  color: $white;
 }
 
 body {
@@ -81,9 +86,12 @@ button {
 
   &.primary {
     margin: 1rem 0.5rem;
+    padding: 0.7rem 1.3rem;
     font-size: 0.875rem;
     background-color: $primary-color;
     color: white;
+    border-radius: 5rem;
+    box-shadow: $shadow;
     &:hover {
       background-color: $primary-color-light;
     }

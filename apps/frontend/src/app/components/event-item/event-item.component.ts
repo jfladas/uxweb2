@@ -3,16 +3,16 @@ import {
   Input,
   HostListener,
   ElementRef,
-  ViewChild,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
-import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-event-item',
   standalone: true,
-  imports: [CommonModule, DatePipe, PopoverComponent],
+  imports: [CommonModule, DatePipe],
   templateUrl: './event-item.component.html',
   styleUrls: ['./event-item.component.scss'],
 })
@@ -26,21 +26,19 @@ export class EventItemComponent {
     poster: string;
   };
 
-  @ViewChild(PopoverComponent) popoverComponent?: PopoverComponent;
+  @Output() showPopover = new EventEmitter<{
+    text: string;
+    icon: string | undefined;
+    closeable: boolean;
+    buttons: { label: string; action: string }[];
+  }>();
 
   isPopupVisible = false;
-
-  confirmationPopup = false;
-  confirmationText = '';
-  confirmationButtons: { label: string; action: string }[] = [];
-  confirmationIcon?: string;
-  confirmationCloseable = true;
 
   constructor(private elementRef: ElementRef) {}
 
   togglePopup(): void {
     this.isPopupVisible = !this.isPopupVisible;
-
     const popupElement =
       this.elementRef.nativeElement.querySelector('.menu-popup');
     if (popupElement) {
@@ -71,81 +69,36 @@ export class EventItemComponent {
     }
   }
 
-  OnSaveEvent() {
+  OnSaveEvent(): void {
     console.log('Event Saved!');
     this.togglePopup();
   }
 
-  OnAddToCalender() {
-    this.showConfirmationPopover(
-      'Der Event wird zu deinem Kalender hinzugefügt.',
-      '',
-      true,
-      [
+  OnAddToCalender(): void {
+    this.showPopover.emit({
+      text: 'Der Event wird zu deinem Kalender hinzugefügt.',
+      icon: 'calendar_add_on',
+      closeable: true,
+      buttons: [
         { label: 'ABBRECHEN', action: 'cancel' },
         { label: 'BESTÄTIGEN', action: 'confirm-calendar' },
-      ]
-    );
+      ],
+    });
+    this.togglePopup();
   }
 
-  OnShareEvent() {
+  OnShareEvent(): void {
     console.log('Event Shared!');
     this.togglePopup();
   }
 
-  OnDeleteEvent() {
+  OnDeleteEvent(): void {
     console.log('Event Deleted!');
     this.togglePopup();
   }
 
-  OnEditEvent() {
+  OnEditEvent(): void {
     console.log('Event Edited!');
     this.togglePopup();
-  }
-
-  handlePopupAction(action: string): void {
-    switch (action) {
-      case 'confirm-calendar':
-        this.showConfirmationPopover(
-          'Juhuu! Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!',
-          'event_available',
-          false,
-          []
-        );
-        break;
-      case 'cancel':
-        this.handlePopoverClose();
-        break;
-      default:
-        console.log('Unknown action:', action);
-    }
-  }
-
-  handlePopoverClose(): void {
-    if (this.popoverComponent) {
-      this.popoverComponent.triggerClose();
-      setTimeout(() => {
-        this.confirmationPopup = false;
-      }, 300);
-    }
-  }
-
-  private showConfirmationPopover(
-    text: string,
-    icon: string,
-    isCloseable: boolean,
-    buttons: { label: string; action: string }[]
-  ): void {
-    this.confirmationText = text;
-    this.confirmationIcon = icon;
-    this.confirmationCloseable = isCloseable;
-    this.confirmationButtons = buttons;
-    this.confirmationPopup = true;
-
-    if (!isCloseable) {
-      setTimeout(() => {
-        this.handlePopoverClose();
-      }, 1500);
-    }
   }
 }

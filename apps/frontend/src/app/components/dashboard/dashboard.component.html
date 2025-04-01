@@ -21,9 +21,30 @@
       </div>
       <ul>
         <li *ngFor="let event of month.value">
-          <app-event-item [event]="event"></app-event-item>
+          <app-event-item
+            [event]="event"
+            (showPopover)="
+              showPopover(
+                $event.text,
+                $event.icon,
+                $event.closeable,
+                $event.buttons
+              )
+            "
+          ></app-event-item>
         </li>
       </ul>
     </div>
+  </div>
+
+  <div *ngIf="popoverVisible">
+    <app-popover
+      [text]="popoverText"
+      [icon]="popoverIcon"
+      [buttons]="popoverButtons"
+      [closeable]="popoverCloseable"
+      (buttonClick)="handlePopoverAction($event)"
+      (closeEvent)="handlePopoverClose()"
+    ></app-popover>
   </div>
 </div>

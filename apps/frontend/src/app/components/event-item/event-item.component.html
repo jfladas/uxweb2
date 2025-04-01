@@ -61,14 +61,3 @@
     <span class="icon">delete</span> Löschen
   </button>
 </div>
-
-<div *ngIf="confirmationPopup">
-  <app-popover
-    [text]="confirmationText"
-    [icon]="confirmationIcon"
-    [buttons]="confirmationButtons"
-    [closeable]="confirmationCloseable"
-    (buttonClick)="handlePopupAction($event)"
-    (closeEvent)="handlePopoverClose()"
-  ></app-popover>
-</div>

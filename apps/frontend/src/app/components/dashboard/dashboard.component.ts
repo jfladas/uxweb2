@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
 
@@ -11,6 +11,7 @@ import { EventItemComponent } from '../event-item/event-item.component';
 import { SearchComponent } from '../search/search.component';
 import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
 import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,7 @@ import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.c
     SearchComponent,
     FilterChipsComponent,
     SubscribeButtonComponent,
+    PopoverComponent,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de-CH' }],
   templateUrl: './dashboard.component.html',
@@ -124,5 +126,63 @@ export class DashboardComponent {
       return false;
     }
     return parseInt(year, 10) === this.currentYear;
+  }
+
+  @ViewChild(PopoverComponent) popoverComponent?: PopoverComponent;
+
+  popoverText = '';
+  popoverIcon?: string;
+  popoverButtons: { label: string; action: string }[] = [];
+  popoverCloseable = true;
+  popoverVisible = false;
+
+  showPopover(
+    text: string,
+    icon: string | undefined,
+    closeable: boolean,
+    buttons: { label: string; action: string }[]
+  ): void {
+    this.popoverText = text;
+    this.popoverIcon = icon;
+    this.popoverCloseable = closeable;
+    this.popoverButtons = buttons;
+    this.popoverVisible = true;
+    if (!closeable) {
+      setTimeout(() => {
+        this.closePopoverWithFadeOut();
+      }, 1500);
+    }
+  }
+
+  handlePopoverAction(action: string): void {
+    switch (action) {
+      case 'cancel':
+        this.closePopoverWithFadeOut();
+        break;
+      case 'confirm-calendar':
+        this.showPopover(
+          'Juhuu! Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!',
+          'event_available',
+          false,
+          []
+        );
+        break;
+      default:
+        console.log('Unknown action:', action);
+        break;
+    }
+  }
+
+  handlePopoverClose(): void {
+    this.popoverVisible = false;
+  }
+
+  closePopoverWithFadeOut(): void {
+    if (this.popoverComponent) {
+      this.popoverComponent.onClose();
+      setTimeout(() => {
+        this.popoverVisible = false;
+      }, 300);
+    }
   }
 }

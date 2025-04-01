@@ -26,23 +26,23 @@ export class PopoverComponent implements OnInit, OnDestroy {
   isFadingOut = false;
 
   ngOnInit(): void {
-    document.body.style.overflow = 'hidden'; // Disable scrolling
+    document.body.style.overflow = 'hidden';
   }
 
   ngOnDestroy(): void {
-    document.body.style.overflow = ''; // Re-enable scrolling
+    document.body.style.overflow = '';
   }
 
   onButtonClick(action: string): void {
     this.buttonClick.emit(action);
   }
 
-  triggerClose(): void {
-    this.isFadingOut = true;
-    setTimeout(() => this.closeEvent.emit(), 300);
-  }
-
   onClose(): void {
-    this.triggerClose();
+    console.log('Popover closed');
+    this.isFadingOut = true;
+    setTimeout(() => {
+      this.isFadingOut = false;
+      this.closeEvent.emit();
+    }, 300);
   }
 }

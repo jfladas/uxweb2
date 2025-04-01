@@ -3,7 +3,11 @@
   <app-search></app-search>
   <div class="filter-section">
     <app-filter-chips></app-filter-chips>
-    <app-subscribe-button></app-subscribe-button>
+    <app-subscribe-button
+      (showPopover)="
+        showPopover($event.text, $event.icon, $event.closeable, $event.buttons)
+      "
+    ></app-subscribe-button>
   </div>
   <h2>Nächste</h2>
   <div *ngIf="events$ | async as events">

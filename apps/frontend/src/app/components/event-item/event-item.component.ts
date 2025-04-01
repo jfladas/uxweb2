@@ -56,14 +56,11 @@ export class EventItemComponent {
       this.elementRef.nativeElement.querySelector('.menu-popup');
     const eventButton =
       this.elementRef.nativeElement.querySelector('.event-button');
-    const popoverElement =
-      this.elementRef.nativeElement.querySelector('.popover');
     if (
       this.isPopupVisible &&
       popupElement &&
       !popupElement.contains(event.target as Node) &&
-      (!eventButton || !eventButton.contains(event.target as Node)) &&
-      (!popoverElement || !popoverElement.contains(event.target as Node))
+      (!eventButton || !eventButton.contains(event.target as Node))
     ) {
       this.togglePopup();
     }
@@ -71,34 +68,29 @@ export class EventItemComponent {
 
   OnSaveEvent(): void {
     console.log('Event Saved!');
-    this.togglePopup();
   }
 
   OnAddToCalender(): void {
     this.showPopover.emit({
       text: 'Der Event wird zu deinem Kalender hinzugefügt.',
-      icon: 'calendar_add_on',
+      icon: '',
       closeable: true,
       buttons: [
         { label: 'ABBRECHEN', action: 'cancel' },
         { label: 'BESTÄTIGEN', action: 'confirm-calendar' },
       ],
     });
-    this.togglePopup();
   }
 
   OnShareEvent(): void {
     console.log('Event Shared!');
-    this.togglePopup();
   }
 
   OnDeleteEvent(): void {
     console.log('Event Deleted!');
-    this.togglePopup();
   }
 
   OnEditEvent(): void {
     console.log('Event Edited!');
-    this.togglePopup();
   }
 }

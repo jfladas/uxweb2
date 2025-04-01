@@ -167,6 +167,14 @@ export class DashboardComponent {
           []
         );
         break;
+      case 'confirm-subscribe':
+        this.showPopover(
+          'Juhuu! Die Events wurden erfolgreich zu deinem Kalender hinzugefügt!',
+          'event_available',
+          false,
+          []
+        );
+        break;
       default:
         console.log('Unknown action:', action);
         break;

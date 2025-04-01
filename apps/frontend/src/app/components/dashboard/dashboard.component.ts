@@ -1,13 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { SearchComponent } from '../search/search.component';
 import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
 import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
 import { EventListComponent } from '../event-list/event-list.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { EventService } from '../../services/event.service';
 import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
-import { filter, map, mergeAll, mergeMap, Observable, toArray } from 'rxjs';
+import { filter, map, mergeAll, mergeMap, Observable, tap, toArray } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectEvents } from '../../+store/events/evnets.selector';
+import { EventsActions } from '../../+store/events/events.action';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,12 +22,13 @@ import { filter, map, mergeAll, mergeMap, Observable, toArray } from 'rxjs';
     SubscribeButtonComponent,
     EventListComponent, // ✅ now included
     ReactiveFormsModule,
+    AsyncPipe,
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  eventservice = inject(EventService);
+  private store$ = inject(Store<'events'>);
   eventForm = new FormGroup({
     titel: new FormControl(''),
     ort: new FormControl(''),
@@ -35,10 +38,13 @@ export class DashboardComponent implements OnInit {
     description: new FormControl(''),
   });
 
+  events$ = this.store$.select(selectEvents);
+
   center?: google.maps.LatLng;
 zoom=8;
   constructor(private geoCoder: MapGeocoder) {} 
   ngOnInit(): void {
+    this.loadEvents();
   this.getCurrentLocation();
   }
 
@@ -62,6 +68,7 @@ zoom=8;
 
   geoCode = (address: string) =>
     this.geoCoder.geocode({ address }).pipe(
+      tap((response) => console.log('geocode', response)),
       filter(response=>response.results.length>0),
       map(
         (response: MapGeocoderResponse) =>
@@ -74,7 +81,7 @@ zoom=8;
       )
     );
 
-    marker$: Observable<MapAdvancedMarker[]> = this.eventservice.getEvents().pipe(
+    marker$: Observable<MapAdvancedMarker[]> = this.events$.pipe(
       mergeAll(),
       mergeMap((event) => this.geoCode(event.location)),
       toArray()
@@ -82,30 +89,18 @@ zoom=8;
 
   // Submit the event form
   submit = () => 
-    this.eventservice
-      .createEvent({
-        summary: this.eventForm.value.titel || '',
-        location: this.eventForm.value.ort || '',
-        start: this.timestamp(this.eventForm.value.start || '00:00'),
-        end: this.timestamp(this.eventForm.value.end || '00:00'),
-        description: this.eventForm.value.description || '',
-      })
-      .subscribe();
+    this.store$.dispatch(EventsActions.saveEvent({ event: {
+      summary: this.eventForm.value.titel || '',
+      location: this.eventForm.value.ort || '',
+      start: this.timestamp(this.eventForm.value.start || '00:00'),
+      end: this.timestamp(this.eventForm.value.end || '00:00'),
+      description: this.eventForm.value.description || '',
+    }}));
 
   timestamp = (time?: string) => `${this.eventForm.value.datum}T${time}`;
 
 
 
   // Load events from the backend and update the iframe with the first event's location
-  loadEvents(): void {
-    this.eventservice.getEvents().subscribe({
-      next: (data) => {
-        console.log('📦 Events data from backend:', data);
-     
-      },
-      error: (error) => {
-        console.error('❌ Error while loading events:', error);
-      },
-    });
-  }
+  loadEvents = () => this.store$.dispatch(EventsActions.loadEvents());  
 }

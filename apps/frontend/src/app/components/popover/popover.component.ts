@@ -9,13 +9,13 @@ import {
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-popup',
+  selector: 'app-popover',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './popup.component.html',
-  styleUrls: ['./popup.component.scss'],
+  templateUrl: './popover.component.html',
+  styleUrls: ['./popover.component.scss'],
 })
-export class PopupComponent implements OnInit, OnDestroy {
+export class PopoverComponent implements OnInit, OnDestroy {
   @Input() text!: string;
   @Input() icon?: string;
   @Input() buttons: { label: string; action: string }[] = [];

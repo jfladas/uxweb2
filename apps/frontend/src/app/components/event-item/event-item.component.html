@@ -63,12 +63,12 @@
 </div>
 
 <div *ngIf="confirmationPopup">
-  <app-popup
+  <app-popover
     [text]="confirmationText"
     [icon]="confirmationIcon"
     [buttons]="confirmationButtons"
     [closeable]="confirmationCloseable"
     (buttonClick)="handlePopupAction($event)"
-    (closeEvent)="handlePopupClose()"
-  ></app-popup>
+    (closeEvent)="handlePopoverClose()"
+  ></app-popover>
 </div>

@@ -7,12 +7,12 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
-import { PopupComponent } from '../popup/popup.component';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-event-item',
   standalone: true,
-  imports: [CommonModule, DatePipe, PopupComponent],
+  imports: [CommonModule, DatePipe, PopoverComponent],
   templateUrl: './event-item.component.html',
   styleUrls: ['./event-item.component.scss'],
 })
@@ -26,9 +26,10 @@ export class EventItemComponent {
     poster: string;
   };
 
-  @ViewChild(PopupComponent) popupComponent?: PopupComponent;
+  @ViewChild(PopoverComponent) popoverComponent?: PopoverComponent;
 
   isPopupVisible = false;
+
   confirmationPopup = false;
   confirmationText = '';
   confirmationButtons: { label: string; action: string }[] = [];
@@ -57,11 +58,14 @@ export class EventItemComponent {
       this.elementRef.nativeElement.querySelector('.menu-popup');
     const eventButton =
       this.elementRef.nativeElement.querySelector('.event-button');
+    const popoverElement =
+      this.elementRef.nativeElement.querySelector('.popover');
     if (
       this.isPopupVisible &&
       popupElement &&
       !popupElement.contains(event.target as Node) &&
-      (!eventButton || !eventButton.contains(event.target as Node))
+      (!eventButton || !eventButton.contains(event.target as Node)) &&
+      (!popoverElement || !popoverElement.contains(event.target as Node))
     ) {
       this.togglePopup();
     }
@@ -73,7 +77,7 @@ export class EventItemComponent {
   }
 
   OnAddToCalender() {
-    this.showConfirmationPopup(
+    this.showConfirmationPopover(
       'Der Event wird zu deinem Kalender hinzugefügt.',
       '',
       true,
@@ -102,7 +106,7 @@ export class EventItemComponent {
   handlePopupAction(action: string): void {
     switch (action) {
       case 'confirm-calendar':
-        this.showConfirmationPopup(
+        this.showConfirmationPopover(
           'Juhuu! Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!',
           'event_available',
           false,
@@ -110,23 +114,23 @@ export class EventItemComponent {
         );
         break;
       case 'cancel':
-        this.handlePopupClose();
+        this.handlePopoverClose();
         break;
       default:
         console.log('Unknown action:', action);
     }
   }
 
-  handlePopupClose(): void {
-    if (this.popupComponent) {
-      this.popupComponent.triggerClose();
+  handlePopoverClose(): void {
+    if (this.popoverComponent) {
+      this.popoverComponent.triggerClose();
       setTimeout(() => {
         this.confirmationPopup = false;
       }, 300);
     }
   }
 
-  private showConfirmationPopup(
+  private showConfirmationPopover(
     text: string,
     icon: string,
     isCloseable: boolean,
@@ -140,7 +144,7 @@ export class EventItemComponent {
 
     if (!isCloseable) {
       setTimeout(() => {
-        this.handlePopupClose();
+        this.handlePopoverClose();
       }, 1500);
     }
   }

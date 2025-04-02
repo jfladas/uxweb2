@@ -16,7 +16,6 @@ import localeDeCh from '@angular/common/locales/de-CH';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
 import { filter, map, mergeAll, mergeMap, Observable, tap, toArray, forkJoin } from 'rxjs';
-
 import { Store } from '@ngrx/store';
 import { selectEvents } from '../../+store/events/evnets.selector';
 import { EventsActions } from '../../+store/events/events.action';

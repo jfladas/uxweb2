@@ -5,7 +5,7 @@ export const authConfig: AuthConfig = {
     oidc: true,
     issuer: env.auth0Domain,
     redirectUri: env.redirectUri,
-    logoutUrl: env.redirectUri,
+    logoutUrl: env.logoutUrl,
     clientId: env.auth0ClientId,
     responseType: 'code',
     scope: 'openid profile email',

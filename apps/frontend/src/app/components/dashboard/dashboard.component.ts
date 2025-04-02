@@ -5,12 +5,7 @@ import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
 import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
 import { EventListComponent } from '../event-list/event-list.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import {
-  GoogleMapsModule,
-  MapAdvancedMarker,
-  MapGeocoder,
-  MapGeocoderResponse,
-} from '@angular/google-maps';
+import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
 import { filter, forkJoin, map, mergeMap, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectEvents } from '../../+store/events/evnets.selector';
@@ -86,9 +81,7 @@ export class DashboardComponent implements OnInit {
     );
 
   marker$: Observable<MapAdvancedMarker[]> = this.events$.pipe(
-    mergeMap((events) =>
-      forkJoin(events.map((event) => this.geoCode(event.location)))
-    )
+    mergeMap((events) => forkJoin(events.map((event) => this.geoCode(event.location))))
   );
 
   // Submit the event form

@@ -6,7 +6,7 @@ import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.c
 import { EventListComponent } from '../event-list/event-list.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
-import { filter, forkJoin, map, mergeMap, Observable } from 'rxjs';
+import { forkJoin, map, mergeMap, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectEvents } from '../../+store/events/evnets.selector';
 import { EventsActions } from '../../+store/events/events.action';
@@ -68,21 +68,24 @@ export class DashboardComponent implements OnInit {
 
   geoCode = (address: string) =>
     this.geoCoder.geocode({ address }).pipe(
-      filter((response) => response.results.length > 0),
-      map(
-        (response: MapGeocoderResponse) =>
-          ({
-            position: {
-              lat: response.results[0].geometry.location.lat(),
-              lng: response.results[0].geometry.location.lng(),
-            },
-          } as MapAdvancedMarker)
+      map((response: MapGeocoderResponse) =>
+        response.results.length > 0
+          ? ({
+              position: {
+                lat: response.results[0].geometry.location.lat(),
+                lng: response.results[0].geometry.location.lng(),
+              },
+            } as MapAdvancedMarker)
+          : null
       )
     );
 
-  marker$: Observable<MapAdvancedMarker[]> = this.events$.pipe(
-    mergeMap((events) => forkJoin(events.map((event) => this.geoCode(event.location))))
-  );
+    marker$: Observable<MapAdvancedMarker[]> = this.events$.pipe(
+      mergeMap((events) =>
+        forkJoin(events.map((event) => this.geoCode(event.location)))
+      ),
+      map((markers) => markers.filter((marker) => marker !== null))
+    );
 
   // Submit the event form
   submit = () =>

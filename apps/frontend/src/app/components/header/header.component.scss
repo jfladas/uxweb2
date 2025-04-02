@@ -24,7 +24,7 @@
     }
 
     .logo {
-      height: 4rem;
+      height: 3rem;
     }
   }
 
@@ -35,4 +35,131 @@
 
 .header-spacer {
   height: 4rem;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -50vw; 
+  width: 50vw; 
+  height: 100%;
+  background-color: $white;
+  box-shadow: $shadow;
+  overflow-y: auto;
+  transition: right 0.5s ease;
+  z-index: 1000;
+  border-radius: 1rem 0 0 1rem;
+
+  &.open {
+    right: 0;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0;
+    background: none;
+    border: none;
+    color: $lightest;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  nav {
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+       
+        &:hover {
+          background-color: $primary-color;
+
+          .sidebar-button {
+            color: $lightest;
+          }
+
+          .sidebar-button .icon {
+            color: $lightest;
+          }
+        }
+
+        a {
+          color: $dark;
+          text-decoration: none;
+          font-size: 1rem;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    background-color: $primary-color;
+    border-radius: 1rem 0 0 0;
+    margin-bottom: 0.1rem;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .sidebar-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .icon{
+    color: $darkest;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .logout-container {
+    position: absolute;
+    bottom: 20px; // Distance from the bottom of the sidebar
+    left: 50%; // Center horizontally within the sidebar
+    transform: translateX(-50%); // Adjust for centering
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .primary {
+      display: flex;
+      align-items: center;
+      border: none;
+      color: $lightest;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+      box-shadow: $shadow;
+
+      &:hover {
+        color: $primary-color-light;
+      }
+
+      .icon {
+        margin-right: 0.5rem;
+        color: $lightest;
+      }
+    }
+  }
+}
+
+hr {
+  border: none;
+  border-top: 1px solid $medium;
+  margin: 0;
 }

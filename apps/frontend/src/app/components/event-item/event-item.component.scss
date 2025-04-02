@@ -78,8 +78,14 @@
     height: 2rem;
     cursor: pointer;
     .icon {
+      rotate: 90deg;
       color: $darkest;
       font-size: 1.5rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    &:hover .icon,
+    &.active .icon {
+      color: $primary-color; 
     }
   }
 }

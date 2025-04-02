@@ -34,7 +34,11 @@
     class="event-actions"
     [ngStyle]="{ 'z-index': isPopupVisible ? '6' : 'auto' }"
   >
-    <button class="event-button" (click)="togglePopup()">
+    <button
+      class="event-button"
+      [class.active]="isPopupVisible"
+      (click)="togglePopup()"
+    >
       <span class="icon">more_vert</span>
     </button>
   </div>

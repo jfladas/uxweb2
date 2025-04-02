@@ -3,8 +3,7 @@
 .header {
   position: fixed;
   inset: 0 0 auto 0;
-  z-index: 10;
-  max-width: 100vw;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,7 +48,6 @@
   transition: right 0.5s ease;
   z-index: 1000;
   border-radius: 1rem 0 0 1rem;
-
   &.open {
     right: 0;
   }
@@ -59,14 +57,15 @@
     top: 0.5rem;
     left: 0.5rem;
     padding: 0;
-    background: none;
-    border: none;
-    color: $lightest;
     font-size: 1.5rem;
-    cursor: pointer;
+    
+    .icon{
+      color: $lightest;
+    }
   }
 
   nav {
+    margin-top: 0.3rem;
 
     ul {
       list-style: none;
@@ -107,7 +106,6 @@
     height: 10rem;
     background-color: $primary-color;
     border-radius: 1rem 0 0 0;
-    margin-bottom: 0.1rem;
 
     img {
       width: 100%;
@@ -126,35 +124,22 @@
     margin-right: 0.5rem;
     font-size: 1.5rem;
   }
+  .primary {
+    transition: color 0.3s ease;
+    box-shadow: $shadow;
 
+    &:hover {
+      color: $primary-color-light;
+    }
+  }
+  
   .logout-container {
     position: absolute;
-    bottom: 20px; // Distance from the bottom of the sidebar
-    left: 50%; // Center horizontally within the sidebar
-    transform: translateX(-50%); // Adjust for centering
+    bottom: 1.25rem;
+    left: 0;
+    right: 0;
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
-
-    .primary {
-      display: flex;
-      align-items: center;
-      border: none;
-      color: $lightest;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-      box-shadow: $shadow;
-
-      &:hover {
-        color: $primary-color-light;
-      }
-
-      .icon {
-        margin-right: 0.5rem;
-        color: $lightest;
-      }
-    }
   }
 }
 

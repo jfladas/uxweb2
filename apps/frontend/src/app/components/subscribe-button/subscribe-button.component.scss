@@ -1,9 +1,10 @@
 @use '../../../styles.scss' as *;
 
 .subscribe-button {
+  padding-right: 0;
   .icon {
     user-select: none;
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: $darkest;
   }
   &.subscribed {

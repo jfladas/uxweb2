@@ -73,8 +73,11 @@ p {
 }
 
 a {
-  color: $primary-color;
-  text-decoration: underline;
+  text-decoration: none;
+  .link {
+    color: $primary-color;
+    text-decoration: underline;
+  }
 }
 
 button {
@@ -83,13 +86,13 @@ button {
   border-radius: 0.5rem;
   cursor: pointer;
   background-color: transparent;
-
+  user-select: none;
   &.primary {
     margin: 1rem 0.5rem;
     padding: 0.7rem 1.3rem;
     font-size: 0.875rem;
     background-color: $primary-color;
-    border-radius: 2rem;
+    border-radius: 3rem;
     color: $lightest;
     display: flex;
     align-items: center;
@@ -99,7 +102,7 @@ button {
       background-color: $primary-color-light;
     }
 
-    .icon{
+    .icon {
       color: $lightest;
     }
   }

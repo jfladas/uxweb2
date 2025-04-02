@@ -8,11 +8,12 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-event-item',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, DatePipe, RouterModule],
   templateUrl: './event-item.component.html',
   styleUrls: ['./event-item.component.scss'],
 })
@@ -99,7 +100,7 @@ export class EventItemComponent {
 
   OnDeleteEvent(): void {
     this.showPopover.emit({
-      text: 'Willst du diesen Event wirklich Löschen?',
+      text: 'Willst du diesen Event wirklich löschen?',
       icon: '',
       closeable: true,
       buttons: [

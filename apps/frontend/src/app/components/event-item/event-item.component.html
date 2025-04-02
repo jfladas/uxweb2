@@ -1,48 +1,49 @@
-<div class="event-card">
-  <div
-    class="event-left {{ event.by }}"
-    [ngClass]="{ 'no-poster': !event.poster }"
-  >
-    <div class="event-logo">
-      <img src="assets/{{ event.by }}.jpg" alt="{{ event.by }}" />
-    </div>
-  </div>
-  <img
-    *ngIf="event.poster"
-    src="{{ event.poster }}"
-    alt="Poster"
-    class="event-poster"
-  />
-  <div class="event-right">
-    <h3>{{ event.name }}</h3>
-    <h4>Digital Ideation</h4>
-    <div class="event-details">
-      <span class="icon">location_on</span>
-      <p>{{ event.location }}</p>
-    </div>
-    <div class="event-details">
-      <span class="icon">calendar_month</span>
-      <p>{{ event.date | date : 'd. MMMM yyyy' }}</p>
-    </div>
-    <div class="event-details">
-      <span class="icon">schedule</span>
-      <p>{{ event.time }}</p>
-    </div>
-  </div>
-
-  <div
-    class="event-actions"
-    [ngStyle]="{ 'z-index': isPopupVisible ? '6' : 'auto' }"
-  >
-    <button
-      class="event-button"
-      [class.active]="isPopupVisible"
-      (click)="togglePopup()"
+<a [routerLink]="['/event', event.id]" class="event-card-link">
+  <div class="event-card">
+    <div
+      class="event-left {{ event.by }}"
+      [ngClass]="{ 'no-poster': !event.poster }"
     >
-      <span class="icon">more_vert</span>
-    </button>
+      <div class="event-logo">
+        <img src="assets/{{ event.by }}.jpg" alt="{{ event.by }}" />
+      </div>
+    </div>
+    <img
+      *ngIf="event.poster"
+      src="{{ event.poster }}"
+      alt="Poster"
+      class="event-poster"
+    />
+    <div class="event-right">
+      <h3>{{ event.name }}</h3>
+      <h4>Digital Ideation</h4>
+      <div class="event-details">
+        <span class="icon">location_on</span>
+        <p>{{ event.location }}</p>
+      </div>
+      <div class="event-details">
+        <span class="icon">calendar_month</span>
+        <p>{{ event.date | date : 'd. MMMM yyyy' }}</p>
+      </div>
+      <div class="event-details">
+        <span class="icon">schedule</span>
+        <p>{{ event.time }}</p>
+      </div>
+    </div>
+    <div
+      class="event-actions"
+      [ngStyle]="{ 'z-index': isPopupVisible ? '6' : 'auto' }"
+    >
+      <button
+        class="event-button"
+        (click)="togglePopup()"
+        [ngClass]="{ active: isPopupVisible }"
+      >
+        <span class="icon">more_vert</span>
+      </button>
+    </div>
   </div>
-</div>
+</a>
 
 <div class="menu-popup">
   <button
@@ -71,4 +72,10 @@
   <button class="menu-popup-button" (click)="OnDeleteEvent()">
     <span class="icon">delete</span> Löschen
   </button>
+  <hr />
+  <a [routerLink]="['/event', event.id]" class="event-details-link">
+    <button class="menu-popup-button">
+      <span class="icon">info</span> Details anzeigen
+    </button>
+  </a>
 </div>

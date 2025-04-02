@@ -103,6 +103,10 @@
   }
 }
 
+.event-item-link {
+  text-decoration: none;
+}
+
 .menu-popup {
   position: absolute;
   transform: translate(0, -2rem) scale(0.95);

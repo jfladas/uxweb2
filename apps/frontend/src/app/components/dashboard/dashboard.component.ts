@@ -231,9 +231,7 @@ export class DashboardComponent {
     );
 
   marker$: Observable<MapAdvancedMarker[]> = this.events$.pipe(
-    mergeMap((events) =>
-      forkJoin(events.map((event) => this.geoCode(event.location)))
-    )
+    mergeMap((events) => forkJoin(events.map((event) => this.geoCode(event.location))))
   );
 
   // Submit the event form

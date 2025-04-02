@@ -15,7 +15,8 @@ import { registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
-import { filter, map, mergeAll, mergeMap, Observable, tap, toArray } from 'rxjs';
+import { filter, map, mergeAll, mergeMap, Observable, tap, toArray, forkJoin } from 'rxjs';
+
 import { Store } from '@ngrx/store';
 import { selectEvents } from '../../+store/events/evnets.selector';
 import { EventsActions } from '../../+store/events/events.action';
@@ -191,11 +192,11 @@ export class DashboardComponent {
   events$ = this.store$.select(selectEvents);
 
   center?: google.maps.LatLng;
-zoom=8;
-  constructor(private geoCoder: MapGeocoder) {} 
+  zoom = 8;
+  constructor(private geoCoder: MapGeocoder) {}
   ngOnInit(): void {
     this.loadEvents();
-  this.getCurrentLocation();
+    this.getCurrentLocation();
   }
 
   getCurrentLocation(): void {
@@ -218,8 +219,7 @@ zoom=8;
 
   geoCode = (address: string) =>
     this.geoCoder.geocode({ address }).pipe(
-      tap((response) => console.log('geocode', response)),
-      filter(response=>response.results.length>0),
+      filter((response) => response.results.length > 0),
       map(
         (response: MapGeocoderResponse) =>
           ({
@@ -231,26 +231,28 @@ zoom=8;
       )
     );
 
-    marker$: Observable<MapAdvancedMarker[]> = this.events$.pipe(
-      mergeAll(),
-      mergeMap((event) => this.geoCode(event.location)),
-      toArray()
-    );
+  marker$: Observable<MapAdvancedMarker[]> = this.events$.pipe(
+    mergeMap((events) =>
+      forkJoin(events.map((event) => this.geoCode(event.location)))
+    )
+  );
 
   // Submit the event form
-  submit = () => 
-    this.store$.dispatch(EventsActions.saveEvent({ event: {
-      summary: this.eventForm.value.titel || '',
-      location: this.eventForm.value.ort || '',
-      start: this.timestamp(this.eventForm.value.start || '00:00'),
-      end: this.timestamp(this.eventForm.value.end || '00:00'),
-      description: this.eventForm.value.description || '',
-    }}));
+  submit = () =>
+    this.store$.dispatch(
+      EventsActions.saveEvent({
+        event: {
+          summary: this.eventForm.value.titel || '',
+          location: this.eventForm.value.ort || '',
+          start: this.timestamp(this.eventForm.value.start || '00:00'),
+          end: this.timestamp(this.eventForm.value.end || '00:00'),
+          description: this.eventForm.value.description || '',
+        },
+      })
+    );
 
   timestamp = (time?: string) => `${this.eventForm.value.datum}T${time}`;
 
-
-
   // Load events from the backend and update the iframe with the first event's location
-  loadEvents = () => this.store$.dispatch(EventsActions.loadEvents());  
+  loadEvents = () => this.store$.dispatch(EventsActions.loadEvents());
 }

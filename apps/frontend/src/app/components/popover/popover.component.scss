@@ -9,7 +9,7 @@
   border-radius: 0.5rem;
   box-shadow: $shadow;
   padding: 1rem;
-  z-index: 12;
+  z-index: 13;
   opacity: 0;
   animation: fade-in 0.3s forwards;
 
@@ -25,7 +25,7 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba($color: $darkest, $alpha: 0);
-  z-index: 11;
+  z-index: 12;
 
   animation: fade-in-overlay 0.3s forwards;
 

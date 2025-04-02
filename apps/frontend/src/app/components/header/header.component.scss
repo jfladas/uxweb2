@@ -3,7 +3,7 @@
 .header {
   position: fixed;
   inset: 0 0 auto 0;
-  z-index: 1000;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,7 +46,7 @@
   box-shadow: $shadow;
   overflow-y: auto;
   transition: right 0.5s ease;
-  z-index: 1000;
+  z-index: 11;
   border-radius: 1rem 0 0 1rem;
   &.open {
     right: 0;

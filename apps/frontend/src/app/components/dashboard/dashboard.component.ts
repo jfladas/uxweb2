@@ -11,13 +11,7 @@ import {
   MapGeocoder,
   MapGeocoderResponse,
 } from '@angular/google-maps';
-import {
-  filter,
-  forkJoin,
-  map,
-  mergeMap,
-  Observable,
-} from 'rxjs';
+import { filter, forkJoin, map, mergeMap, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectEvents } from '../../+store/events/evnets.selector';
 import { EventsActions } from '../../+store/events/events.action';

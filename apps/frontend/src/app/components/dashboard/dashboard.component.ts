@@ -1,4 +1,3 @@
-import { EventListComponent } from '../event-list/event-list.component'; // 👈 EventList importieren
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
@@ -23,7 +22,6 @@ import { PopoverComponent } from '../popover/popover.component';
     SearchComponent,
     FilterChipsComponent,
     SubscribeButtonComponent,
-    EventListComponent, // ✅ jetzt wirklich eingebunden!
     DatePipe,
     EventItemComponent,
     SearchComponent,

@@ -1,5 +1,11 @@
 <div>
-  <button class="subscribe-button" (click)="onSubscribe()">
-    <span class="icon">calendar_add_on</span>
+  <button
+    class="subscribe-button"
+    [ngClass]="{ subscribed: isSubscribed }"
+    (click)="onSubscribe()"
+  >
+    <span class="icon">{{
+      isSubscribed ? 'event_available' : 'calendar_add_on'
+    }}</span>
   </button>
 </div>

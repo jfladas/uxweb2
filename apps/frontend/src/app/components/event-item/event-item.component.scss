@@ -2,53 +2,90 @@
 
 .event-card {
   display: flex;
-  background-color: $background-color-light;
+  position: relative;
+  background-color: $white;
   border-radius: 1rem;
-  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow;
   overflow: hidden;
   width: 100%;
+  height: 9rem;
   margin: 1rem 0 0.5rem 0;
-  h2 {
-    margin: 0 0 0.2rem 0;
-  }
 }
 
 .event-left {
   position: relative;
-  width: 25%;
-  background-color: green;
+  width: 1rem;
+  &.di {
+    background-color: $digital-ideation;
+  }
+  &.stair {
+    background-color: $stair;
+  }
+  &.frame {
+    background-color: $frame;
+  }
+  &.no-poster {
+    width: calc(25% + 1rem);
+    max-width: 11rem;
+  }
 }
 
 .event-logo {
   position: absolute;
-  top: 0.625rem;
-  left: 0.625rem;
+  top: 0.5rem;
+  left: 0.5rem;
   background-color: white;
+  box-shadow: $shadow;
   border-radius: 50%;
-  padding: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  z-index: 2;
   img {
-    width: 2.5rem;
-    height: 2.2rem;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    clip-path: circle(50%);
   }
 }
 
+.event-poster {
+  height: 100%;
+  width: 25%;
+  max-width: 10rem;
+  object-fit: cover;
+  filter: brightness(0.8) grayscale(0.5);
+  z-index: 1;
+}
+
 .event-right {
-  padding: 0.3rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
   flex: 1;
-  padding-left: 1.2rem;
 }
 
 .event-actions {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: end;
+  margin: 0 0.5rem 0.5rem 0;
   .event-button {
-    padding: 0.1rem 0.4rem 0.2rem 0;
-    flex: 1;
+    border-radius: 50%;
+    background-color: $lightest;
+    box-shadow: $shadow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 2rem;
+    cursor: pointer;
     .icon {
-      color: $secondary-text-color;
+      rotate: 90deg;
+      color: $darkest;
       font-size: 1.5rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    &:hover .icon,
+    &.active .icon {
+      color: $primary-color; 
     }
   }
 }
@@ -56,13 +93,66 @@
 .event-details {
   display: flex;
   align-items: center;
-  width: 11rem;
-  height: 2rem;
-  color: $secondary-text-color !important;
+  width: 10rem;
+  height: 1.5rem;
   span {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   p {
     margin: 0.2rem 0 0.2rem 0.2rem;
+  }
+}
+
+.event-item-link {
+  text-decoration: none;
+}
+
+.menu-popup {
+  position: absolute;
+  transform: translate(0, -2rem) scale(0.95);
+  right: 2.5rem;
+  background-color: $lightest;
+  border-radius: 0.5rem;
+  box-shadow: $shadow;
+  z-index: 5;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+
+  &.visible {
+    transform: translate(0, -2rem) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-popup-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    -webkit-tap-highlight-color: rgba($color: $primary-color, $alpha: 0.25);
+    .icon {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+    &.favorite {
+      color: $primary-color;
+      .icon {
+        color: $primary-color;
+        font-variation-settings: 'FILL' 1;
+      }
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid $medium;
+    margin: 0;
   }
 }

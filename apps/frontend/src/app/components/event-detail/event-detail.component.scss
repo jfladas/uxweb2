@@ -1,0 +1,66 @@
+@use '../../../styles.scss' as *;
+
+.event-detail {
+  padding: 1rem;
+  text-align: center;
+
+  .back-button {
+    background: none;
+    border: none;
+    color: $primary-color;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .event-poster {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    button {
+      background-color: $primary-color;
+      color: $white;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+
+      &:hover {
+        background-color: $primary-color-light;
+      }
+    }
+  }
+
+  .event-details {
+    text-align: left;
+    margin: 1rem 0;
+
+    p {
+      margin: 0.5rem 0;
+    }
+  }
+
+  .event-description {
+    margin: 1rem 0;
+    text-align: left;
+
+    p {
+      margin: 0;
+    }
+  }
+}

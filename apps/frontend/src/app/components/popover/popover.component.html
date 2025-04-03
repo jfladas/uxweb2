@@ -1,0 +1,22 @@
+<div class="popover" [ngClass]="{ 'fade-out': isFadingOut }">
+  <button *ngIf="closeable" class="popover-close" (click)="onClose()">
+    <span class="icon">close</span>
+  </button>
+  <div class="popover-content">
+    <div *ngIf="icon" class="popover-icon">
+      <span class="icon">{{ icon }}</span>
+    </div>
+    <p class="popover-text">{{ text }}</p>
+    <div class="popover-buttons" *ngIf="buttons.length > 0">
+      <button
+        *ngFor="let button of buttons"
+        (click)="onButtonClick(button.action)"
+        class="primary"
+      >
+        {{ button.label }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" [ngClass]="{ 'fade-out': isFadingOut }"></div>

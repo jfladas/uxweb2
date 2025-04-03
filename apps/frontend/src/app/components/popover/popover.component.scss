@@ -1,0 +1,123 @@
+@use '../../../styles.scss' as *;
+
+.popover {
+  position: fixed;
+  top: 16.5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: $lightest;
+  border-radius: 0.5rem;
+  box-shadow: $shadow;
+  padding: 1rem;
+  z-index: 13;
+  opacity: 0;
+  animation: fade-in 0.3s forwards;
+
+  &.fade-out {
+    animation: fade-out 0.3s forwards;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: $darkest, $alpha: 0);
+  z-index: 12;
+
+  animation: fade-in-overlay 0.3s forwards;
+
+  &.fade-out {
+    animation: fade-out-overlay 0.3s forwards;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -5%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -5%);
+  }
+}
+
+@keyframes fade-in-overlay {
+  from {
+    background-color: rgba($color: $darkest, $alpha: 0);
+  }
+  to {
+    background-color: rgba($color: $darkest, $alpha: 0.5);
+  }
+}
+
+@keyframes fade-out-overlay {
+  from {
+    background-color: rgba($color: $darkest, $alpha: 0.5);
+  }
+  to {
+    background-color: rgba($color: $darkest, $alpha: 0);
+  }
+}
+
+.popover-content {
+  text-align: center;
+  min-width: 18rem;
+  width: 60vw;
+  max-width: 25rem;
+  position: relative;
+}
+
+.popover-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.1rem 0.2rem;
+  .icon {
+    color: $primary-color;
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.popover-icon {
+  margin-bottom: 0.5rem;
+  user-select: none;
+  .icon {
+    font-size: 3.5rem;
+    color: $primary-color;
+  }
+}
+
+.popover-text {
+  margin-bottom: 1rem;
+  line-height: 1.25rem;
+}
+
+.popover-buttons {
+  display: flex;
+  justify-content: space-around;
+  button {
+    margin: 0;
+  }
+}

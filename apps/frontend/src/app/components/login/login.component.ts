@@ -10,5 +10,5 @@ import { OAuthService } from 'angular-oauth2-oidc';
 })
 export class LoginComponent {
   private OauthService = inject(OAuthService);
-  login = () => this.OauthService.initLoginFlow();
+  login = () => this.OauthService.loadDiscoveryDocumentAndLogin();;
 }

@@ -3,7 +3,7 @@ export const env = {
     api: "https://studio-webux-3cf3a57a6e64.herokuapp.com/api",
     auth0Domain: 'https://dev-ya68ueq5vs555uca.eu.auth0.com/',
     auth0ClientId: '5kstur4Ljw3bmPLtEN7aRdrPNVsUJyJW',
-    redirectUri: 'https://jfladas.github.io/uxweb2/#/login',
-    logoutUrl: 'https://jfladas.github.io/uxweb2/#/login',
+    redirectUri: 'https://jfladas.github.io/uxweb2/',
+    logoutUrl: 'https://jfladas.github.io/uxweb2/',
     };
   

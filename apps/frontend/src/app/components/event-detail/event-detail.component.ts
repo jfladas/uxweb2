@@ -35,15 +35,13 @@ export class EventDetailComponent implements OnInit {
   fetchEventDetails(): void {
     const event = this.eventService.getEventById(this.eventId);
     if (event) {
-      this.eventTitle = event.name || 'Unbekannter Titel';
-      this.eventPoster = event.poster || 'assets/poster1.jpg';
-      this.eventLocation = event.location || 'Unbekannter Ort';
-      this.eventDate = event.date || 'Unbekanntes Datum';
-      this.eventTime = event.time || 'Unbekannte Uhrzeit';
-      this.eventDescription = `Details for ${
-        event.name || 'Unbekanntes Event'
-      }`;
-      this.isFavorite = event.favorite || false;
+      this.eventTitle = event.name;
+      this.eventPoster = event.poster || '';
+      this.eventLocation = event.location;
+      this.eventDate = event.date;
+      this.eventTime = event.time;
+      this.eventDescription = `Details for ${event.name}`;
+      this.isFavorite = event.favorite;
     } else {
       console.error('Event not found!');
     }

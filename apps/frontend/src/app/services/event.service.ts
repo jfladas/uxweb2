@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root', // Ensure the service is provided in the root injector
+  providedIn: 'root',
 })
 export class EventService {
   private events = [
@@ -26,16 +26,6 @@ export class EventService {
     },
     {
       id: '3',
-      name: 'FRAME Meetup',
-      date: '2025-05-05',
-      location: 'Emmenbrücke',
-      time: '16:00 Uhr',
-      by: 'frame',
-      poster: 'assets/poster3.jpg',
-      favorite: false,
-    },
-    {
-      id: '4',
       name: 'Digital Oddities',
       date: '2025-05-14',
       location: 'Rotkreuz 9. Stock',
@@ -45,7 +35,7 @@ export class EventService {
       favorite: false,
     },
     {
-      id: '5',
+      id: '4',
       name: 'DI-Party',
       date: '2025-06-03',
       location: 'Rotkreuz 9. Stock',
@@ -53,6 +43,15 @@ export class EventService {
       by: 'di',
       poster: 'assets/poster1.jpg',
       favorite: false,
+    },
+    {
+      id: '5',
+      name: 'Switch 2 Party & Lükas Geburtstag',
+      date: '2025-06-05',
+      location: 'Rotkreuz 9. Stock',
+      time: '18:00 Uhr',
+      by: 'di',
+      favorite: true,
     },
     {
       id: '6',

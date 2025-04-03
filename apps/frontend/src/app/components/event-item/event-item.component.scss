@@ -8,7 +8,6 @@
   box-shadow: $shadow;
   overflow: hidden;
   width: 100%;
-  height: 9rem;
   margin: 1rem 0 0.5rem 0;
 }
 
@@ -27,6 +26,7 @@
   &.no-poster {
     width: calc(25% + 1rem);
     max-width: 11rem;
+    min-width: 4rem;
   }
 }
 
@@ -49,7 +49,6 @@
 }
 
 .event-poster {
-  height: 100%;
   width: 25%;
   max-width: 10rem;
   object-fit: cover;
@@ -60,6 +59,13 @@
 .event-right {
   padding: 0.5rem 0.5rem 0.5rem 1rem;
   flex: 1;
+  h3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
 }
 
 .event-actions {
@@ -85,7 +91,7 @@
     }
     &:hover .icon,
     &.active .icon {
-      color: $primary-color; 
+      color: $primary-color;
     }
   }
 }

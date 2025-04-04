@@ -14,7 +14,7 @@ export class HeaderComponent {
   @Input() showBackArrow = false;
   @Input() showMenu = false;
 
-  isSidebarOpen = false; // Add this property to control sidebar visibility
+  isSidebarOpen = false;
 
   private authService = inject(AuthService);
 
@@ -25,7 +25,7 @@ export class HeaderComponent {
   }
 
   toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
+    this.isSidebarOpen = !this.isSidebarOpen; 
   }
 
   onBackArrowClick() {
@@ -35,5 +35,4 @@ export class HeaderComponent {
   onMenuClick() {
     // Handle menu click
   }
-
 }

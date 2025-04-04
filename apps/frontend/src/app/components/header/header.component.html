@@ -19,6 +19,15 @@
   </div>
 </header>
 <div class="header-spacer"></div>
+
+<div
+  class="overlay"
+  *ngIf="isSidebarOpen"
+  tabindex="-1"
+  aria-hidden="true" 
+  (click)="toggleSidebar()"
+></div>
+
 <app-sidebar
   [isSidebarOpen]="isSidebarOpen"
   (closeSidebar)="toggleSidebar()"

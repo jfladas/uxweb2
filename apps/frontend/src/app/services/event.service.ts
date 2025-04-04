@@ -103,6 +103,7 @@ export class EventService {
   getEventById(id: string) {
     return this.events.find((event) => event.id === id);
     */
+
 export class EventService { // ✅ Ensure this class is correctly defined
   private apiUrl = 'http://localhost:3000/api/events'; // ✅ Correct API URL
 

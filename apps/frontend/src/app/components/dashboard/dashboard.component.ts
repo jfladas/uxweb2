@@ -16,6 +16,15 @@ import localeDeCh from '@angular/common/locales/de-CH';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
 import { filter, map, mergeAll, mergeMap, Observable, tap, toArray, forkJoin } from 'rxjs';
+import { Component, inject, OnInit } from '@angular/core';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { SearchComponent } from '../search/search.component';
+import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
+import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
+import { EventListComponent } from '../event-list/event-list.component';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
+import { forkJoin, map, mergeMap, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectEvents } from '../../+store/events/evnets.selector';
 import { EventsActions } from '../../+store/events/events.action';
@@ -178,6 +187,7 @@ export class DashboardComponent {
 
   private sanitzer = inject(DomSanitizer);
   eventservice = inject(EventService);
+export class DashboardComponent implements OnInit {
   private store$ = inject(Store<'events'>);
   eventForm = new FormGroup({
     titel: new FormControl(''),

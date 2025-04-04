@@ -52,8 +52,8 @@ export class EventDetailComponent implements OnInit {
   }
 
   toggleFavorite(): void {
-    this.isFavorite = !this.isFavorite;
-  }
+  this.isFavorite = !this.isFavorite;
+}
 
   shareEvent(): void {
     console.log('Event shared!');

@@ -27,22 +27,18 @@
 
   .action-buttons {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
+    justify-content: space-between; 
+    align-items: center;
 
-    button {
-      background-color: $primary-color;
-      color: $white;
-      border: none;
-      border-radius: 0.5rem;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-size: 0.9rem;
+    .icon-button {
+      display: flex;
+      align-items: center; 
+      justify-content: center;
+      padding: 0.5rem;
+    }
 
-      &:hover {
-        background-color: $primary-color-light;
-      }
+    .icon-button:last-child {
+      margin-left: auto;
     }
   }
 

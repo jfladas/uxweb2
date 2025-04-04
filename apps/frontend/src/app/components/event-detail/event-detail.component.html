@@ -9,11 +9,15 @@
   />
 
   <div class="action-buttons">
-    <button (click)="toggleFavorite()">
-      {{ isFavorite ? '★ Favorit' : '☆ Favorit' }}
+    <button class="icon-button" (click)="toggleFavorite()">
+      <span class="icon"> {{ isFavorite ? 'star' : 'star_border' }}</span>
     </button>
-    <button (click)="shareEvent()">Teilen</button>
-    <button (click)="addToCalendar()">Zum Kalender hinzufügen</button>
+    <button class="icon-button" (click)="shareEvent()">
+      <span class="icon">share</span>
+    </button>
+    <button class="icon-button" (click)="addToCalendar()">
+      <span class="icon">calendar_add_on</span>
+    </button>
   </div>
 
   <div class="event-details">

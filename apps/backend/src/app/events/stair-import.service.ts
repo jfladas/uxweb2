@@ -3,6 +3,7 @@ import * as ical from 'node-ical';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from './event.entity';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class StairImportService {
@@ -18,19 +19,37 @@ export class StairImportService {
       const icalEvents = await ical.fromURL(this.STAIR_ICAL_URL);
       for (const key in icalEvents) {
         if (icalEvents[key].type === 'VEVENT') {
-          const event = new Event();
-          event.summary = icalEvents[key].summary;
-          event.start = icalEvents[key].start;
-          event.end = icalEvents[key].end;
-          event.location = icalEvents[key].location || '';
-          event.description = icalEvents[key].description || '';
+          const existing = await this.eventRepository.findOneBy({
+            summary: icalEvents[key].summary,
+            start: icalEvents[key].start,
+            end: icalEvents[key].end,
+          });
 
-          await this.eventRepository.save(event);
+          if (!existing) {
+            const event = new Event();
+            event.summary = icalEvents[key].summary;
+            event.start = icalEvents[key].start;
+            event.end = icalEvents[key].end;
+            event.location = icalEvents[key].location || '';
+            event.description = icalEvents[key].description || '';
+            await this.eventRepository.save(event);
+          }
         }
       }
       return '✅ STAIR Events erfolgreich importiert!';
     } catch (error) {
       throw new Error(`❌ Fehler beim Importieren: ${error.message}`);
+    }
+  }
+
+  @Cron(CronExpression.EVERY_30_MINUTES)
+  async handleCron() {
+    console.log('⏱ Automatischer STAIR-Import läuft...');
+    try {
+      const msg = await this.importEvents();
+      console.log(msg);
+    } catch (error) {
+      console.error('❌ Fehler beim automatischen Import:', error.message);
     }
   }
 }

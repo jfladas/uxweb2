@@ -1,44 +1,50 @@
 import { Injectable } from '@nestjs/common';
-import * as fs from 'fs';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Event } from '../events/event.entity';
+import { Repository } from 'typeorm';
 import { ICalCalendar } from 'ical-generator';
-import nodeIcal from 'node-ical';
-
 
 @Injectable()
 export class CalendarService {
-  private readonly filePath = 'my_calendar.ics';
+  constructor(
+    @InjectRepository(Event)
+    private readonly eventRepository: Repository<Event>,
+  ) {}
 
-  async readCalendar(): Promise<any[]> {
+  async generateICS(): Promise<string> {
     try {
-      const events = await nodeIcal.parseFile(this.filePath);
-      return Object.values(events)
-        .filter((event: any) => event.type === 'VEVENT')
-        .map((event: any) => ({
-          summary: event.summary,
-          location: event.location,
+      const events = await this.eventRepository.find();
+      const calendar = new ICalCalendar({ name: 'sweet DI Eventkalender' });
+
+      for (const event of events) {
+        calendar.createEvent({
           start: event.start,
           end: event.end,
-        }));
-    } catch (error) {
-      throw new Error(`❌ Fehler beim Lesen der iCalendar-Datei: ${error.message}`);
-    }
-  }
+          summary: event.summary,
+          description: event.description || '',
+          location: event.location || '',
+        });
+      }
 
-  async createCalendarEvent(eventData: { summary: string; start: Date; end: Date; location?: string; description?: string; }): Promise<string> {
-    try {
-      const calendar = new ICalCalendar({ name: 'My Calendar' });
-        calendar.createEvent({
-        start: eventData.start,
-        end: eventData.end,
-        summary: eventData.summary,
-        description: eventData.description || '',
-        location: eventData.location || '',
-      });
-
-      fs.writeFileSync(this.filePath, calendar.toString());
-      return '✅ iCalendar-Datei erfolgreich erstellt!';
+      return calendar.toString();
     } catch (error) {
       throw new Error(`❌ Fehler beim Erstellen der iCalendar-Datei: ${error.message}`);
     }
+  }
+
+  async readCalendar(): Promise<Event[]> {
+    return await this.eventRepository.find();
+  }
+
+  async createCalendarEvent(eventData: {
+    summary: string;
+    start: Date;
+    end: Date;
+    location?: string;
+    description?: string;
+  }): Promise<string> {
+    const event = this.eventRepository.create(eventData);
+    await this.eventRepository.save(event);
+    return '✅ Event erfolgreich gespeichert!';
   }
 }

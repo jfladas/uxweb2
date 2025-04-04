@@ -22,4 +22,7 @@ export class Event {
 
   @Column({ nullable: true })
   category?: string;
+
+  @Column({ nullable: true })
+  source?: string; // z.B. 'stair' oder 'manual'
 }

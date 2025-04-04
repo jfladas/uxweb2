@@ -1,7 +1,5 @@
 <div id="events-container">
-    <app-event-item
-      *ngFor="let event of events"
-      [event]="event"
-    ></app-event-item>
-  </div>
-  
+  @for(event of event$ | async; track event){
+  <app-event-item [event]="event"></app-event-item>
+  }
+</div>

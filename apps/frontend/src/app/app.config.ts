@@ -7,9 +7,17 @@ import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { AuthConfig } from 'angular-oauth2-oidc';
 import { authConfig } from './guards/auth/auth.config';
 import { env } from '../env/env';
+import { provideState, provideStore } from '@ngrx/store';
+import { eventsReducer } from './+store/events/events.reducer';
+import { EventsEffects } from './+store/events/events.effects';
+import { provideEffects } from '@ngrx/effects';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideEffects([EventsEffects]),
+    provideStore(),
+    provideState('events', eventsReducer),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(withInterceptorsFromDi()),

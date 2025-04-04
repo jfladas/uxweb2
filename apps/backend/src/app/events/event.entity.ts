@@ -15,10 +15,10 @@ export class Event {
   end: Date;
 
   @Column({ nullable: true })
-  location?: string;
+  location: string;
 
   @Column({ nullable: true })
-  description?: string;
+  description: string;
 
   @Column({ nullable: true })
   category?: string;

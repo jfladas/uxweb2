@@ -53,4 +53,41 @@
       (closeEvent)="handlePopoverClose()"
     ></app-popover>
   </div>
+  <!-- This component fetches and displays all events -->
+  <app-event-list></app-event-list>
 </div>
+
+<h2>Füge ein Event hinzu</h2>
+<form [formGroup]="eventForm" (ngSubmit)="submit()">
+  <label for="titel">Titel:</label><br />
+  <input type="text" id="titel" formControlName="titel" /><br />
+
+  <label for="ort">Ort:</label><br />
+  <input type="text" id="ort" formControlName="ort" /><br />
+
+  <label for="datum">Datum:</label><br />
+  <input type="date" id="datum" formControlName="datum" /><br />
+
+  <label for="start">Start Zeit:</label><br />
+  <input type="time" id="start" formControlName="start" /><br /><br />
+
+  <label for="end">End Zeit:</label><br />
+  <input type="time" id="end" formControlName="end" /><br /><br />
+
+  <label for="description">Beschreibung:</label><br />
+  <input
+    type="text"
+    id="description"
+    formControlName="description"
+  /><br /><br />
+
+  <button type="submit">Submit</button>
+</form>
+
+@if(center) {
+  <google-map mapId="Studio-Web" [center]="center" [zoom]="zoom">
+  @for(marker of marker$ | async; track marker) {
+    <map-advanced-marker [position]="marker.position"></map-advanced-marker>
+  }
+  </google-map>
+}

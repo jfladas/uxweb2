@@ -4,9 +4,7 @@ import { CreateEventDto } from './dto/create-event.dto';
 
 @Controller('events')
 export class EventsController {
-  constructor(private readonly eventsService: EventsService) {
-    console.log('📢 EventsController wurde geladen!');
-  }
+  constructor(private readonly eventsService: EventsService) {}
 
   @Get()
   async getEvents() {
@@ -15,6 +13,7 @@ export class EventsController {
 
   @Post()
   async createEvent(@Body() createEventDto: CreateEventDto) {
+    console.log('📢 Event received:', createEventDto);
     return this.eventsService.create(createEventDto);
   }
 }

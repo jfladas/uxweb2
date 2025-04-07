@@ -81,6 +81,7 @@
   width: 1.5rem;
   height: 2rem;
   cursor: pointer;
+  z-index: 6;
   .icon {
     rotate: 90deg;
     color: $darkest;
@@ -98,7 +99,7 @@
   align-items: center;
   width: 10rem;
   height: 1.5rem;
-  span {
+  .icon {
     font-size: 1rem;
   }
   p {

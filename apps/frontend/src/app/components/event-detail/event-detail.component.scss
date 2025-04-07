@@ -1,62 +1,105 @@
 @use '../../../styles.scss' as *;
 
-.event-detail {
-  padding: 1rem;
-  text-align: center;
-
-  .back-button {
-    background: none;
-    border: none;
+.back-button {
+  padding: 0;
+  .icon {
     color: $primary-color;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-bottom: 1rem;
   }
+}
 
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+h1 {
+  margin: 0 0 1rem 0;
+}
+
+.event-poster {
+  width: 100vw;
+  height: 100vw;
+  max-height: 30rem;
+  overflow: hidden;
+  transform: translate(-1rem, 0);
+  .poster-img {
+    width: calc(100vw - 2rem);
+    margin-left: 2rem;
+    height: auto;
+    min-height: 100%;
   }
-
-  .event-poster {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 0.5rem;
-    margin: 1rem auto;
+  &.di {
+    background-color: $digital-ideation;
   }
+  &.stair {
+    background-color: $stair;
+  }
+  &.frame {
+    background-color: $frame;
+  }
+  .event-logo {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background-color: white;
+    box-shadow: $shadow;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    z-index: 2;
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      clip-path: circle(50%);
+    }
+  }
+  .fullscreen {
+    color: $lightest;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+  }
+}
 
-  .action-buttons {
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  .icon-button {
     display: flex;
-    justify-content: space-between; 
     align-items: center;
-
-    .icon-button {
-      display: flex;
-      align-items: center; 
-      justify-content: center;
-      padding: 0.5rem;
-    }
-
-    .icon-button:last-child {
-      margin-left: auto;
+    justify-content: center;
+    padding: 0.5rem 0;
+    .icon.favorite {
+      color: $primary-color;
+      font-variation-settings: 'FILL' 1;
     }
   }
 
-  .event-details {
-    text-align: left;
-    margin: 1rem 0;
-
-    p {
-      margin: 0.5rem 0;
-    }
+  .icon-button:last-child {
+    margin-left: auto;
   }
+}
 
-  .event-description {
-    margin: 1rem 0;
-    text-align: left;
+.event-details {
+  display: flex;
+  align-items: center;
+  width: 10rem;
+  height: 1.5rem;
+  margin-bottom: 0.5rem;
+  .icon {
+    font-size: 1.5rem;
+  }
+  p {
+    margin: 0.2rem 0 0.2rem 0.5rem;
+  }
+}
 
-    p {
-      margin: 0;
-    }
+.event-description {
+  margin: 1rem 0 2rem 0;
+  text-align: left;
+  h3 {
+    padding: 1rem 0 0.5rem 0;
+  }
+  p {
+    margin: 0;
   }
 }

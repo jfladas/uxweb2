@@ -1,16 +1,26 @@
-<div class="event-detail">
-  <button class="back-button" (click)="goBack()">← Zurück</button>
+<div class="container">
+  <button class="back-button" (click)="goBack()">
+    <span class="icon">keyboard_backspace</span>
+  </button>
   <h1>{{ eventTitle }}</h1>
-  <img
-    *ngIf="eventPoster"
-    [src]="eventPoster"
-    alt="Event Poster"
-    class="event-poster"
-  />
+  <div class="event-poster {{ eventBy }}">
+    <div class="event-logo">
+      <img src="assets/{{ eventBy }}.jpg" alt="{{ eventBy }}" />
+    </div>
+    <img
+      *ngIf="eventPoster"
+      [src]="eventPoster"
+      alt="Event Poster"
+      class="poster-img"
+    />
+    <span class="icon fullscreen">fullscreen</span>
+  </div>
 
   <div class="action-buttons">
     <button class="icon-button" (click)="toggleFavorite()">
-      <span class="icon"> {{ isFavorite ? 'star' : 'star_border' }}</span>
+      <span class="icon" [ngClass]="{ favorite: isFavorite }">
+        {{ isFavorite ? 'star' : 'star_border' }}</span
+      >
     </button>
     <button class="icon-button" (click)="shareEvent()">
       <span class="icon">share</span>
@@ -21,14 +31,26 @@
   </div>
 
   <div class="event-details">
-    <p><strong>Ort:</strong> {{ eventLocation }}</p>
-    <p><strong>Datum:</strong> {{ eventDate }}</p>
-    <p><strong>Uhrzeit:</strong> {{ eventTime }}</p>
+    <span class="icon">location_on</span>
+    <p>{{ eventLocation }}</p>
+  </div>
+  <div class="event-details">
+    <span class="icon">calendar_month</span>
+    <p>{{ eventDate | date : 'd. MMMM yyyy' }}</p>
+  </div>
+  <div class="event-details">
+    <span class="icon">schedule</span>
+    <p>{{ eventTime }}</p>
   </div>
 
   <div class="event-description">
+    <h3>Eventdetails</h3>
     <p>{{ eventDescription }}</p>
+    <h3>Veranstalter</h3>
+    <p>{{ eventBy === 'di' ? 'Digital Ideation' : eventBy.toUpperCase() }}</p>
+    <h3>Kosten</h3>
+    <p>100.-</p>
   </div>
 
-  <button class="back-button" (click)="goBack()">← Zurück</button>
+  <button class="primary" (click)="goBack()">ZURÜCK</button>
 </div>

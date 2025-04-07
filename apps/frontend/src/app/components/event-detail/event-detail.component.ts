@@ -19,6 +19,7 @@ export class EventDetailComponent implements OnInit {
   eventDate!: string;
   eventTime!: string;
   eventDescription!: string;
+  eventBy!: string;
   isFavorite = false;
 
   constructor(
@@ -41,6 +42,7 @@ export class EventDetailComponent implements OnInit {
       this.eventDate = event.date;
       this.eventTime = event.time;
       this.eventDescription = `Details for ${event.name}`;
+      this.eventBy = event.by;
       this.isFavorite = event.favorite;
     } else {
       console.error('Event not found!');
@@ -52,8 +54,8 @@ export class EventDetailComponent implements OnInit {
   }
 
   toggleFavorite(): void {
-  this.isFavorite = !this.isFavorite;
-}
+    this.isFavorite = !this.isFavorite;
+  }
 
   shareEvent(): void {
     console.log('Event shared!');

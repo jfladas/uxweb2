@@ -1,4 +1,4 @@
-
+<a [routerLink]="['/event', event.id]" class="event-card-link">
   <div class="event-card">
     <div
       class="event-left {{ event.by }}"
@@ -14,7 +14,6 @@
       alt="Poster"
       class="event-poster"
     />
-    <a [routerLink]="['/event', event.id]" class="event-card-link">
     <div class="event-right">
       <h3>{{ event.name }}</h3>
       <h4>Digital Ideation</h4>
@@ -31,21 +30,17 @@
         <p>{{ event.time }}</p>
       </div>
     </div>
-  </a>
-    <div
-      class="event-actions"
-      [ngStyle]="{ 'z-index': isPopupVisible ? '6' : 'auto' }"
-    >
-      <button
-        class="event-button"
-        (click)="togglePopup()"
-        [ngClass]="{ active: isPopupVisible }"
-      >
-        <span class="icon">more_vert</span>
-      </button>
-    </div>
   </div>
+</a>
 
+<button
+  class="event-button"
+  (click)="togglePopup()"
+  [ngClass]="{ active: isPopupVisible }"
+  [ngStyle]="{ 'z-index': isPopupVisible ? '6' : 'auto' }"
+>
+  <span class="icon">more_vert</span>
+</button>
 
 <div class="menu-popup">
   <button

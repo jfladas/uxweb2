@@ -68,31 +68,28 @@
   }
 }
 
-.event-actions {
+.event-button {
+  position: absolute;
+  right: 0;
+  transform: translate(-1.5rem, -3rem);
+  border-radius: 50%;
+  background-color: $lightest;
+  box-shadow: $shadow;
   display: flex;
-  flex-direction: column;
-  justify-content: end;
-  margin: 0 0.5rem 0.5rem 0;
-  .event-button {
-    border-radius: 50%;
-    background-color: $lightest;
-    box-shadow: $shadow;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1.5rem;
-    height: 2rem;
-    cursor: pointer;
-    .icon {
-      rotate: 90deg;
-      color: $darkest;
-      font-size: 1.5rem;
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
-    &:hover .icon,
-    &.active .icon {
-      color: $primary-color;
-    }
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 2rem;
+  cursor: pointer;
+  .icon {
+    rotate: 90deg;
+    color: $darkest;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  &:hover .icon,
+  &.active .icon {
+    color: $primary-color;
   }
 }
 
@@ -109,7 +106,7 @@
   }
 }
 
-.event-item-link {
+.event-card-link {
   text-decoration: none;
 }
 

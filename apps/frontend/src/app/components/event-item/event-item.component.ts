@@ -95,7 +95,23 @@ export class EventItemComponent {
   }
 
   OnShareEvent(): void {
-    console.log('Event Shared!');
+    const eventUrl = `${window.location.origin}/#/event/${this.event.id}`;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: this.event.name,
+        text: `Check out this event: ${this.event.name}`,
+        url: eventUrl,
+      })
+      .then(() => console.log('Event shared successfully!'))
+      .catch((error) => console.error('Error sharing event:', error));
+    } else {
+      navigator.clipboard.writeText(eventUrl).then(() => {
+        alert('Event link copied to clipboard!');
+      }).catch((error) => {
+        console.error('Error copying link:', error);
+      });
+    }
   }
 
   OnDeleteEvent(): void {

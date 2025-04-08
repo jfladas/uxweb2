@@ -12,13 +12,13 @@ h1 {
 }
 
 .event-poster {
-  width: 100vw;
+  width: calc(100% + 2rem);
   height: 100vw;
   max-height: 30rem;
   overflow: hidden;
   transform: translate(-1rem, 0);
   .poster-img {
-    width: calc(100vw - 2rem);
+    width: calc(100% - 2rem);
     margin-left: 2rem;
     height: auto;
     min-height: 100%;

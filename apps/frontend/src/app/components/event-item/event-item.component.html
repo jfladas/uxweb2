@@ -16,7 +16,7 @@
     />
     <div class="event-right">
       <h3>{{ event.name }}</h3>
-      <h4>Digital Ideation</h4>
+      <h4>{{ event.by === 'di' ? 'Digital Ideation' : event.by | uppercase }}</h4>
       <div class="event-details">
         <span class="icon">location_on</span>
         <p>{{ event.location }}</p>

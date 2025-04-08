@@ -20,7 +20,7 @@
   </div>
 
   <div class="action-buttons">
-    <button class="icon-button" (click)="toggleFavorite()">
+    <button class="icon-button" (click)="onFavoriteChange()">
       <span class="icon" [ngClass]="{ favorite: isFavorite }">
         {{ isFavorite ? 'star' : 'star_border' }}</span
       >

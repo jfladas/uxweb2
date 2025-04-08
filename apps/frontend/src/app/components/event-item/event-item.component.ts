@@ -5,6 +5,7 @@ import {
   ElementRef,
   Output,
   EventEmitter,
+  OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
@@ -17,7 +18,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './event-item.component.html',
   styleUrls: ['./event-item.component.scss'],
 })
-export class EventItemComponent {
+export class EventItemComponent implements OnInit {
   @Input() event!: {
     id: string;
     name: string;
@@ -26,6 +27,7 @@ export class EventItemComponent {
     time: string;
     by: string;
     poster: string;
+    favorite: boolean;
   };
 
   @Output() showPopover = new EventEmitter<{
@@ -41,9 +43,13 @@ export class EventItemComponent {
   }>();
 
   isPopupVisible = false;
-  isFavorite = false;
+  isFavorite!: boolean;
 
   constructor(private elementRef: ElementRef) {}
+
+  ngOnInit(): void {
+    this.isFavorite = this.event.favorite;
+  }
 
   togglePopup(): void {
     this.isPopupVisible = !this.isPopupVisible;

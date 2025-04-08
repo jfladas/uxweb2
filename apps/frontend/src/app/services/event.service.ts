@@ -4,7 +4,16 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class EventService {
-  private events = [
+  private events: Array<{
+    id: string;
+    name: string;
+    date: string;
+    location: string;
+    time: string;
+    by: string;
+    poster?: string;
+    favorite?: boolean;
+  }> = [
     {
       id: '1',
       name: 'DI-Party',
@@ -22,7 +31,6 @@ export class EventService {
       location: 'Luzern',
       time: '13:30 Uhr',
       by: 'stair',
-      favorite: false,
     },
     {
       id: '3',
@@ -32,7 +40,6 @@ export class EventService {
       time: '17:00 Uhr',
       by: 'di',
       poster: 'assets/poster4.jpg',
-      favorite: false,
     },
     {
       id: '4',
@@ -42,7 +49,6 @@ export class EventService {
       time: '10:00 Uhr',
       by: 'di',
       poster: 'assets/poster1.jpg',
-      favorite: false,
     },
     {
       id: '5',
@@ -51,7 +57,6 @@ export class EventService {
       location: 'Rotkreuz 9. Stock',
       time: '18:00 Uhr',
       by: 'di',
-      favorite: true,
     },
     {
       id: '6',
@@ -61,7 +66,6 @@ export class EventService {
       time: '13:30 Uhr',
       by: 'stair',
       poster: 'assets/poster2.jpg',
-      favorite: false,
     },
     {
       id: '7',
@@ -70,7 +74,6 @@ export class EventService {
       location: 'Emmenbrücke',
       time: '16:00 Uhr',
       by: 'frame',
-      favorite: false,
     },
     {
       id: '8',
@@ -80,7 +83,6 @@ export class EventService {
       time: '17:00 Uhr',
       by: 'di',
       poster: 'assets/poster4.jpg',
-      favorite: false,
     },
   ];
 

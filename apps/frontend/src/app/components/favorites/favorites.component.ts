@@ -9,59 +9,31 @@ import { LOCALE_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EventItemComponent } from '../event-item/event-item.component';
-import { SearchComponent } from '../search/search.component';
-import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
-import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
 import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-favorites',
   imports: [
     AsyncPipe,
     CommonModule,
     DatePipe,
     EventItemComponent,
-    SearchComponent,
-    FilterChipsComponent,
-    SubscribeButtonComponent,
     PopoverComponent,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de-CH' }],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  templateUrl: './favorites.component.html',
+  styleUrl: './favorites.component.scss',
 })
-export class DashboardComponent implements OnInit {
+export class FavoritesComponent implements OnInit {
   currentYear = new Date().getFullYear();
   events$!: Observable<Record<string, any[]>>;
+  favoriteCount = 0;
 
   constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
-    this.events$ = of(this.eventService.getEvents()).pipe(
-      map((events) => {
-        const currentDate = new Date();
-        const groupedEvents = events.reduce(
-          (acc: Record<string, any[]>, event) => {
-            const date = new Date(event.date);
-            if (date >= currentDate) {
-              const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`;
-              if (!acc[monthYear]) {
-                acc[monthYear] = [];
-              }
-              acc[monthYear].push(event);
-            }
-            return acc;
-          },
-          {}
-        );
-        return Object.keys(groupedEvents)
-          .sort()
-          .reduce((acc: Record<string, any[]>, key) => {
-            acc[key] = groupedEvents[key];
-            return acc;
-          }, {});
-      })
-    );
+    this.updateEvents();
+    this.updateFavoriteCount();
   }
 
   isCurrentYear(year: string | null): boolean {
@@ -72,8 +44,6 @@ export class DashboardComponent implements OnInit {
   }
 
   @ViewChild(PopoverComponent) popoverComponent?: PopoverComponent;
-  @ViewChild(SubscribeButtonComponent)
-  subscribeButton?: SubscribeButtonComponent;
 
   popoverText = '';
   popoverIcon?: string;
@@ -112,15 +82,6 @@ export class DashboardComponent implements OnInit {
           []
         );
         break;
-      case 'confirm-subscribe':
-        this.showPopover(
-          'Juhuu! Die Events wurden erfolgreich zu deinem Kalender hinzugefügt!',
-          'event_available',
-          false,
-          []
-        );
-        this.subscribeButton?.markAsSubscribed();
-        break;
       case 'confirm-delete':
         this.showPopover(
           'Der Event wurde erfolgreich gelöscht!',
@@ -155,5 +116,40 @@ export class DashboardComponent implements OnInit {
     if (targetEvent) {
       targetEvent.favorite = event.isFavorite;
     }
+    this.updateEvents();
+  }
+
+  updateFavoriteCount(): void {
+    this.favoriteCount = this.eventService
+      .getEvents()
+      .filter((event) => event.favorite).length;
+  }
+
+  updateEvents(): void {
+    this.events$ = of(this.eventService.getEvents()).pipe(
+      map((events) => {
+        const currentDate = new Date();
+        const groupedEvents = events
+          .filter((event) => event.favorite === true)
+          .reduce((acc: Record<string, any[]>, event) => {
+            const date = new Date(event.date);
+            if (date >= currentDate) {
+              const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`;
+              if (!acc[monthYear]) {
+                acc[monthYear] = [];
+              }
+              acc[monthYear].push(event);
+            }
+            return acc;
+          }, {});
+        return Object.keys(groupedEvents)
+          .sort()
+          .reduce((acc: Record<string, any[]>, key) => {
+            acc[key] = groupedEvents[key];
+            return acc;
+          }, {});
+      })
+    );
+    this.updateFavoriteCount();
   }
 }

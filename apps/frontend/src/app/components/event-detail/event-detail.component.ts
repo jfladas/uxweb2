@@ -43,7 +43,7 @@ export class EventDetailComponent implements OnInit {
       this.eventTime = event.time;
       this.eventDescription = `Details for ${event.name}`;
       this.eventBy = event.by;
-      this.isFavorite = event.favorite;
+      this.isFavorite = event.favorite ?? false;
     } else {
       console.error('Event not found!');
     }
@@ -53,8 +53,14 @@ export class EventDetailComponent implements OnInit {
     this.location.back();
   }
 
-  toggleFavorite(): void {
+  onFavoriteChange(): void {
     this.isFavorite = !this.isFavorite;
+    const targetEvent = this.eventService
+      .getEvents()
+      .find((e) => e.id === this.eventId);
+    if (targetEvent) {
+      targetEvent.favorite = this.isFavorite;
+    }
   }
 
   shareEvent(): void {

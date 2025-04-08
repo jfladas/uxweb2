@@ -3,7 +3,10 @@
     <span class="icon">keyboard_backspace</span>
   </button>
   <h1>{{ eventTitle }}</h1>
-  <div class="event-poster {{ eventBy }}">
+  <div
+    class="event-poster {{ eventBy }}"
+    [ngClass]="{ posterless: !eventPoster }"
+  >
     <div class="event-logo">
       <img src="assets/{{ eventBy }}.jpg" alt="{{ eventBy }}" />
     </div>
@@ -13,7 +16,7 @@
       alt="Event Poster"
       class="poster-img"
     />
-    <span class="icon fullscreen">fullscreen</span>
+    <span *ngIf="eventPoster" class="icon fullscreen">fullscreen</span>
   </div>
 
   <div class="action-buttons">
@@ -50,6 +53,12 @@
     <p>{{ eventBy === 'di' ? 'Digital Ideation' : eventBy.toUpperCase() }}</p>
     <h3>Kosten</h3>
     <p>100.-</p>
+    <h3>Hashtags</h3>
+    <p class="hashtags">
+      <span>#gaming</span>
+      <span>#cool</span>
+      <span>#fotzig</span>
+    </p>
   </div>
 
   <button class="primary" (click)="goBack()">ZURÜCK</button>

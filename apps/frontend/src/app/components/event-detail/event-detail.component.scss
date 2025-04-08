@@ -23,6 +23,9 @@ h1 {
     height: auto;
     min-height: 100%;
   }
+  &.posterless {
+    height: 4rem;
+  }
   &.di {
     background-color: $digital-ideation;
   }
@@ -54,6 +57,9 @@ h1 {
     position: absolute;
     right: 1rem;
     bottom: 1rem;
+    text-shadow: 0 0 1px $darkest, 0 0 3px $darkest, 0 0 5px $darkest,
+      0 0 10px $darkest, 0 0 15px $darkest, 0 0 20px $darkest, 0 0 25px $darkest,
+      0 0 30px $darkest, 0 0 35px $darkest;
   }
 }
 
@@ -101,5 +107,12 @@ h1 {
   }
   p {
     margin: 0;
+  }
+  .hashtags {
+    span {
+      font-size: inherit;
+      color: $primary-color;
+      padding-right: 0.5rem;
+    }
   }
 }

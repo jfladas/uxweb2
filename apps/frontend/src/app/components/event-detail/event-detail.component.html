@@ -1,29 +1,30 @@
 <div class="event-detail">
   <button class="back-button" (click)="goBack()">← Zurück</button>
-  <h1>{{ eventTitle }}</h1>
+  <h1>{{ event?.summary }}</h1>
+
   <img
-    *ngIf="eventPoster"
-    [src]="eventPoster"
+    *ngIf="event?.poster"
+    [src]="event?.poster"
     alt="Event Poster"
     class="event-poster"
   />
 
   <div class="action-buttons">
     <button (click)="toggleFavorite()">
-      {{ isFavorite ? '★ Favorit' : '☆ Favorit' }}
+      {{ event?.favorite ? '★ Favorit' : '☆ Favorit' }}
     </button>
     <button (click)="shareEvent()">Teilen</button>
     <button (click)="addToCalendar()">Zum Kalender hinzufügen</button>
   </div>
 
   <div class="event-details">
-    <p><strong>Ort:</strong> {{ eventLocation }}</p>
-    <p><strong>Datum:</strong> {{ eventDate }}</p>
-    <p><strong>Uhrzeit:</strong> {{ eventTime }}</p>
+    <p><strong>Ort:</strong> {{ event?.location }}</p>
+    <p><strong>Datum:</strong> {{ event?.date }}</p>
+    <p><strong>Uhrzeit:</strong> {{ event?.time }}</p>
   </div>
 
   <div class="event-description">
-    <p>{{ eventDescription }}</p>
+    <p>{{ event?.description }}</p>
   </div>
 
   <button class="back-button" (click)="goBack()">← Zurück</button>

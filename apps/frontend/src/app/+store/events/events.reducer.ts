@@ -1,5 +1,5 @@
 import { EventsActions } from "./events.action";
-import { Event } from "../../services/event.service"; 
+import { Event } from "../../models/event.model"; 
 import { createReducer, on } from "@ngrx/store";
 
 export interface Events { events: Event[]; };

@@ -10,6 +10,6 @@ import { StairImportController } from './stair-import.controller';
   imports: [TypeOrmModule.forFeature([Event])], // ✅ Ensure Event entity is registered
   controllers: [EventsController, StairImportController], 
   providers: [EventsService, StairImportService], 
-  exports: [EventsService, StairImportService], 
+  exports: [EventsService, StairImportService,TypeOrmModule], 
 })
 export class EventsModule {}

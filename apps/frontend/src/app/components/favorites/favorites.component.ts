@@ -7,6 +7,7 @@ registerLocaleData(localeDeCh);
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { Location } from '@angular/common';
 import { map } from 'rxjs/operators';
 import { EventItemComponent } from '../event-item/event-item.component';
 import { PopoverComponent } from '../popover/popover.component';
@@ -28,8 +29,7 @@ export class FavoritesComponent implements OnInit {
   currentYear = new Date().getFullYear();
   events$!: Observable<Record<string, any[]>>;
   favoriteCount = 0;
-
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private location: Location) {}
 
   ngOnInit(): void {
     this.updateEvents();
@@ -107,6 +107,10 @@ export class FavoritesComponent implements OnInit {
         this.popoverVisible = false;
       }, 300);
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   onFavoriteChange(event: { id: string; isFavorite: boolean }): void {

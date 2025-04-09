@@ -1,22 +1,20 @@
-import { Component, inject, OnInit, ViewChild, LOCALE_ID } from '@angular/core';
-import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
+import { Component, inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
-import { forkJoin, map, mergeMap, Observable, take } from 'rxjs';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
+import { forkJoin, map, mergeMap, Observable } from 'rxjs';
 
-import { EventItemComponent } from '../event-item/event-item.component';
-import { SearchComponent } from '../search/search.component';
-import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
-import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
-import { PopoverComponent } from '../popover/popover.component';
-import { EventListComponent } from '../event-list/event-list.component';
-import { EventService } from '../../services/event.service';
-import { selectEvents } from '../../+store/events/evnets.selector';
 import { EventsActions } from '../../+store/events/events.action';
+import { selectEvents } from '../../+store/events/evnets.selector';
 import { Event } from '../../models/event.model';
+import { EventListComponent } from '../event-list/event-list.component';
+import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
+import { PopoverComponent } from '../popover/popover.component';
+import { SearchComponent } from '../search/search.component';
+import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
 
 registerLocaleData(localeDeCh);
 
@@ -30,10 +28,8 @@ registerLocaleData(localeDeCh);
     FilterChipsComponent,
     SubscribeButtonComponent,
     PopoverComponent,
-    EventItemComponent,
     EventListComponent,
     ReactiveFormsModule,
-    DatePipe,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de-CH' }],
   templateUrl: './dashboard.component.html',
@@ -41,8 +37,6 @@ registerLocaleData(localeDeCh);
 })
 export class DashboardComponent implements OnInit {
   currentYear = new Date().getFullYear();
-  private sanitizer = inject(DomSanitizer);
-  private eventService = inject(EventService);
   private store$ = inject(Store<'events'>);
   constructor(private geoCoder: MapGeocoder) {}
 
@@ -62,27 +56,6 @@ export class DashboardComponent implements OnInit {
     end: new FormControl(''),
     description: new FormControl(''),
   });
-
-  events$ = this.store$.select(selectEvents).pipe(
-    map(events => {
-      const grouped: Record<string, Event[]> = {};
-      events.forEach(event => {
-        const date = new Date(event.start);
-        const key = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
-        if (!grouped[key]) grouped[key] = [];
-        grouped[key].push({
-          ...event,
-          id: event.id?.toString(),
-          name: event.summary,
-          date: event.start.split('T')[0],
-          time: event.start.split('T')[1]?.substring(0, 5),
-          by: event.by || 'HSLU',
-          poster: event.poster || '',
-        });
-      });
-      return grouped;
-    })
-  );
 
   ngOnInit(): void {
     this.loadEvents();
@@ -148,10 +121,6 @@ export class DashboardComponent implements OnInit {
   timestamp = (time?: string) => `${this.eventForm.value.datum}T${time}`;
   loadEvents = () => this.store$.dispatch(EventsActions.loadEvents());
 
-  isCurrentYear(year: string | null): boolean {
-    return year ? parseInt(year, 10) === this.currentYear : false;
-  }
-
   popoverText = '';
   popoverIcon?: string;
   popoverButtons: { label: string; action: string }[] = [];
@@ -207,17 +176,4 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  onFavoriteChange(event: { id: string; isFavorite: boolean }): void {
-    this.store$.select(selectEvents).pipe(take(1)).subscribe((events) => {
-      const targetEvent = events.find((e) => e.id?.toString() === event.id);
-      if (targetEvent) {
-        this.store$.dispatch(
-          EventsActions.updateFavorite({
-            eventId: event.id,
-            isFavorite: event.isFavorite,
-          })
-        );
-      }
-    });
   }
-}

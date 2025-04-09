@@ -1,5 +1,30 @@
-<div id="events-container">
-  @for(event of event$ | async; track event){
-  <app-event-item [event]="event"></app-event-item>
-  }
+<h2>Nächste</h2>
+@if(events$ | async; as events) {
+@for(month of events | keyvalue; track month) {
+<div class="month-section">
+  <div class="month-header">
+    <h4>
+      {{ month.key | date : 'MMMM' }}
+      @if(!isCurrentYear(month.key | date : 'yyyy')) {
+
+      }
+      <span class="month-year">{{ month.key | date : 'yyyy' }}
+      </span>
+    </h4>
+    <hr />
+  </div>
+  <ul>
+    @for(event of month.value; track event) {
+    <li>
+      <app-event-item [event]="event" (showPopover)="
+                onShowPopover(
+                  $event
+                )
+              " (favoriteChange)="onFavoriteChange($event)"></app-event-item>
+    </li>
+    }
+
+  </ul>
 </div>
+}
+}

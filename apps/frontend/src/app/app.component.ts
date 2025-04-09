@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 
 @Component({
-  imports: [RouterModule, HeaderComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [CommonModule, RouterModule, HeaderComponent],
 })
 export class AppComponent {
   title = 'frontend';
+  constructor(public router: Router) {}
 }

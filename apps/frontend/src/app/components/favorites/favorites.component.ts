@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
 import { EventService } from '../../services/event.service';
+import { Event } from '../../models/event.model'; // Assuming there's an Event model
 
 registerLocaleData(localeDeCh);
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
@@ -27,7 +28,7 @@ import { PopoverComponent } from '../popover/popover.component';
 })
 export class FavoritesComponent implements OnInit {
   currentYear = new Date().getFullYear();
-  events$!: Observable<Record<string, any[]>>;
+  events$!: Observable<Record<string, Event[]>>;
   favoriteCount = 0;
   constructor(private eventService: EventService, private location: Location) {}
 
@@ -114,46 +115,48 @@ export class FavoritesComponent implements OnInit {
   }
 
   onFavoriteChange(event: { id: string; isFavorite: boolean }): void {
-    const targetEvent = this.eventService
-      .getEvents()
-      .find((e) => e.id === event.id);
-    if (targetEvent) {
-      targetEvent.favorite = event.isFavorite;
-    }
-    this.updateEvents();
+    this.eventService.getEvents().subscribe((events: Event[]) => {
+      const targetEvent = events.find((e: Event) => e.id === event.id);
+      if (targetEvent) {
+        targetEvent.favorite = event.isFavorite;
+      }
+      this.updateEvents();
+    });
   }
 
   updateFavoriteCount(): void {
-    this.favoriteCount = this.eventService
-      .getEvents()
-      .filter((event) => event.favorite).length;
+    this.eventService.getEvents().subscribe((events: Event[]) => {
+      this.favoriteCount = events.filter(
+        (event: Event) => event.favorite
+      ).length;
+    });
   }
 
   updateEvents(): void {
-    this.events$ = of(this.eventService.getEvents()).pipe(
-      map((events) => {
-        const currentDate = new Date();
-        const groupedEvents = events
-          .filter((event) => event.favorite === true)
-          .reduce((acc: Record<string, any[]>, event) => {
-            const date = new Date(event.date);
-            if (date >= currentDate) {
-              const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`;
-              if (!acc[monthYear]) {
-                acc[monthYear] = [];
-              }
-              acc[monthYear].push(event);
+    this.eventService.getEvents().subscribe((events: Event[]) => {
+      const currentDate = new Date();
+      const groupedEvents = events
+        .filter((event: Event) => event.favorite === true)
+        .reduce((acc: Record<string, Event[]>, event: Event) => {
+          const date = new Date(event.date);
+          if (date >= currentDate) {
+            const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`;
+            if (!acc[monthYear]) {
+              acc[monthYear] = [];
             }
-            return acc;
-          }, {});
-        return Object.keys(groupedEvents)
+            acc[monthYear].push(event);
+          }
+          return acc;
+        }, {});
+      this.events$ = of(
+        Object.keys(groupedEvents)
           .sort()
-          .reduce((acc: Record<string, any[]>, key) => {
+          .reduce((acc: Record<string, Event[]>, key) => {
             acc[key] = groupedEvents[key];
             return acc;
-          }, {});
-      })
-    );
-    this.updateFavoriteCount();
+          }, {})
+      );
+      this.updateFavoriteCount();
+    });
   }
 }

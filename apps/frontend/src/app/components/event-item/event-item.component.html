@@ -16,7 +16,9 @@
     />
     <div class="event-right">
       <h3>{{ event.name }}</h3>
-      <h4>{{ event.by === 'di' ? 'Digital Ideation' : event.by | uppercase }}</h4>
+      <h4>
+        {{ event.by === 'di' ? 'Digital Ideation' : (event.by | uppercase) }}
+      </h4>
       <div class="event-details">
         <span class="icon">location_on</span>
         <p>{{ event.location }}</p>
@@ -45,7 +47,7 @@
   <button
     class="menu-popup-button"
     [ngClass]="{ favorite: isFavorite }"
-    (click)="OnSaveEvent()"
+    (click)="onFavoriteEvent()"
   >
     <span class="icon">
       {{ isFavorite ? 'star' : 'star_border' }}
@@ -53,19 +55,19 @@
     {{ isFavorite ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen' }}
   </button>
   <hr />
-  <button class="menu-popup-button" (click)="OnShareEvent()">
+  <button class="menu-popup-button" (click)="onShareEvent()">
     <span class="icon">share</span> Teilen
   </button>
   <hr />
-  <button class="menu-popup-button" (click)="OnAddToCalender()">
+  <button class="menu-popup-button" (click)="onAddToCalender()">
     <span class="icon">calendar_add_on</span> Zum Kalender hinzufügen
   </button>
   <hr />
-  <button class="menu-popup-button" (click)="OnEditEvent()">
+  <button class="menu-popup-button" (click)="onEditEvent()">
     <span class="icon">edit</span> Bearbeiten
   </button>
   <hr />
-  <button class="menu-popup-button" (click)="OnDeleteEvent()">
+  <button class="menu-popup-button" (click)="onDeleteEvent()">
     <span class="icon">delete</span> Löschen
   </button>
 </div>

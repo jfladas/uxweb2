@@ -4,28 +4,28 @@
   </button>
   <h1>{{ event?.summary }}</h1>
   <div
-    class="event-poster {{ eventBy }}"
-    [ngClass]="{ posterless: !eventPoster }"
+    class="event-poster {{ event?.by }}"
+    [ngClass]="{ posterless: !event?.poster }"
   >
     <div class="event-logo">
-      <img src="assets/{{ eventBy }}.jpg" alt="{{ eventBy }}" />
+      <img src="assets/{{ event?.by }}.jpg" alt="{{ event?.by }}" />
     </div>
     <img
-    *ngIf="event?.poster"
-    [src]="event?.poster"
-    alt="Event Poster"
-    class="event-poster"
-  />
-    <span *ngIf="eventPoster" class="icon fullscreen">fullscreen</span>
+      *ngIf="event?.poster"
+      [src]="event?.poster"
+      alt="Event Poster"
+      class="event-poster"
+    />
+    <span *ngIf="event?.poster" class="icon fullscreen">fullscreen</span>
   </div>
 
   <div class="action-buttons">
     <button class="icon-button" (click)="toggleFavorite()">
-      <span class="icon" [ngClass]="{ favorite: isFavorite }">
+      <span class="icon" [ngClass]="{ favorite: event?.favorite }">
         {{ event?.favorite ? 'star' : 'star_border' }}</span
       >
     </button>
-    <button class="icon-button" (click)="shareEvent()">
+    <button class="icon-button" (click)="onShareEvent()">
       <span class="icon">share</span>
     </button>
     <button class="icon-button" (click)="addToCalendar()">
@@ -50,7 +50,9 @@
     <h3>Eventdetails</h3>
     <p>{{ event?.description }}</p>
     <h3>Veranstalter</h3>
-    <p>{{ eventBy === 'di' ? 'Digital Ideation' : eventBy.toUpperCase() }}</p>
+    <p>
+      {{ event?.by === 'di' ? 'Digital Ideation' : event?.by?.toUpperCase() }}
+    </p>
     <h3>Kosten</h3>
     <p>100.-</p>
     <h3>Hashtags</h3>

@@ -35,13 +35,9 @@ export class EventItemComponent {
   }>();
 
   isPopupVisible = false;
-  isFavorite!: boolean;
+  isFavorite = false;
 
   constructor(private elementRef: ElementRef) {}
-
-  ngOnInit(): void {
-    this.isFavorite = this.event.favorite;
-  }
 
   togglePopup(): void {
     this.isPopupVisible = !this.isPopupVisible;
@@ -68,7 +64,7 @@ export class EventItemComponent {
     }
   }
 
-  OnSaveEvent(): void {
+  onFavoriteEvent(): void {
     this.isFavorite = !this.isFavorite;
     this.favoriteChange.emit({
       id: String(this.event.id), // ✅ sicherstellen, dass string übergeben wird
@@ -76,7 +72,7 @@ export class EventItemComponent {
     });
   }
 
-  OnAddToCalender(): void {
+  onAddToCalender(): void {
     this.showPopover.emit({
       text: 'Der Event wird zu deinem Kalender hinzugefügt.',
       icon: '',
@@ -88,27 +84,31 @@ export class EventItemComponent {
     });
   }
 
-  OnShareEvent(): void {
+  onShareEvent(): void {
     const eventUrl = `${window.location.origin}/#/event/${this.event.id}`;
-    
+
     if (navigator.share) {
-      navigator.share({
-        title: this.event.name,
-        text: `Check out this event: ${this.event.name}`,
-        url: eventUrl,
-      })
-      .then(() => console.log('Event shared successfully!'))
-      .catch((error) => console.error('Error sharing event:', error));
+      navigator
+        .share({
+          title: this.event.name,
+          text: `Check out this event: ${this.event.name}`,
+          url: eventUrl,
+        })
+        .then(() => console.log('Event shared successfully!'))
+        .catch((error) => console.error('Error sharing event:', error));
     } else {
-      navigator.clipboard.writeText(eventUrl).then(() => {
-        alert('Event link copied to clipboard!');
-      }).catch((error) => {
-        console.error('Error copying link:', error);
-      });
+      navigator.clipboard
+        .writeText(eventUrl)
+        .then(() => {
+          alert('Event link copied to clipboard!');
+        })
+        .catch((error) => {
+          console.error('Error copying link:', error);
+        });
     }
   }
 
-  OnDeleteEvent(): void {
+  onDeleteEvent(): void {
     this.showPopover.emit({
       text: 'Willst du diesen Event wirklich löschen?',
       icon: '',
@@ -120,7 +120,7 @@ export class EventItemComponent {
     });
   }
 
-  OnEditEvent(): void {
+  onEditEvent(): void {
     console.log('Event Edited!');
   }
 }

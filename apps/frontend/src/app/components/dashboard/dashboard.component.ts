@@ -3,13 +3,13 @@ import localeDeCh from '@angular/common/locales/de-CH';
 import { EventService } from '../../services/event.service';
 
 registerLocaleData(localeDeCh);
-import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EventItemComponent } from '../event-item/event-item.component';
 import { SearchComponent } from '../search/search.component';
-import { Component, inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   GoogleMapsModule,
@@ -19,7 +19,7 @@ import {
 } from '@angular/google-maps';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
-import { forkJoin, map, mergeMap, Observable } from 'rxjs';
+import { forkJoin, mergeMap } from 'rxjs';
 
 import { EventsActions } from '../../+store/events/events.action';
 import { selectEvents } from '../../+store/events/evnets.selector';
@@ -27,7 +27,6 @@ import { Event } from '../../models/event.model';
 import { EventListComponent } from '../event-list/event-list.component';
 import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
 import { PopoverComponent } from '../popover/popover.component';
-import { SearchComponent } from '../search/search.component';
 import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
 
 registerLocaleData(localeDeCh);

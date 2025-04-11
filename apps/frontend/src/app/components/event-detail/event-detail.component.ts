@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../../services/event.service';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-event-detail',
@@ -13,14 +14,7 @@ import { EventService } from '../../services/event.service';
 })
 export class EventDetailComponent implements OnInit {
   eventId!: string;
-  eventTitle!: string;
-  eventPoster!: string;
-  eventLocation!: string;
-  eventDate!: string;
-  eventTime!: string;
-  eventDescription!: string;
-  eventBy!: string;
-  isFavorite = false;
+  event?: Event;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,32 +28,29 @@ export class EventDetailComponent implements OnInit {
   }
 
   fetchEventDetails(): void {
-    const event = this.eventService.getEventById(this.eventId);
-    if (event) {
-      this.eventTitle = event.name;
-      this.eventPoster = event.poster || '';
-      this.eventLocation = event.location;
-      this.eventDate = event.date;
-      this.eventTime = event.time;
-      this.eventDescription = `Details for ${event.name}`;
-      this.eventBy = event.by;
-      this.isFavorite = event.favorite ?? false;
-    } else {
-      console.error('Event not found!');
-    }
+    this.eventService.getEvents().subscribe((events) => {
+      const found = events.find((e) => e.id?.toString() === this.eventId);
+      if (found) {
+        // Enrich with UI-friendly fields
+        this.event = {
+          ...found,
+          name: found.summary,
+          date: found.start.split('T')[0],
+          time: found.start.split('T')[1]?.slice(0, 5),
+        };
+      } else {
+        console.error('Event not found!');
+      }
+    });
   }
 
   goBack(): void {
     this.location.back();
   }
 
-  onFavoriteChange(): void {
-    this.isFavorite = !this.isFavorite;
-    const targetEvent = this.eventService
-      .getEvents()
-      .find((e) => e.id === this.eventId);
-    if (targetEvent) {
-      targetEvent.favorite = this.isFavorite;
+  toggleFavorite(): void {
+    if (this.event) {
+      this.event.favorite = !this.event.favorite;
     }
   }
 

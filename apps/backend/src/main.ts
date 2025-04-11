@@ -15,7 +15,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   app.use(cookieParser());
   app.enableCors({
-    origin: ['http://localhost:4200', 'https://jfladas.github.io/uxweb2'],
+    origin: ['http://localhost:4200', 'https://jfladas.github.io'],
     credentials: true,
   });
 
@@ -23,7 +23,7 @@ async function bootstrap() {
     .setTitle('Studio Web UX')
     .setDescription('The Studio Web UX API description')
     .setVersion('1.0')
-    .addTag('HSLU')
+    .addTag('di')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, documentFactory);

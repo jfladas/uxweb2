@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { env } from '../../../env/env';
+import { catchError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,9 @@ export class AuthService {
       })
       .subscribe(() => this.router.navigate(['/login']));
   isAuthenticated = () =>
-    this.httpClient.get<{ authenticated: boolean }>(`${env.api}/auth/status`, {
-      withCredentials: true,
-    });
+    this.httpClient
+      .get<{ authenticated: boolean }>(`${env.api}/auth/status`, {
+        withCredentials: true,
+      })
+      .pipe(catchError(() => of({ authenticated: false })));
 }

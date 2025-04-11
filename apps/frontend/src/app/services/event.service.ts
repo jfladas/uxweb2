@@ -1,96 +1,30 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { Event } from '../models/event.model';
+import { env } from '../../env/env';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  private events: Array<{
-    id: string;
-    name: string;
-    date: string;
-    location: string;
-    time: string;
-    by: string;
-    poster?: string;
-    favorite?: boolean;
-  }> = [
-    {
-      id: '1',
-      name: 'DI-Party',
-      date: '2025-04-03',
-      location: 'Rotkreuz 9. Stock',
-      time: '10:00 Uhr',
-      by: 'di',
-      poster: 'assets/poster1.jpg',
-      favorite: false,
-    },
-    {
-      id: '2',
-      name: 'STAIR Event',
-      date: '2025-04-24',
-      location: 'Luzern',
-      time: '13:30 Uhr',
-      by: 'stair',
-    },
-    {
-      id: '3',
-      name: 'Digital Oddities',
-      date: '2025-05-14',
-      location: 'Rotkreuz 9. Stock',
-      time: '17:00 Uhr',
-      by: 'di',
-      poster: 'assets/poster4.jpg',
-    },
-    {
-      id: '4',
-      name: 'DI-Party',
-      date: '2025-06-03',
-      location: 'Rotkreuz 9. Stock',
-      time: '10:00 Uhr',
-      by: 'di',
-      poster: 'assets/poster1.jpg',
-    },
-    {
-      id: '5',
-      name: 'Switch 2 Party & Lükas Geburtstag',
-      date: '2025-06-05',
-      location: 'Rotkreuz 9. Stock',
-      time: '18:00 Uhr',
-      by: 'di',
-    },
-    {
-      id: '6',
-      name: 'STAIR Event',
-      date: '2025-06-24',
-      location: 'Luzern',
-      time: '13:30 Uhr',
-      by: 'stair',
-      poster: 'assets/poster2.jpg',
-    },
-    {
-      id: '7',
-      name: 'FRAME Meetup',
-      date: '2025-07-05',
-      location: 'Emmenbrücke',
-      time: '16:00 Uhr',
-      by: 'frame',
-    },
-    {
-      id: '8',
-      name: 'Digital Oddities',
-      date: '2026-01-14',
-      location: 'Rotkreuz 9. Stock',
-      time: '17:00 Uhr',
-      by: 'di',
-      poster: 'assets/poster4.jpg',
-    },
-  ];
+  private apiUrl = `${env.api}/events`;
 
-  getEvents(): any[] {
-    return this.events;
+
+  constructor(private http: HttpClient) {}
+
+  getEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(this.apiUrl);
   }
 
-  getEventById(id: string) {
-    return this.events.find((event) => event.id === id);
+  createEvent(event: Event): Observable<Event> {
+    return this.http.post<Event>(this.apiUrl, event);
   }
+
+  getEventById(id: number): Observable<Event | undefined> {
+    return this.getEvents().pipe(
+      map((events) => events.find((event) => event.id === id))
+    );
+  }
+  
 }

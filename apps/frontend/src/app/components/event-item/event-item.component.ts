@@ -10,6 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-event-item',
@@ -18,17 +19,8 @@ import { RouterModule } from '@angular/router';
   templateUrl: './event-item.component.html',
   styleUrls: ['./event-item.component.scss'],
 })
-export class EventItemComponent implements OnInit {
-  @Input() event!: {
-    id: string;
-    name: string;
-    date: string;
-    location: string;
-    time: string;
-    by: string;
-    poster: string;
-    favorite: boolean;
-  };
+export class EventItemComponent {
+  @Input() event!: Event;
 
   @Output() showPopover = new EventEmitter<{
     text: string;
@@ -56,11 +48,7 @@ export class EventItemComponent implements OnInit {
     const popupElement =
       this.elementRef.nativeElement.querySelector('.menu-popup');
     if (popupElement) {
-      if (this.isPopupVisible) {
-        popupElement.classList.add('visible');
-      } else {
-        popupElement.classList.remove('visible');
-      }
+      popupElement.classList.toggle('visible', this.isPopupVisible);
     }
   }
 
@@ -83,7 +71,7 @@ export class EventItemComponent implements OnInit {
   OnSaveEvent(): void {
     this.isFavorite = !this.isFavorite;
     this.favoriteChange.emit({
-      id: this.event.id,
+      id: String(this.event.id), // ✅ sicherstellen, dass string übergeben wird
       isFavorite: this.isFavorite,
     });
   }

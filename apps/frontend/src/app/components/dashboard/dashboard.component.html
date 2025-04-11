@@ -9,7 +9,7 @@
       "
     ></app-subscribe-button>
   </div>
-<!-- This component fetches and displays all events -->
+  <!-- This component fetches and displays all events -->
   <app-event-list></app-event-list>
 
   <div *ngIf="popoverVisible">
@@ -22,8 +22,6 @@
       (closeEvent)="handlePopoverClose()"
     ></app-popover>
   </div>
-  
-  
 </div>
 
 <h2>Füge ein Event hinzu</h2>
@@ -52,7 +50,7 @@
 
   <button type="submit">Submit</button>
 </form>
-
+<!--
 @if(center) {
   <google-map mapId="Studio-Web" [center]="center" [zoom]="zoom">
   @for(marker of marker$ | async; track marker) {
@@ -60,3 +58,4 @@
   }
   </google-map>
 }
+-->

@@ -7,11 +7,10 @@ import { selectEvents } from '../../+store/events/evnets.selector';
 import { Event } from '../../models/event.model';
 import { EventItemComponent } from '../event-item/event-item.component';
 
-
 @Component({
   selector: 'app-event-list',
   templateUrl: './event-list.component.html',
-  styleUrls: ['./event-list.component.css'],
+  styleUrls: ['./event-list.component.scss'],
   standalone: true,
   imports: [CommonModule, EventItemComponent, DatePipe],
 })
@@ -28,11 +27,13 @@ export class EventListComponent {
   currentYear = new Date().getFullYear();
 
   events$ = this.store$.select(selectEvents).pipe(
-    map(events => {
+    map((events) => {
       const grouped: Record<string, Event[]> = {};
-      events.forEach(event => {
+      events.forEach((event) => {
         const date = new Date(event.start);
-        const key = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+        const key = `${date.getFullYear()}-${(date.getMonth() + 1)
+          .toString()
+          .padStart(2, '0')}`;
         if (!grouped[key]) grouped[key] = [];
         grouped[key].push({
           ...event,
@@ -40,7 +41,7 @@ export class EventListComponent {
           name: event.summary,
           date: event.start.split('T')[0],
           time: event.start.split('T')[1]?.substring(0, 5),
-          by: event.by || 'HSLU',
+          by: event.by || 'di',
           poster: event.poster || '',
         });
       });
@@ -49,17 +50,20 @@ export class EventListComponent {
   );
 
   onFavoriteChange(event: { id: string; isFavorite: boolean }): void {
-    this.store$.select(selectEvents).pipe(take(1)).subscribe((events) => {
-      const targetEvent = events.find((e) => e.id?.toString() === event.id);
-      if (targetEvent) {
-        this.store$.dispatch(
-          EventsActions.updateFavorite({
-            eventId: event.id,
-            isFavorite: event.isFavorite,
-          })
-        );
-      }
-    });
+    this.store$
+      .select(selectEvents)
+      .pipe(take(1))
+      .subscribe((events) => {
+        const targetEvent = events.find((e) => e.id?.toString() === event.id);
+        if (targetEvent) {
+          this.store$.dispatch(
+            EventsActions.updateFavorite({
+              eventId: event.id,
+              isFavorite: event.isFavorite,
+            })
+          );
+        }
+      });
   }
 
   isCurrentYear(year: string | null): boolean {
@@ -67,5 +71,4 @@ export class EventListComponent {
   }
 
   onShowPopover = (event: any) => this.showPopover.emit(event);
-
 }

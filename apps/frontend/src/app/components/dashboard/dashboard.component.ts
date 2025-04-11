@@ -2,7 +2,12 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
 import { Component, inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GoogleMapsModule, MapAdvancedMarker, MapGeocoder, MapGeocoderResponse } from '@angular/google-maps';
+import {
+  GoogleMapsModule,
+  MapAdvancedMarker,
+  MapGeocoder,
+  MapGeocoderResponse,
+} from '@angular/google-maps';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { forkJoin, map, mergeMap, Observable } from 'rxjs';
@@ -41,7 +46,8 @@ export class DashboardComponent implements OnInit {
   constructor(private geoCoder: MapGeocoder) {}
 
   @ViewChild(PopoverComponent) popoverComponent?: PopoverComponent;
-  @ViewChild(SubscribeButtonComponent) subscribeButton?: SubscribeButtonComponent;
+  @ViewChild(SubscribeButtonComponent)
+  subscribeButton?: SubscribeButtonComponent;
 
   center?: google.maps.LatLng;
   zoom = 8;
@@ -97,7 +103,9 @@ export class DashboardComponent implements OnInit {
   marker$: Observable<MapAdvancedMarker[]> = this.store$
     .select(selectEvents)
     .pipe(
-      mergeMap((events) => forkJoin(events.map((event) => this.geoCode(event.location || '')))),
+      mergeMap((events) =>
+        forkJoin(events.map((event) => this.geoCode(event.location || '')))
+      ),
       map((markers) => markers.filter((marker) => marker !== null))
     );
 
@@ -111,7 +119,7 @@ export class DashboardComponent implements OnInit {
       name: this.eventForm.value.titel || '',
       date: this.eventForm.value.datum || '',
       time: this.eventForm.value.start || '',
-      by: 'HSLU',
+      by: 'di',
       poster: '',
     };
 
@@ -149,14 +157,29 @@ export class DashboardComponent implements OnInit {
         this.closePopoverWithFadeOut();
         break;
       case 'confirm-calendar':
-        this.showPopover('Juhuu! Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!', 'event_available', false, []);
+        this.showPopover(
+          'Juhuu! Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!',
+          'event_available',
+          false,
+          []
+        );
         break;
       case 'confirm-subscribe':
-        this.showPopover('Juhuu! Die Events wurden erfolgreich zu deinem Kalender hinzugefügt!', 'event_available', false, []);
+        this.showPopover(
+          'Juhuu! Die Events wurden erfolgreich zu deinem Kalender hinzugefügt!',
+          'event_available',
+          false,
+          []
+        );
         this.subscribeButton?.markAsSubscribed();
         break;
       case 'confirm-delete':
-        this.showPopover('Der Event wurde erfolgreich gelöscht!', 'check_circle', false, []);
+        this.showPopover(
+          'Der Event wurde erfolgreich gelöscht!',
+          'check_circle',
+          false,
+          []
+        );
         break;
       default:
         console.log('Unknown action:', action);
@@ -175,5 +198,4 @@ export class DashboardComponent implements OnInit {
       }, 300);
     }
   }
-
-  }
+}

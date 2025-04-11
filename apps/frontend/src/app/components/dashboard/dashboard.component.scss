@@ -1,11 +1,5 @@
 @use '../../../styles.scss' as *;
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
 .filter-section {
   display: flex;
   justify-content: space-between;

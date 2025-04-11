@@ -23,7 +23,7 @@ async function bootstrap() {
     .setTitle('Studio Web UX')
     .setDescription('The Studio Web UX API description')
     .setVersion('1.0')
-    .addTag('HSLU')
+    .addTag('di')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, documentFactory);

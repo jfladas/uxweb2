@@ -1,5 +1,14 @@
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
+import { EventService } from '../../services/event.service';
+
+registerLocaleData(localeDeCh);
+import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { EventItemComponent } from '../event-item/event-item.component';
+import { SearchComponent } from '../search/search.component';
 import { Component, inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {

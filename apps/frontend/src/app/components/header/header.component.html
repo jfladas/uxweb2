@@ -1,15 +1,12 @@
 <header class="header">
   <div class="left-section">
-    <ng-container *ngIf="showBackArrow">
-      <button (click)="onBackArrowClick()">
-        <span class="back-arrow icon">arrow_back</span>
-      </button>
-    </ng-container>
-    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <a [routerLink]="'/dashboard'">
+      <img src="assets/logo.svg" alt="Logo" class="logo" />
+    </a>
   </div>
   <div class="right-section">
     <ng-container *ngIf="showMenu">
-      <button (click)="onMenuClick()">
+      <button (click)="addEvent()">
         <span class="menu icon">Add_circle</span>
       </button>
       <button (click)="toggleSidebar()">
@@ -19,6 +16,15 @@
   </div>
 </header>
 <div class="header-spacer"></div>
+
+<div
+  class="overlay"
+  *ngIf="isSidebarOpen"
+  tabindex="-1"
+  aria-hidden="true"
+  (click)="toggleSidebar()"
+></div>
+
 <app-sidebar
   [isSidebarOpen]="isSidebarOpen"
   (closeSidebar)="toggleSidebar()"

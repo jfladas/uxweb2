@@ -5,6 +5,7 @@ import {
   ElementRef,
   Output,
   EventEmitter,
+  OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
@@ -34,9 +35,13 @@ export class EventItemComponent {
   }>();
 
   isPopupVisible = false;
-  isFavorite = false;
+  isFavorite!: boolean;
 
   constructor(private elementRef: ElementRef) {}
+
+  ngOnInit(): void {
+    this.isFavorite = this.event.favorite;
+  }
 
   togglePopup(): void {
     this.isPopupVisible = !this.isPopupVisible;
@@ -84,7 +89,23 @@ export class EventItemComponent {
   }
 
   OnShareEvent(): void {
-    console.log('Event Shared!');
+    const eventUrl = `${window.location.origin}/#/event/${this.event.id}`;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: this.event.name,
+        text: `Check out this event: ${this.event.name}`,
+        url: eventUrl,
+      })
+      .then(() => console.log('Event shared successfully!'))
+      .catch((error) => console.error('Error sharing event:', error));
+    } else {
+      navigator.clipboard.writeText(eventUrl).then(() => {
+        alert('Event link copied to clipboard!');
+      }).catch((error) => {
+        console.error('Error copying link:', error);
+      });
+    }
   }
 
   OnDeleteEvent(): void {

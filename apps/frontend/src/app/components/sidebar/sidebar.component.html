@@ -1,43 +1,58 @@
 <div class="sidebar" [class.open]="isSidebarOpen">
-    <button class="close-button" (click)="toggleSidebar()">
-      <span class="icon">close</span>
-    </button>
-    <div class="logo-container">
-      <img src="assets/logo.png" alt="Logo" class="logo" />
-    </div>
-    <nav>
-      <ul>
-        <li><button class="sidebar-button" (click)="startseite()">
-            <span class="icon">home</span> Startseite
-          </button>
-          <hr />
-        </li>
-        <li><button class="sidebar-button" (click)="createEvent()">
-            <span class="icon">Add_circle</span> Event erstellen
-          </button>
-          <hr />
-        </li>
-        <li><button class="sidebar-button" (click)="createEvent()">
-            <span class="icon">Celebration</span> Erstellte Events
-          </button>
-          <hr />
-        </li>
-        <li><button class="sidebar-button" (click)="createEvent()">
-            <span class="icon">Star</span> Favoriten
-          </button>
-          <hr />
-        </li>
-        <li><button class="sidebar-button" (click)="createEvent()">
-            <span class="icon">Settings</span> Einstellungen
-          </button>
-          <hr />
-        </li>
-  
-      </ul>
-    </nav>
-    <div class="logout-container">
-      <button class="primary" (click)="logout()">
-        <span class="icon">logout</span> LOGOUT
-      </button>
+  <button class="close-button" (click)="toggleSidebar()">
+    <span class="icon">close</span>
+  </button>
+  <div class="profil-container">
+    <div class="profil-box">
+      <span class="icon">person</span>
     </div>
   </div>
+  <nav>
+    <ul>
+      <li>
+        <a
+          [routerLink]="'/dashboard'"
+          class="sidebar-button"
+          (click)="toggleSidebar()"
+        >
+          <span class="icon">home</span> Startseite
+        </a>
+        <hr />
+      </li>
+      <li>
+        <button class="sidebar-button" (click)="createEvent()">
+          <span class="icon">Add_circle</span> Event erstellen
+        </button>
+        <hr />
+      </li>
+      <li>
+        <button class="sidebar-button" (click)="createEvent()">
+          <span class="icon">Celebration</span> Erstellte Events
+        </button>
+        <hr />
+      </li>
+      <li>
+        <a
+          [routerLink]="'/favorites'"
+          class="sidebar-button"
+          (click)="toggleSidebar()"
+        >
+          <span class="icon">star</span>
+          Favoriten
+        </a>
+        <hr />
+      </li>
+      <li>
+        <button class="sidebar-button" (click)="createEvent()">
+          <span class="icon">Settings</span> Einstellungen
+        </button>
+        <hr />
+      </li>
+    </ul>
+  </nav>
+  <div class="logout-container">
+    <button class="primary" (click)="logout()">
+      <span class="icon">logout</span> LOGOUT
+    </button>
+  </div>
+</div>

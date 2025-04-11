@@ -6,12 +6,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent, // Ensure SidebarComponent is declared here
+    SidebarComponent,
   ],
-  imports: [
-    BrowserModule,
-  ],
+  imports: [BrowserModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

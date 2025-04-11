@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  imports: [CommonModule, SidebarComponent],
+  imports: [CommonModule, SidebarComponent, RouterModule],
 })
 export class HeaderComponent {
-  @Input() showBackArrow = false;
   @Input() showMenu = false;
 
-  isSidebarOpen = false; // Add this property to control sidebar visibility
+  isSidebarOpen = false;
 
   private authService = inject(AuthService);
 
@@ -28,12 +28,7 @@ export class HeaderComponent {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  onBackArrowClick() {
-    // Handle back arrow click
+  addEvent() {
+    // Handle create event click
   }
-
-  onMenuClick() {
-    // Handle menu click
-  }
-
 }

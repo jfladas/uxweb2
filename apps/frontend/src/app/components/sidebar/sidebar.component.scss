@@ -50,7 +50,7 @@
         }
 
         a {
-          color: $dark;
+          color: $darkest;
           text-decoration: none;
           font-size: 1rem;
 
@@ -62,38 +62,43 @@
     }
   }
 
-  .logo-container {
+  .profil-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 10rem;
     background-color: $primary-color;
-    border-radius: 1rem 0 0 0;
+  }
 
-    img {
-      width: 100%;
-      height: auto;
+  .profil-box {
+    text-align: center;
+    padding: 1rem;
+    border: 2px solid white; 
+    border-radius: 1rem;
+    height: 4rem;
+    width: 4rem;
+    .icon {
+      margin: 0;
+      font-variation-settings: 'FILL' 1;
+      color: $white;
+      font-size: 4rem;
     }
   }
+
+
   .sidebar-button {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 1rem;
+    user-select: none;
+    cursor: pointer;
   }
 
   .icon {
     color: $darkest;
     margin-right: 0.5rem;
     font-size: 1.5rem;
-  }
-  .primary {
-    transition: color 0.3s ease;
-    box-shadow: $shadow;
-
-    &:hover {
-      color: $primary-color-light;
-    }
   }
 
   .logout-container {

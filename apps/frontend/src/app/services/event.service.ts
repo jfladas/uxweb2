@@ -10,6 +10,7 @@ import { env } from '../../env/env';
 export class EventService {
   private apiUrl = `${env.api}/events`;
 
+
   constructor(private http: HttpClient) {}
 
   getEvents(): Observable<Event[]> {

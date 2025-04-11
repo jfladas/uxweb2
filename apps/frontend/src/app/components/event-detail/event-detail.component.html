@@ -1,31 +1,65 @@
-<div class="event-detail">
-  <button class="back-button" (click)="goBack()">← Zurück</button>
+<div class="container">
+  <button class="back-button" (click)="goBack()">
+    <span class="icon">keyboard_backspace</span>
+  </button>
   <h1>{{ event?.summary }}</h1>
-
-  <img
+  <div
+    class="event-poster {{ eventBy }}"
+    [ngClass]="{ posterless: !eventPoster }"
+  >
+    <div class="event-logo">
+      <img src="assets/{{ eventBy }}.jpg" alt="{{ eventBy }}" />
+    </div>
+    <img
     *ngIf="event?.poster"
     [src]="event?.poster"
     alt="Event Poster"
     class="event-poster"
   />
+    <span *ngIf="eventPoster" class="icon fullscreen">fullscreen</span>
+  </div>
 
   <div class="action-buttons">
-    <button (click)="toggleFavorite()">
-      {{ event?.favorite ? '★ Favorit' : '☆ Favorit' }}
+    <button class="icon-button" (click)="toggleFavorite()">
+      <span class="icon" [ngClass]="{ favorite: isFavorite }">
+        {{ event?.favorite ? 'star' : 'star_border' }}</span
+      >
     </button>
-    <button (click)="shareEvent()">Teilen</button>
-    <button (click)="addToCalendar()">Zum Kalender hinzufügen</button>
+    <button class="icon-button" (click)="shareEvent()">
+      <span class="icon">share</span>
+    </button>
+    <button class="icon-button" (click)="addToCalendar()">
+      <span class="icon">calendar_add_on</span>
+    </button>
   </div>
 
   <div class="event-details">
-    <p><strong>Ort:</strong> {{ event?.location }}</p>
-    <p><strong>Datum:</strong> {{ event?.date }}</p>
-    <p><strong>Uhrzeit:</strong> {{ event?.time }}</p>
+    <span class="icon">location_on</span>
+    <p>{{ event?.location }}</p>
+  </div>
+  <div class="event-details">
+    <span class="icon">calendar_month</span>
+    <p>{{ event?.date | date : 'd. MMMM yyyy' }}</p>
+  </div>
+  <div class="event-details">
+    <span class="icon">schedule</span>
+    <p>{{ event?.time }}</p>
   </div>
 
   <div class="event-description">
+    <h3>Eventdetails</h3>
     <p>{{ event?.description }}</p>
+    <h3>Veranstalter</h3>
+    <p>{{ eventBy === 'di' ? 'Digital Ideation' : eventBy.toUpperCase() }}</p>
+    <h3>Kosten</h3>
+    <p>100.-</p>
+    <h3>Hashtags</h3>
+    <p class="hashtags">
+      <span>#gaming</span>
+      <span>#cool</span>
+      <span>#fotzig</span>
+    </p>
   </div>
 
-  <button class="back-button" (click)="goBack()">← Zurück</button>
+  <button class="primary" (click)="goBack()">ZURÜCK</button>
 </div>

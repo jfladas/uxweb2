@@ -1,0 +1,26 @@
+@use '../../../styles.scss' as *;
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: $lightest;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+}
+
+.logo {
+  width: 10rem;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+button.primary {
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+}

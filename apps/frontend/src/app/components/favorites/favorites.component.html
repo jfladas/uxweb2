@@ -1,0 +1,57 @@
+<div class="container">
+  <button class="back-button" (click)="goBack()">
+    <span class="icon">keyboard_backspace</span>
+  </button>
+  <h1>
+    Favoriten
+    <span class="icon star">star</span>
+  </h1>
+  <p class="sub">
+    Du hast {{ favoriteCount === 0 ? 'keine' : favoriteCount }} favorisierte{{
+      favoriteCount === 1 ? 'n' : ''
+    }}
+    Event{{ favoriteCount === 1 ? '' : 's' }}
+  </p>
+  <div *ngIf="events$ | async as events">
+    <div *ngFor="let month of events | keyvalue" class="month-section">
+      <div class="month-header">
+        <h4>
+          {{ month.key | date : 'MMMM' }}
+          <span
+            *ngIf="!isCurrentYear(month.key | date : 'yyyy')"
+            class="month-year"
+            >{{ month.key | date : 'yyyy' }}
+          </span>
+        </h4>
+        <hr />
+      </div>
+      <ul>
+        <li *ngFor="let event of month.value">
+          <app-event-item
+            [event]="event"
+            (showPopover)="
+              showPopover(
+                $event.text,
+                $event.icon,
+                $event.closeable,
+                $event.buttons
+              )
+            "
+            (favoriteChange)="onFavoriteChange($event)"
+          ></app-event-item>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="popoverVisible">
+    <app-popover
+      [text]="popoverText"
+      [icon]="popoverIcon"
+      [buttons]="popoverButtons"
+      [closeable]="popoverCloseable"
+      (buttonClick)="handlePopoverAction($event)"
+      (closeEvent)="handlePopoverClose()"
+    ></app-popover>
+  </div>
+</div>

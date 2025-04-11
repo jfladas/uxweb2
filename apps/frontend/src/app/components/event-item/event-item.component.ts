@@ -85,7 +85,7 @@ export class EventItemComponent {
   }
 
   onShareEvent(): void {
-    const eventUrl = `${window.location.origin}/#/event/${this.event.id}`;
+    const eventUrl = `${window.location.origin}/uxweb2/#/event/${this.event.id}`;
 
     if (navigator.share) {
       navigator

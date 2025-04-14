@@ -6,9 +6,9 @@
   </div>
   <div class="right-section">
     <ng-container *ngIf="showMenu">
-      <button (click)="addEvent()">
-        <span class="menu icon">Add_circle</span>
-      </button>
+      <a [routerLink]="'/add-event'">
+        <span class="menu icon">add_circle</span>
+      </a>
       <button (click)="toggleSidebar()">
         <span class="menu icon">menu</span>
       </button>

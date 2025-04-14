@@ -1,16 +1,12 @@
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
-import { EventService } from '../../services/event.service';
 
 registerLocaleData(localeDeCh);
-import { AsyncPipe, DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EventItemComponent } from '../event-item/event-item.component';
 import { SearchComponent } from '../search/search.component';
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   GoogleMapsModule,
   MapAdvancedMarker,
@@ -20,10 +16,10 @@ import {
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { forkJoin, mergeMap } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { EventsActions } from '../../+store/events/events.action';
 import { selectEvents } from '../../+store/events/evnets.selector';
-import { Event } from '../../models/event.model';
 import { EventListComponent } from '../event-list/event-list.component';
 import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
 import { PopoverComponent } from '../popover/popover.component';
@@ -42,7 +38,6 @@ registerLocaleData(localeDeCh);
     SubscribeButtonComponent,
     PopoverComponent,
     EventListComponent,
-    ReactiveFormsModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de-CH' }],
   templateUrl: './dashboard.component.html',
@@ -51,7 +46,7 @@ registerLocaleData(localeDeCh);
 export class DashboardComponent implements OnInit {
   currentYear = new Date().getFullYear();
   private store$ = inject(Store<'events'>);
-  constructor(private geoCoder: MapGeocoder) {}
+  constructor(private geoCoder: MapGeocoder, private router: Router) {}
 
   @ViewChild(PopoverComponent) popoverComponent?: PopoverComponent;
   @ViewChild(SubscribeButtonComponent)
@@ -61,15 +56,6 @@ export class DashboardComponent implements OnInit {
   zoom = 8;
   markers: any[] = [];
   iframeSrc: SafeResourceUrl = '';
-
-  eventForm = new FormGroup({
-    titel: new FormControl(''),
-    ort: new FormControl(''),
-    datum: new FormControl(''),
-    start: new FormControl(''),
-    end: new FormControl(''),
-    description: new FormControl(''),
-  });
 
   ngOnInit(): void {
     this.loadEvents();
@@ -117,24 +103,6 @@ export class DashboardComponent implements OnInit {
       map((markers) => markers.filter((marker) => marker !== null))
     );
 
-  submit = () => {
-    const baseEvent: Event = {
-      summary: this.eventForm.value.titel || '',
-      location: this.eventForm.value.ort || '',
-      start: this.timestamp(this.eventForm.value.start || '00:00'),
-      end: this.timestamp(this.eventForm.value.end || '00:00'),
-      description: this.eventForm.value.description || '',
-      name: this.eventForm.value.titel || '',
-      date: this.eventForm.value.datum || '',
-      time: this.eventForm.value.start || '',
-      by: 'di',
-      poster: '',
-    };
-
-    this.store$.dispatch(EventsActions.saveEvent({ event: baseEvent }));
-  };
-
-  timestamp = (time?: string) => `${this.eventForm.value.datum}T${time}`;
   loadEvents = () => this.store$.dispatch(EventsActions.loadEvents());
 
   popoverText = '';

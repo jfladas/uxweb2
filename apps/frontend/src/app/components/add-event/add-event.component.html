@@ -1,0 +1,77 @@
+<div class="container">
+  <button class="back-button" (click)="goBack()">
+    <span class="icon">keyboard_backspace</span>
+  </button>
+
+  <form [formGroup]="eventForm" (ngSubmit)="submit()">
+    <input
+      id="titel"
+      formControlName="titel"
+      [class.invalid]="
+        eventForm.get('titel')?.invalid && eventForm.get('titel')?.touched
+      "
+      placeholder="Eventtitel"
+      required
+    /><br />
+
+    <div class="event-poster">
+      <div class="event-logo">
+        <img src="assets/di.jpg" alt="upload" />
+      </div>
+      <img src="assets/upload.jpg" alt="upload" class="poster-img" />
+    </div>
+
+    <input
+      id="ort"
+      formControlName="ort"
+      [class.invalid]="
+        eventForm.get('ort')?.invalid && eventForm.get('ort')?.touched
+      "
+      placeholder="Ort, Schulhaus, Raumnummer,..."
+      required
+    /><br />
+    <input
+      id="datum"
+      type="date"
+      formControlName="datum"
+      [class.invalid]="
+        eventForm.get('datum')?.invalid && eventForm.get('datum')?.touched
+      "
+      required
+    /><br />
+    <input
+      id="start"
+      type="time"
+      formControlName="start"
+      [class.invalid]="
+        eventForm.get('start')?.invalid && eventForm.get('start')?.touched
+      "
+      required
+    /><br />
+    <input
+      id="end"
+      type="time"
+      formControlName="end"
+      [class.invalid]="
+        eventForm.get('end')?.invalid && eventForm.get('end')?.touched
+      "
+      required
+    /><br />
+    <h3>Eventdetails</h3>
+    <textarea
+      id="description"
+      formControlName="description"
+      [class.invalid]="
+        eventForm.get('description')?.invalid &&
+        eventForm.get('description')?.touched
+      "
+      placeholder="Schreibe hier Details zu deinem Event..."
+      required
+    ></textarea
+    ><br />
+    <div class="button-container">
+      <button class="primary" (click)="goBack()">ABBRECHEN</button>
+      <button class="primary" type="submit">EVENT HINZUFÜGEN</button>
+    </div>
+  </form>
+</div>

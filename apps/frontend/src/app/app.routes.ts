@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { AddEventComponent } from './components/add-event/add-event.component';
 
 export const appRoutes: Route[] = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -17,5 +18,9 @@ export const appRoutes: Route[] = [
   {
     path: 'favorites',
     component: FavoritesComponent,
+  },
+  {
+    path: 'add-event',
+    component: AddEventComponent,
   },
 ];

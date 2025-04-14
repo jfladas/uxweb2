@@ -1,0 +1,80 @@
+@use '../../../styles.scss' as *;
+
+.back-button {
+  padding: 0;
+  .icon {
+    color: $primary-color;
+  }
+}
+
+h3 {
+  padding: 1rem 0 0.5rem 0;
+}
+
+.event-poster {
+  width: calc(100% + 2rem);
+  height: 100vw;
+  max-height: 30rem;
+  overflow: hidden;
+  transform: translate(-1rem, 0);
+  background-color: $digital-ideation;
+  margin: 1rem 0;
+  .poster-img {
+    width: calc(100% - 2rem);
+    margin-left: 2rem;
+    height: auto;
+    min-height: 100%;
+  }
+  .event-logo {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background-color: white;
+    box-shadow: $shadow;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    z-index: 2;
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      clip-path: circle(50%);
+    }
+  }
+}
+
+input,
+textarea {
+  border: 1px solid $dark;
+  padding: 0 0.2rem;
+  border-radius: 5px;
+  background-color: $lightest;
+  width: calc(100vw - 3rem);
+  &::placeholder {
+    color: $medium;
+  }
+}
+
+#titel {
+  font-size: 2.125rem;
+  font-weight: 700;
+}
+#ort,
+#datum,
+#start,
+#end {
+  margin-bottom: 0.5rem;
+}
+
+.invalid {
+  border: 3px solid $primary-color;
+  background-color: $lightest;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+}

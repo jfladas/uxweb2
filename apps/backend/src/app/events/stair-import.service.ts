@@ -1,11 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit  } from '@nestjs/common';
 import * as ical from 'node-ical';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from './event.entity';
+import { Cron, CronExpression } from '@nestjs/schedule'; // <== wichtig!
+
 
 @Injectable()
 export class StairImportService {
+  private readonly logger = new Logger(StairImportService.name);
   private readonly STAIR_ICAL_URL =
     'https://stair.ch/?post_type=tribe_events&ical=1&eventDisplay=list';
 
@@ -14,6 +17,17 @@ export class StairImportService {
     private readonly eventRepository: Repository<Event>,
   ) {}
 
+  async onModuleInit() {
+    this.logger.log('⏳ Importiere STAIR Events beim App-Start...');
+    await this.importEvents();
+  }
+
+  @Cron(CronExpression.EVERY_5_MINUTES)
+  async handleCron() {
+    this.logger.log('🔁 Cronjob gestartet: STAIR Events Import');
+    await this.importEvents();
+  }
+  
   async importEvents(): Promise<string> {
     try {
       const icalEvents = await ical.fromURL(this.STAIR_ICAL_URL);

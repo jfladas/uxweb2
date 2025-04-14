@@ -5,7 +5,6 @@ import {
   ElementRef,
   Output,
   EventEmitter,
-  OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
@@ -67,7 +66,7 @@ export class EventItemComponent {
   onFavoriteEvent(): void {
     this.isFavorite = !this.isFavorite;
     this.favoriteChange.emit({
-      id: String(this.event.id), // ✅ sicherstellen, dass string übergeben wird
+      id: String(this.event.id),
       isFavorite: this.isFavorite,
     });
   }
@@ -122,5 +121,10 @@ export class EventItemComponent {
 
   onEditEvent(): void {
     console.log('Event Edited!');
+  }
+
+  getShortLocation(location?: string): string {
+    if (!location) return '';
+    return location.split(',')[0].trim();
   }
 }

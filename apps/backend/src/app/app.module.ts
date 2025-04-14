@@ -8,9 +8,12 @@ import { EventsModule } from './events/events.module';
 import { Event } from './events/event.entity';
 import { StairImportService } from './events/stair-import.service';
 import { CalendarModule } from './calendar/calendar.module';
+import { ScheduleModule } from '@nestjs/schedule';
+
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({

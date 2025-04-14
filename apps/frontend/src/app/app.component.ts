@@ -11,6 +11,6 @@ import { HeaderComponent } from './components/header/header.component';
   imports: [CommonModule, RouterModule, HeaderComponent],
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'sweet';
   constructor(public router: Router) {}
 }

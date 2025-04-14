@@ -61,7 +61,7 @@ export class EventDetailComponent implements OnInit {
       navigator
         .share({
           title: this.event?.name,
-          text: `Check out this event: ${this.event?.name}`,
+          text: `Schau dir diesen sweeten Event an: ${this.event?.name}`,
           url: eventUrl,
         })
         .then(() => console.log('Event shared successfully!'))

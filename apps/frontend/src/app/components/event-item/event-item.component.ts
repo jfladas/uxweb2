@@ -123,4 +123,13 @@ export class EventItemComponent {
   onEditEvent(): void {
     console.log('Event Edited!');
   }
+
+  onShowPopover(): void {
+    this.showPopover.emit({
+      text: 'Popover content for this event',
+      icon: 'info',
+      closeable: true,
+      buttons: [{ label: 'Close', action: 'close' }],
+    });
+  }
 }

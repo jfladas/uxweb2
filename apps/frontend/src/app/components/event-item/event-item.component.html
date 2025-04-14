@@ -63,11 +63,19 @@
     <span class="icon">calendar_add_on</span> Zum Kalender hinzufügen
   </button>
   <hr />
-  <button class="menu-popup-button" (click)="onEditEvent()">
+  <button
+    *ngIf="event.by === 'di'"
+    class="menu-popup-button"
+    (click)="onEditEvent()"
+  >
     <span class="icon">edit</span> Bearbeiten
   </button>
   <hr />
-  <button class="menu-popup-button" (click)="onDeleteEvent()">
+  <button
+    *ngIf="event.by === 'di'"
+    class="menu-popup-button"
+    (click)="onDeleteEvent()"
+  >
     <span class="icon">delete</span> Löschen
   </button>
 </div>

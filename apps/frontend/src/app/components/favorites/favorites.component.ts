@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
 import { EventService } from '../../services/event.service';
-import { Event } from '../../models/event.model'; // Assuming there's an Event model
+import { Event } from '../../models/event.model';
 
 registerLocaleData(localeDeCh);
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
@@ -30,6 +30,12 @@ export class FavoritesComponent implements OnInit {
   currentYear = new Date().getFullYear();
   events$!: Observable<Record<string, Event[]>>;
   favoriteCount = 0;
+  popoverVisible = false;
+  popoverText = '';
+  popoverIcon?: string;
+  popoverButtons: { label: string; action: string }[] = [];
+  popoverCloseable = true;
+
   constructor(private eventService: EventService, private location: Location) {}
 
   ngOnInit(): void {
@@ -42,76 +48,6 @@ export class FavoritesComponent implements OnInit {
       return false;
     }
     return parseInt(year, 10) === this.currentYear;
-  }
-
-  @ViewChild(PopoverComponent) popoverComponent?: PopoverComponent;
-
-  popoverText = '';
-  popoverIcon?: string;
-  popoverButtons: { label: string; action: string }[] = [];
-  popoverCloseable = true;
-  popoverVisible = false;
-
-  showPopover(
-    text: string,
-    icon: string | undefined,
-    closeable: boolean,
-    buttons: { label: string; action: string }[]
-  ): void {
-    this.popoverText = text;
-    this.popoverIcon = icon;
-    this.popoverCloseable = closeable;
-    this.popoverButtons = buttons;
-    this.popoverVisible = true;
-    if (!closeable) {
-      setTimeout(() => {
-        this.closePopoverWithFadeOut();
-      }, 1500);
-    }
-  }
-
-  handlePopoverAction(action: string): void {
-    switch (action) {
-      case 'cancel':
-        this.closePopoverWithFadeOut();
-        break;
-      case 'confirm-calendar':
-        this.showPopover(
-          'Juhuu! Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!',
-          'event_available',
-          false,
-          []
-        );
-        break;
-      case 'confirm-delete':
-        this.showPopover(
-          'Der Event wurde erfolgreich gelöscht!',
-          'check_circle',
-          false,
-          []
-        );
-        break;
-      default:
-        console.log('Unknown action:', action);
-        break;
-    }
-  }
-
-  handlePopoverClose(): void {
-    this.popoverVisible = false;
-  }
-
-  closePopoverWithFadeOut(): void {
-    if (this.popoverComponent) {
-      this.popoverComponent.onClose();
-      setTimeout(() => {
-        this.popoverVisible = false;
-      }, 300);
-    }
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 
   onFavoriteChange(event: { id: string; isFavorite: boolean }): void {
@@ -158,5 +94,31 @@ export class FavoritesComponent implements OnInit {
       );
       this.updateFavoriteCount();
     });
+  }
+
+  showPopover(
+    text: string,
+    icon: string | undefined,
+    closeable: boolean,
+    buttons: { label: string; action: string }[]
+  ): void {
+    this.popoverText = text;
+    this.popoverIcon = icon;
+    this.popoverCloseable = closeable;
+    this.popoverButtons = buttons;
+    this.popoverVisible = true;
+  }
+
+  handlePopoverAction(action: string): void {
+    console.log('Popover action:', action);
+    this.popoverVisible = false;
+  }
+
+  closePopover(): void {
+    this.popoverVisible = false;
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

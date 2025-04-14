@@ -23,13 +23,3 @@
   </ul>
 </div>
 } }
-<div *ngIf="popoverVisible">
-  <app-popover
-    [text]="popoverData?.text ?? ''"
-    [icon]="popoverData?.icon ?? ''"
-    [closeable]="popoverData?.closeable ?? false"
-    [buttons]="popoverData?.buttons ?? []"
-    (closeEvent)="closePopover()"
-    (buttonClick)="closePopover()"
-  ></app-popover>
-</div>

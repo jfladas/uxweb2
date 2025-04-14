@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,33 +8,31 @@ import { CommonModule } from '@angular/common';
   templateUrl: './popover.component.html',
   styleUrls: ['./popover.component.scss'],
 })
-export class PopoverComponent implements OnInit, OnDestroy {
+export class PopoverComponent {
   @Input() text!: string;
   @Input() icon?: string;
   @Input() buttons: { label: string; action: string }[] = [];
   @Input() closeable = false;
+  @Input() visible = false;
   @Output() buttonClick = new EventEmitter<string>();
   @Output() closeEvent = new EventEmitter<void>();
 
   isFadingOut = false;
 
-  ngOnInit(): void {
-    document.body.style.overflow = 'hidden';
-  }
-
-  ngOnDestroy(): void {
-    document.body.style.overflow = '';
-  }
-
   onButtonClick(action: string): void {
-    this.buttonClick.emit(action);
+    if (action === 'cancel') {
+      this.onClose();
+    } else {
+      this.buttonClick.emit(action);
+      this.onClose();
+    }
   }
 
   onClose(): void {
     this.isFadingOut = true;
     setTimeout(() => {
-      this.isFadingOut = false;
       this.closeEvent.emit();
+      this.isFadingOut = false;
     }, 300);
   }
 }

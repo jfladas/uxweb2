@@ -11,16 +11,19 @@
       "
     ></app-subscribe-button>
   </div>
-  <app-event-list #eventList [activeFilters]="activeFilters"></app-event-list>
+  <app-event-list
+    #eventList
+    [activeFilters]="activeFilters"
+    (showPopover)="onShowPopover($event)"
+  ></app-event-list>
 
-  <div *ngIf="popoverVisible">
-    <app-popover
-      [text]="popoverText"
-      [icon]="popoverIcon"
-      [buttons]="popoverButtons"
-      [closeable]="popoverCloseable"
-      (buttonClick)="handlePopoverAction($event)"
-      (closeEvent)="handlePopoverClose()"
-    ></app-popover>
-  </div>
+  <app-popover
+    [text]="popoverText"
+    [icon]="popoverIcon"
+    [buttons]="popoverButtons"
+    [closeable]="popoverCloseable"
+    [visible]="popoverVisible"
+    (buttonClick)="handlePopoverAction($event)"
+    (closeEvent)="closePopover()"
+  ></app-popover>
 </div>

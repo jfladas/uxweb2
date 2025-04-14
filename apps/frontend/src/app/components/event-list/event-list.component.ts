@@ -6,14 +6,13 @@ import { EventsActions } from '../../+store/events/events.action';
 import { selectEvents } from '../../+store/events/evnets.selector';
 import { Event } from '../../models/event.model';
 import { EventItemComponent } from '../event-item/event-item.component';
-import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-event-list',
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.scss'],
   standalone: true,
-  imports: [CommonModule, EventItemComponent, DatePipe, PopoverComponent],
+  imports: [CommonModule, EventItemComponent, DatePipe],
 })
 export class EventListComponent {
   private store$ = inject(Store<'events'>);
@@ -30,7 +29,7 @@ export class EventListComponent {
 
   @Output() showPopover = new EventEmitter<{
     text: string;
-    icon: string | undefined;
+    icon?: string | undefined;
     closeable: boolean;
     buttons: { label: string; action: string }[];
   }>();
@@ -66,14 +65,6 @@ export class EventListComponent {
     })
   );
 
-  popoverVisible = false;
-  popoverData: {
-    text: string;
-    icon?: string;
-    closeable: boolean;
-    buttons: { label: string; action: string }[];
-  } | null = null;
-
   onFavoriteChange(event: { id: string; isFavorite: boolean }): void {
     this.store$
       .select(selectEvents)
@@ -101,13 +92,7 @@ export class EventListComponent {
     closeable: boolean;
     buttons: { label: string; action: string }[];
   }): void {
-    this.popoverVisible = true;
-    this.popoverData = event;
-  }
-
-  closePopover(): void {
-    this.popoverVisible = false;
-    this.popoverData = null;
+    this.showPopover.emit(event);
   }
 
   onFiltersChanged(filters: string[]): void {

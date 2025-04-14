@@ -44,14 +44,15 @@
     </div>
   </div>
 
-  <div *ngIf="popoverVisible">
+  <div>
     <app-popover
       [text]="popoverText"
       [icon]="popoverIcon"
       [buttons]="popoverButtons"
       [closeable]="popoverCloseable"
+      [visible]="popoverVisible"
       (buttonClick)="handlePopoverAction($event)"
-      (closeEvent)="handlePopoverClose()"
+      (closeEvent)="closePopover()"
     ></app-popover>
   </div>
 </div>

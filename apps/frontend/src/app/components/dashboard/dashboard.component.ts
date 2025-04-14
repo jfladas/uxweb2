@@ -58,6 +58,12 @@ export class DashboardComponent implements OnInit {
   iframeSrc: SafeResourceUrl = '';
   activeFilters: string[] = [];
 
+  popoverVisible = false;
+  popoverText = '';
+  popoverIcon?: string;
+  popoverButtons: { label: string; action: string }[] = [];
+  popoverCloseable = true;
+
   ngOnInit(): void {
     this.loadEvents();
     this.getCurrentLocation();
@@ -106,11 +112,47 @@ export class DashboardComponent implements OnInit {
 
   loadEvents = () => this.store$.dispatch(EventsActions.loadEvents());
 
-  popoverText = '';
-  popoverIcon?: string;
-  popoverButtons: { label: string; action: string }[] = [];
-  popoverCloseable = true;
-  popoverVisible = false;
+  handlePopoverAction(action: string): void {
+    console.log('Popover action:', action);
+    setTimeout(() => {
+      switch (action) {
+        case 'confirm-calendar':
+          this.showPopover(
+            'Juhuu! Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!',
+            'event_available',
+            false,
+            []
+          );
+          break;
+        case 'confirm-subscribe':
+          this.showPopover(
+            'Juhuu! Die Events wurden erfolgreich zu deinem Kalender hinzugefügt!',
+            'event_available',
+            false,
+            []
+          );
+          this.subscribeButton?.markAsSubscribed();
+          break;
+        case 'confirm-delete':
+          this.showPopover(
+            'Der Event wurde erfolgreich gelöscht!',
+            'check_circle',
+            false,
+            []
+          );
+          break;
+      }
+    }, 310);
+  }
+
+  onShowPopover(event: {
+    text: string;
+    icon?: string;
+    closeable: boolean;
+    buttons: { label: string; action: string }[];
+  }): void {
+    this.showPopover(event.text, event.icon, event.closeable, event.buttons);
+  }
 
   showPopover(
     text: string,
@@ -123,57 +165,15 @@ export class DashboardComponent implements OnInit {
     this.popoverCloseable = closeable;
     this.popoverButtons = buttons;
     this.popoverVisible = true;
-    if (!closeable) {
-      setTimeout(() => this.closePopoverWithFadeOut(), 1500);
-    }
-  }
-
-  handlePopoverAction(action: string): void {
-    switch (action) {
-      case 'cancel':
-        this.closePopoverWithFadeOut();
-        break;
-      case 'confirm-calendar':
-        this.showPopover(
-          'Juhuu! Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!',
-          'event_available',
-          false,
-          []
-        );
-        break;
-      case 'confirm-subscribe':
-        this.showPopover(
-          'Juhuu! Die Events wurden erfolgreich zu deinem Kalender hinzugefügt!',
-          'event_available',
-          false,
-          []
-        );
-        this.subscribeButton?.markAsSubscribed();
-        break;
-      case 'confirm-delete':
-        this.showPopover(
-          'Der Event wurde erfolgreich gelöscht!',
-          'check_circle',
-          false,
-          []
-        );
-        break;
-      default:
-        console.log('Unknown action:', action);
-    }
-  }
-
-  handlePopoverClose(): void {
-    this.popoverVisible = false;
-  }
-
-  closePopoverWithFadeOut(): void {
-    if (this.popoverComponent) {
-      this.popoverComponent.onClose();
+    if (!this.popoverCloseable) {
       setTimeout(() => {
-        this.popoverVisible = false;
-      }, 300);
+        this.closePopover();
+      }, 1500);
     }
+  }
+
+  closePopover(): void {
+    this.popoverVisible = false;
   }
 
   onFiltersChanged(filters: string[]): void {

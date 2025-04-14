@@ -39,12 +39,20 @@ export class EventItemComponent {
   constructor(private elementRef: ElementRef) {}
 
   togglePopup(): void {
-    this.isPopupVisible = !this.isPopupVisible;
-    const popupElement =
-      this.elementRef.nativeElement.querySelector('.menu-popup');
-    if (popupElement) {
-      popupElement.classList.toggle('visible', this.isPopupVisible);
+    const buttonElement =
+      this.elementRef.nativeElement.querySelector('.event-button');
+    if (this.isPopupVisible) {
+      setTimeout(() => {
+        if (buttonElement) {
+          buttonElement.classList.remove('active');
+        }
+      }, 300);
+    } else {
+      if (buttonElement) {
+        buttonElement.classList.add('active');
+      }
     }
+    this.isPopupVisible = !this.isPopupVisible;
   }
 
   @HostListener('document:click', ['$event'])
@@ -121,15 +129,6 @@ export class EventItemComponent {
 
   onEditEvent(): void {
     console.log('Event Edited!');
-  }
-
-  onShowPopover(): void {
-    this.showPopover.emit({
-      text: 'Popover content for this event',
-      icon: 'info',
-      closeable: true,
-      buttons: [{ label: 'Close', action: 'close' }],
-    });
   }
 
   getShortLocation(location?: string): string {

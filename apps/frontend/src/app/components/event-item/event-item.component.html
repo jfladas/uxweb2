@@ -35,15 +35,11 @@
   </div>
 </a>
 
-<button
-  class="event-button"
-  (click)="togglePopup()"
-  [ngClass]="{ active: isPopupVisible }"
->
+<button class="event-button" (click)="togglePopup()">
   <span class="icon">more_vert</span>
 </button>
 
-<div class="menu-popup">
+<div class="menu-popup" [ngClass]="{ visible: isPopupVisible }">
   <button
     class="menu-popup-button"
     [ngClass]="{ favorite: isFavorite }"

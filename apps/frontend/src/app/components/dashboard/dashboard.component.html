@@ -2,14 +2,16 @@
   <h1>Events</h1>
   <app-search></app-search>
   <div class="filter-section">
-    <app-filter-chips></app-filter-chips>
+    <app-filter-chips
+      (filtersChanged)="onFiltersChanged($event)"
+    ></app-filter-chips>
     <app-subscribe-button
       (showPopover)="
         showPopover($event.text, $event.icon, $event.closeable, $event.buttons)
       "
     ></app-subscribe-button>
   </div>
-  <app-event-list></app-event-list>
+  <app-event-list #eventList [activeFilters]="activeFilters"></app-event-list>
 
   <div *ngIf="popoverVisible">
     <app-popover

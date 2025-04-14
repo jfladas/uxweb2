@@ -4,6 +4,8 @@ import {
   AfterViewInit,
   ViewChild,
   ChangeDetectorRef,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -20,6 +22,7 @@ interface Chip {
 })
 export class FilterChipsComponent implements AfterViewInit {
   @ViewChild('chipsContainer') chipsContainer!: ElementRef;
+  @Output() filtersChanged = new EventEmitter<string[]>();
 
   chips: Chip[] = [
     { name: 'DIGITAL IDEATION', selected: true },
@@ -35,6 +38,14 @@ export class FilterChipsComponent implements AfterViewInit {
 
   onChipClick(chip: Chip): void {
     chip.selected = !chip.selected;
+    this.emitActiveFilters();
+  }
+
+  private emitActiveFilters(): void {
+    const activeFilters = this.chips
+      .filter((chip) => chip.selected)
+      .map((chip) => chip.name.toLowerCase());
+    this.filtersChanged.emit(activeFilters);
   }
 
   private checkOverflow(): void {

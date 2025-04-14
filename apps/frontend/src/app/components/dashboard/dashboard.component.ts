@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
   zoom = 8;
   markers: any[] = [];
   iframeSrc: SafeResourceUrl = '';
+  activeFilters: string[] = [];
 
   ngOnInit(): void {
     this.loadEvents();
@@ -173,5 +174,9 @@ export class DashboardComponent implements OnInit {
         this.popoverVisible = false;
       }, 300);
     }
+  }
+
+  onFiltersChanged(filters: string[]): void {
+    this.activeFilters = filters;
   }
 }

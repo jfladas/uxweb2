@@ -130,6 +130,13 @@ export class DashboardComponent implements OnInit {
           );
           break;
         case 'confirm-subscribe':
+          window.open(
+            'webcal://studio-webux-3cf3a57a6e64.herokuapp.com/api/calendar/sweetDIEventkalender.ics',
+            '_blank'
+          );
+          navigator.clipboard.writeText(
+            'webcal://studio-webux-3cf3a57a6e64.herokuapp.com/api/calendar/sweetDIEventkalender.ics'
+          );
           this.showPopover(
             'Juhuu! Die Events wurden erfolgreich zu deinem Kalender hinzugefügt!',
             'event_available',

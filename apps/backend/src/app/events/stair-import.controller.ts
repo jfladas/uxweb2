@@ -7,6 +7,6 @@ export class StairImportController {
 
   @Get()
   async importEvents(): Promise<string> {
-    return this.stairImportService.importEvents(); // ✅ Methode sollte existieren
+    return this.stairImportService.importEvents();
   }
 }

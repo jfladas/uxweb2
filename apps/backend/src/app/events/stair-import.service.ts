@@ -33,26 +33,22 @@ export class StairImportService {
       const icalEvents = await ical.fromURL(this.STAIR_ICAL_URL);
 
       for (const key in icalEvents) {
-        const icalEvent = icalEvents[key];
-
-        if (icalEvent.type === 'VEVENT') {
-          const existingEvent = await this.eventRepository.findOne({
-            where: {
-              summary: icalEvent.summary,
-              start: icalEvent.start,
-            },
+        if (icalEvents[key].type === 'VEVENT') {
+          const existing = await this.eventRepository.findOneBy({
+            summary: icalEvents[key].summary,
+            start: icalEvents[key].start,
+            end: icalEvents[key].end,
           });
 
-          const event = existingEvent || new Event();
-
-          event.summary = icalEvent.summary;
-          event.start = icalEvent.start;
-          event.end = icalEvent.end;
-          event.location = icalEvent.location || '';
-          event.description = icalEvent.description || '';
-          event.by = 'stair';
-
-          await this.eventRepository.save(event);
+          if (!existing) {
+            const event = new Event();
+            event.summary = icalEvents[key].summary;
+            event.start = icalEvents[key].start;
+            event.end = icalEvents[key].end;
+            event.location = icalEvents[key].location || '';
+            event.description = icalEvents[key].description || '';
+            await this.eventRepository.save(event);
+          }
         }
       }
 
@@ -63,4 +59,5 @@ export class StairImportService {
       );
     }
   }
+
 }

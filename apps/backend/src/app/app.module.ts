@@ -6,7 +6,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from "@nestjs/typeorm"; 
 import { EventsModule } from './events/events.module';
 import { Event } from './events/event.entity';
-import { StairImportService } from './events/stair-import.service';
 import { CalendarModule } from './calendar/calendar.module';
 import { ScheduleModule } from '@nestjs/schedule';
 
@@ -16,6 +15,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     ScheduleModule.forRoot(),
     AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
+    ScheduleModule.forRoot(), // 🕒 Scheduler aktivieren
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -27,10 +27,10 @@ import { ScheduleModule } from '@nestjs/schedule';
       inject: [ConfigService],
     }),
     TypeOrmModule.forFeature([Event]), // Event-Entity registrieren
-    EventsModule, // Events-Modul hinzufügen
-    CalendarModule, // NEU: Kalender-Funktionen modular
+    EventsModule, // Events-Modul mit STAIR-Import
+    CalendarModule, // Kalender-Logik
   ],
   controllers: [AppController],
-  providers: [AppService, StairImportService], // Services
+  providers: [AppService], // StairImportService ist im EventsModule
 })
 export class AppModule {}

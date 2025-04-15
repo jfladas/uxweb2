@@ -4,17 +4,24 @@ import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../models/event.model';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-event-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PopoverComponent],
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.scss'],
 })
 export class EventDetailComponent implements OnInit {
   eventId!: string;
   event?: Event;
+
+  popoverText = '';
+  popoverIcon?: string;
+  popoverButtons: { label: string; action: string }[] = [];
+  popoverCloseable = false;
+  popoverVisible = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,8 +30,11 @@ export class EventDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventId = this.route.snapshot.paramMap.get('id')!;
-    this.fetchEventDetails();
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.eventId = id;
+      this.fetchEventDetails();
+    }
   }
 
   fetchEventDetails(): void {
@@ -80,5 +90,10 @@ export class EventDetailComponent implements OnInit {
 
   addToCalendar(): void {
     console.log('Event added to calendar!');
+  }
+
+  handlePopoverAction(action: string): void {
+    // Handle the action triggered by the popover buttons
+    console.log(`Popover action triggered: ${action}`);
   }
 }

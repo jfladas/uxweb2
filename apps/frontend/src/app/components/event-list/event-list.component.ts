@@ -35,7 +35,7 @@ export class EventListComponent {
   }>();
 
   currentYear = new Date().getFullYear();
-  searchQuery: string = ''; // Add a property to hold the search query
+  searchQuery = ''; // Removed explicit type annotation
 
   events$ = this.store$.select(selectEvents).pipe(
     map((events) => {
@@ -101,11 +101,10 @@ export class EventListComponent {
     this.refreshEvents();
   }
 
-  private filterEvents(events: any[]): any[] {
+  private filterEvents(events: Event[]): Event[] {
     if (!this.searchQuery) return events;
 
     const query = this.searchQuery.toLowerCase();
-    console.log(events);
     return events.filter(
       (event) =>
         event.summary?.toLowerCase().includes(query) ||

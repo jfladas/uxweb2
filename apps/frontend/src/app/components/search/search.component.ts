@@ -20,10 +20,14 @@ import {
   ],
 })
 export class SearchComponent implements ControlValueAccessor {
-  searchQuery: string = '';
+  searchQuery = '';
 
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: string) => void = () => {
+    // Default implementation
+  };
+  private onTouched: () => void = () => {
+    // Default implementation
+  };
 
   writeValue(value: string): void {
     this.searchQuery = value || '';

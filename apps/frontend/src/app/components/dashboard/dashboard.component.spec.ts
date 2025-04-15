@@ -17,9 +17,15 @@ describe('DashboardComponent', () => {
 
   beforeAll(() => {
     // Mock the global `google` object
-    (global as any).google = {
+    (
+      global as unknown as {
+        google: { maps: { LatLng: jest.Mock; importLibrary: jest.Mock } };
+      }
+    ).google = {
       maps: {
-        LatLng: jest.fn().mockImplementation((lat, lng) => ({ lat, lng })),
+        LatLng: jest
+          .fn()
+          .mockImplementation((lat: number, lng: number) => ({ lat, lng })),
         importLibrary: jest.fn().mockResolvedValue({}),
       },
     };

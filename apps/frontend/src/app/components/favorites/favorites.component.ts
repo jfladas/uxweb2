@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
 import { EventService } from '../../services/event.service';
@@ -9,7 +9,6 @@ import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Location } from '@angular/common';
-import { map } from 'rxjs/operators';
 import { EventItemComponent } from '../event-item/event-item.component';
 import { PopoverComponent } from '../popover/popover.component';
 

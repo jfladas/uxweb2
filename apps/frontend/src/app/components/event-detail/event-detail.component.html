@@ -64,4 +64,13 @@
   </div>
 
   <button class="primary" (click)="goBack()">ZURÜCK</button>
+
+  <app-popover
+    [text]="popoverText"
+    [icon]="popoverIcon"
+    [buttons]="popoverButtons"
+    [closeable]="popoverCloseable"
+    [visible]="popoverVisible"
+    (buttonClick)="handlePopoverAction($event)"
+  ></app-popover>
 </div>

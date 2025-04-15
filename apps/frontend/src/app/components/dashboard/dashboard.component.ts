@@ -25,6 +25,7 @@ import { EventListComponent } from '../event-list/event-list.component';
 import { FilterChipsComponent } from '../filter-chips/filter-chips.component';
 import { PopoverComponent } from '../popover/popover.component';
 import { SubscribeButtonComponent } from '../subscribe-button/subscribe-button.component';
+import { Event } from '../../models/event.model';
 
 registerLocaleData(localeDeCh);
 
@@ -106,10 +107,12 @@ export class DashboardComponent implements OnInit {
   marker$: Observable<MapAdvancedMarker[]> = this.store$
     .select(selectEvents)
     .pipe(
-      mergeMap((events) =>
+      mergeMap((events: Event[]) =>
         forkJoin(events.map((event) => this.geoCode(event.location || '')))
       ),
-      map((markers) => markers.filter((marker) => marker !== null))
+      map((markers) =>
+        markers.filter((marker): marker is MapAdvancedMarker => marker !== null)
+      )
     );
 
   loadEvents = () => this.store$.dispatch(EventsActions.loadEvents());

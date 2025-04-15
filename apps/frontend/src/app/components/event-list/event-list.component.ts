@@ -35,6 +35,7 @@ export class EventListComponent {
   }>();
 
   currentYear = new Date().getFullYear();
+  searchQuery: string = ''; // Add a property to hold the search query
 
   events$ = this.store$.select(selectEvents).pipe(
     map((events) => {
@@ -100,11 +101,24 @@ export class EventListComponent {
     this.refreshEvents();
   }
 
-  private refreshEvents(): void {
+  private filterEvents(events: any[]): any[] {
+    if (!this.searchQuery) return events;
+
+    const query = this.searchQuery.toLowerCase();
+    console.log(events);
+    return events.filter(
+      (event) =>
+        event.summary?.toLowerCase().includes(query) ||
+        event.location?.toLowerCase().includes(query)
+    );
+  }
+
+  public refreshEvents(): void {
     this.events$ = this.store$.select(selectEvents).pipe(
       map((events) => {
+        const filteredEvents = this.filterEvents(events);
         const grouped: Record<string, Event[]> = {};
-        events.forEach((event) => {
+        filteredEvents.forEach((event) => {
           const eventBy = event.by?.toLowerCase() ?? 'unknown';
           if (
             this.activeFilters.length === 0 ||

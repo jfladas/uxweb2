@@ -17,6 +17,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { forkJoin, mergeMap } from 'rxjs';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { EventsActions } from '../../+store/events/events.action';
 import { selectEvents } from '../../+store/events/evnets.selector';
@@ -31,6 +32,7 @@ registerLocaleData(localeDeCh);
   selector: 'app-dashboard',
   standalone: true,
   imports: [
+    FormsModule,
     GoogleMapsModule,
     CommonModule,
     SearchComponent,

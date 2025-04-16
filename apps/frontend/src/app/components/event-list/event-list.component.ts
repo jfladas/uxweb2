@@ -62,7 +62,12 @@ export class EventListComponent {
           });
         }
       });
-      return grouped;
+      return Object.keys(grouped).reduce((sortedGrouped, key) => {
+        sortedGrouped[key] = grouped[key].sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
+        return sortedGrouped;
+      }, {} as Record<string, Event[]>);
     })
   );
 
@@ -140,7 +145,12 @@ export class EventListComponent {
             });
           }
         });
-        return grouped;
+        return Object.keys(grouped).reduce((sortedGrouped, key) => {
+          sortedGrouped[key] = grouped[key].sort(
+            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+          );
+          return sortedGrouped;
+        }, {} as Record<string, Event[]>);
       })
     );
   }

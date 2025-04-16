@@ -35,7 +35,19 @@
 
   <div class="event-details">
     <span class="icon">location_on</span>
-    <p>{{ event?.location }}</p>
+    <p *ngIf="event?.location as location">
+      <a
+        class="link"
+        *ngIf="location.split(',')[0] as part1"
+        [href]="'https://www.google.com/maps/search/' + location"
+        target="_blank"
+      >
+        {{ part1 }}
+      </a>
+      <span class="loc" *ngIf="location.split(',')[1] as part2">
+        , {{ part2 }}
+      </span>
+    </p>
   </div>
   <div class="event-details">
     <span class="icon">calendar_month</span>

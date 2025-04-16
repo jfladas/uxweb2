@@ -25,11 +25,7 @@ export class LoginComponent implements OnInit {
       } else {
         const randomDelay = Math.random() * 6;
         (balloon as HTMLElement).style.animationDelay = `${randomDelay}s`;
-        console.log(`Balloon ${index} delay: ${randomDelay}s`);
       }
     });
   }
-
 }
-
-

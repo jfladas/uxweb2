@@ -123,7 +123,7 @@ export class DashboardComponent implements OnInit {
       switch (action) {
         case 'confirm-calendar':
           this.showPopover(
-            'Juhuu! Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!',
+            'Tatatata - Der Event wurde erfolgreich zu deinem Kalender hinzugefügt!',
             'event_available',
             false,
             []
@@ -138,7 +138,7 @@ export class DashboardComponent implements OnInit {
             'webcal://studio-webux-3cf3a57a6e64.herokuapp.com/api/calendar/sweetDIEventkalender.ics'
           );
           this.showPopover(
-            'Juhuu! Die Events wurden erfolgreich zu deinem Kalender hinzugefügt!',
+            'Tatatata! Die Events wurden erfolgreich zu deinem Kalender hinzugefügt!',
             'event_available',
             false,
             []
@@ -147,7 +147,7 @@ export class DashboardComponent implements OnInit {
           break;
         case 'confirm-delete':
           this.showPopover(
-            'Der Event wurde erfolgreich gelöscht!',
+            'Der Event wurde jetzt gelöscht. Es ist wie es ist.',
             'check_circle',
             false,
             []
@@ -180,7 +180,7 @@ export class DashboardComponent implements OnInit {
     if (!this.popoverCloseable) {
       setTimeout(() => {
         this.closePopover();
-      }, 1500);
+      }, 2000);
     }
   }
 

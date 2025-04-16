@@ -81,12 +81,12 @@ export class EventItemComponent {
 
   onAddToCalender(): void {
     this.showPopover.emit({
-      text: 'Der Event wird zu deinem Kalender hinzugefügt.',
+      text: 'Habe mir erlaubt, den angewählten Event zu deinem Kalender hinzuzufügen.',
       icon: '',
       closeable: true,
       buttons: [
-        { label: 'ABBRECHEN', action: 'cancel' },
-        { label: 'BESTÄTIGEN', action: 'confirm-calendar' },
+        { label: 'DAS IST EIN FEHLER.', action: 'cancel' },
+        { label: 'FEIN', action: 'confirm-calendar' },
       ],
     });
   }
@@ -117,12 +117,12 @@ export class EventItemComponent {
 
   onDeleteEvent(): void {
     this.showPopover.emit({
-      text: 'Willst du diesen Event wirklich löschen?',
+      text: 'Warte mal, willst du diesen Event wirklich löschen?',
       icon: '',
       closeable: true,
       buttons: [
-        { label: 'ABBRECHEN', action: 'cancel' },
-        { label: 'BESTÄTIGEN', action: 'confirm-delete' },
+        { label: 'PAIN & NEIN', action: 'cancel' },
+        { label: 'SWEET YES', action: 'confirm-delete' },
       ],
     });
   }

@@ -19,12 +19,12 @@ export class SubscribeButtonComponent {
 
   onSubscribe(): void {
     this.showPopover.emit({
-      text: 'Deine angewählten Events werden zu deinem Kalender hinzugefügt',
+      text: 'Habe mir erlaubt, den angewählten Event zu deinem Kalender hinzuzufügen.',
       icon: '',
       closeable: true,
       buttons: [
-        { label: 'ABBRECHEN', action: 'cancel' },
-        { label: 'BESTÄTIGEN', action: 'confirm-subscribe' },
+        { label: 'DAS IST EIN FEHLER.', action: 'cancel' },
+        { label: 'FEIN', action: 'confirm-subscribe' },
       ],
     });
   }

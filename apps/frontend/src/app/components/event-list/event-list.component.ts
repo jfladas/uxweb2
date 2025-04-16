@@ -133,7 +133,8 @@ export class EventListComponent {
               id: event.id?.toString(),
               name: event.summary,
               date: event.start.split('T')[0],
-              time: event.start.split('T')[1]?.substring(0, 5),
+              start: event.start.split('T')[1]?.substring(0, 5),
+              end: event.end.split('T')[1]?.substring(0, 5),
               by: eventBy,
               poster: event.poster || '',
             });

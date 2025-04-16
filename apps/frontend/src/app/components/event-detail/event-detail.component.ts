@@ -46,7 +46,8 @@ export class EventDetailComponent implements OnInit {
           ...found,
           name: found.summary,
           date: found.start.split('T')[0],
-          time: found.start.split('T')[1]?.slice(0, 5),
+          start: found.start.split('T')[1]?.slice(0, 5),
+          end: found.end.split('T')[1]?.slice(0, 5),
         };
       } else {
         console.error('Event not found!');

@@ -44,7 +44,11 @@ export class FilterChipsComponent implements AfterViewInit {
   private emitActiveFilters(): void {
     const activeFilters = this.chips
       .filter((chip) => chip.selected)
-      .map((chip) => chip.name.toLowerCase());
+      .map((chip) =>
+        chip.name.toLowerCase() === 'digital ideation'
+          ? 'di'
+          : chip.name.toLowerCase()
+      );
     this.filtersChanged.emit(activeFilters);
   }
 

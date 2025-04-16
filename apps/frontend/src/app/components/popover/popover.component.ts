@@ -13,10 +13,9 @@ export class PopoverComponent {
   @Input() icon?: string;
   @Input() buttons: { label: string; action: string }[] = [];
   @Input() closeable = false;
-  @Input() visible = false;
   @Output() buttonClick = new EventEmitter<string>();
-  @Output() closeEvent = new EventEmitter<void>();
 
+  isVisible = false;
   isFadingOut = false;
 
   onButtonClick(action: string): void {
@@ -28,10 +27,14 @@ export class PopoverComponent {
     }
   }
 
+  onOpen(): void {
+    this.isVisible = true;
+  }
+
   onClose(): void {
     this.isFadingOut = true;
     setTimeout(() => {
-      this.closeEvent.emit();
+      this.isVisible = false;
       this.isFadingOut = false;
     }, 300);
   }

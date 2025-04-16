@@ -61,7 +61,6 @@ export class DashboardComponent implements OnInit {
   iframeSrc: SafeResourceUrl = '';
   activeFilters: string[] = [];
 
-  popoverVisible = false;
   popoverText = '';
   popoverIcon?: string;
   popoverButtons: { label: string; action: string }[] = [];
@@ -176,7 +175,7 @@ export class DashboardComponent implements OnInit {
     this.popoverIcon = icon;
     this.popoverCloseable = closeable;
     this.popoverButtons = buttons;
-    this.popoverVisible = true;
+    this.popoverComponent?.onOpen();
     if (!this.popoverCloseable) {
       setTimeout(() => {
         this.closePopover();
@@ -185,7 +184,7 @@ export class DashboardComponent implements OnInit {
   }
 
   closePopover(): void {
-    this.popoverVisible = false;
+    this.popoverComponent?.onClose();
   }
 
   onFiltersChanged(filters: string[]): void {

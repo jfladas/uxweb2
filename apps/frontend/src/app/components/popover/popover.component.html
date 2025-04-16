@@ -1,4 +1,4 @@
-<div *ngIf="visible">
+<div *ngIf="isVisible">
   <div class="popover" [ngClass]="{ 'fade-out': isFadingOut }">
     <button *ngIf="closeable" class="popover-close" (click)="onClose()">
       <span class="icon">close</span>

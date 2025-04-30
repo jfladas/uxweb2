@@ -1,24 +1,6 @@
-# sweet
+<img src="https://github.com/jfladas/uxweb2/blob/a58a5482c57ce7ea9fdfe0246cb7c1b5eca068a4/apps/frontend/src/assets/logo.svg" width="500">
 
 ✨ Welcome to this sweet project! ✨
-
-## Project Structure
-
-This workspace contains the following key components:
-
-- **Frontend**: An Angular-based application located in `apps/frontend`.
-- **Backend**: A NestJS-based application located in `apps/backend`.
-- **Shared Library**: A library for shared utilities and components located in `libs/shared`.
-
-## Getting Started
-
-### Prerequisites
-
-Ensure you have the following installed:
-
-- Node.js (v16 or higher)
-- npm or yarn
-- Nx CLI (optional, but recommended)
 
 ### Installation
 

@@ -2,38 +2,6 @@
 
 ✨ Welcome to this sweet project! ✨
 
-### Installation
+### [Check out the Website!](https://jfladas.github.io/uxweb2/)
 
-1. Clone the repository:
-
-   ```sh
-   git clone <repository-url>
-   cd uxweb2
-   ```
-
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-
-### Running the Applications
-
-#### Frontend
-
-To serve the frontend application:
-
-```sh
-npx nx serve frontend
-```
-
-The application will be available at `http://localhost:4200`.
-
-#### Backend
-
-To serve the backend application:
-
-```sh
-npx nx serve backend
-```
-
-The backend will run on `http://localhost:3000`.
+(best on mobile)
